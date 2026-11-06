@@ -43,18 +43,9 @@
   --r-sm:10px;--r-md:16px;--r-lg:24px;--r-pill:999px;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#111511;--surface:#1D231C;--sand:#283027;--sand-2:#3A4436;--line:#3B4637;--ink:#F6F5EF;--muted:#C3C9B9;
-  --green:#9FD07F;--green-soft:#2C4321;--olive:#C5D27A;--olive-soft:#363D1F;--terra:#F49E7A;--terra-soft:#4A2A1D;
-  --orange:#F6B07A;--orange-soft:#4A331C;--yellow:#F5D06E;--yellow-soft:#463B1A;--on-accent:#10190C;
-  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.4);color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#111511;--surface:#1D231C;--sand:#283027;--sand-2:#3A4436;--line:#3B4637;--ink:#F6F5EF;--muted:#C3C9B9;
-  --green:#9FD07F;--green-soft:#2C4321;--olive:#C5D27A;--olive-soft:#363D1F;--terra:#F49E7A;--terra-soft:#4A2A1D;
-  --orange:#F6B07A;--orange-soft:#4A331C;--yellow:#F5D06E;--yellow-soft:#463B1A;--on-accent:#10190C;
-  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.4);color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
@@ -94,8 +85,6 @@ input,select,textarea{font:inherit;color:var(--ink)}
 .st-ok{background:var(--green-soft);color:var(--green)}
 .st-warn{background:var(--orange-soft);color:var(--terra)}
 .st-today{background:var(--yellow-soft);color:#9A6B00}
-:root[data-theme="dark"] .st-today{color:var(--yellow)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .st-today{color:var(--yellow)}}
 .st-bad{background:var(--terra-soft);color:var(--terra)}
 .st-done{background:var(--sand);color:var(--muted)}
 .chip{border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-pill);padding:7px 14px;font-weight:700;font-size:.86rem;color:var(--muted)}
@@ -154,6 +143,42 @@ input,select,textarea{font:inherit;color:var(--ink)}
 .hero-art svg.ill{width:100%;max-width:420px;height:auto}
 .float-card{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center;max-width:260px}
 .float-card .food{width:40px;height:40px;font-size:22px;border-radius:12px}
+.food.photo{background:#fff;border:1px solid var(--line);padding:3px;overflow:hidden}
+.food.photo img{width:100%;height:100%;object-fit:contain;display:block}
+.shot-pair{display:flex;gap:10px;align-items:center;flex:none}
+.shot{width:84px;height:84px;border-radius:18px;object-fit:cover;border:3px solid var(--surface);box-shadow:var(--shadow);display:block}
+.user-photo{width:100%;max-height:320px;object-fit:cover;border-radius:var(--r-md);display:block}
+.proc-photo{width:150px;height:150px;border-radius:22px;object-fit:cover;box-shadow:var(--shadow)}
+.guess-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.guess{display:inline-flex;gap:8px;align-items:center;border:1.5px solid var(--line);background:var(--surface);border-radius:var(--r-pill);padding:4px 12px 4px 4px;font-weight:700;font-size:.85rem}
+.guess .food{width:30px;height:30px;border-radius:50%;padding:2px}
+.guess:hover{border-color:var(--green)}
+.label-quote{margin:0;padding:12px 14px;border-left:4px solid var(--olive);background:var(--olive-soft);border-radius:0 12px 12px 0;font-weight:700;font-size:.92rem}
+/* Câmera */
+.cam{display:grid;gap:14px}
+.viewfinder{position:relative;border-radius:24px;overflow:hidden;background:#1b201a;aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;color:#fff}
+.viewfinder video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.viewfinder.mirror video{transform:scaleX(-1)}
+.vf-idle{position:relative;z-index:2;display:grid;justify-items:center;gap:10px;text-align:center;padding:24px;max-width:34ch}
+.vf-idle .svg{width:44px;height:44px;opacity:.9}
+.vf-idle span{opacity:.8;font-size:.9rem}
+.vf-frame{position:absolute;inset:12% 10%;pointer-events:none;z-index:1}
+.vf-frame i{position:absolute;width:34px;height:34px;border-color:#fff;border-style:solid;opacity:.9}
+.vf-frame i:nth-child(1){top:0;left:0;border-width:4px 0 0 4px;border-top-left-radius:14px}
+.vf-frame i:nth-child(2){top:0;right:0;border-width:4px 4px 0 0;border-top-right-radius:14px}
+.vf-frame i:nth-child(3){bottom:0;left:0;border-width:0 0 4px 4px;border-bottom-left-radius:14px}
+.vf-frame i:nth-child(4){bottom:0;right:0;border-width:0 4px 4px 0;border-bottom-right-radius:14px}
+.vf-hint{position:absolute;z-index:3;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);color:#fff;font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
+.vf-scan{position:absolute;z-index:2;left:10%;right:10%;height:3px;background:#9FD07F;box-shadow:0 0 14px #9FD07F;top:20%;animation:scan 2.4s ease-in-out infinite alternate}
+.viewfinder:not(.live) .vf-scan{display:none}
+@keyframes scan{to{top:80%}}
+.vf-flash{position:absolute;inset:0;background:#fff;z-index:5;animation:flash .35s forwards;pointer-events:none}
+@keyframes flash{from{opacity:.95}to{opacity:0}}
+.shutter-row{display:flex;justify-content:space-around;align-items:center}
+.shutter{width:72px;height:72px;border-radius:50%;border:5px solid var(--green);background:var(--surface);box-shadow:inset 0 0 0 5px var(--surface),inset 0 0 0 40px var(--green)}
+.shutter:active{transform:scale(.94)}
+.vf-side{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.vf-side:hover{background:var(--sand)}
 .float-card strong{display:block;font-size:.9rem}
 .float-card small{color:var(--muted);font-size:.8rem}
 .fc-1{top:26px;left:22px}.fc-2{bottom:28px;right:20px}
@@ -250,8 +275,6 @@ button.stat:hover{border-color:var(--sand-2);background:var(--bg)}
 .i-green{background:var(--green-soft);color:var(--green)}.i-orange{background:var(--orange-soft);color:var(--terra)}
 .i-terra{background:var(--terra-soft);color:var(--terra)}.i-yellow{background:var(--yellow-soft);color:#946500}
 .i-olive{background:var(--olive-soft);color:var(--olive)}
-:root[data-theme="dark"] .i-yellow{color:var(--yellow)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .i-yellow{color:var(--yellow)}}
 .dash-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start}
 .stack{display:grid;gap:20px}
 .welcome{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:var(--sand);border-radius:var(--r-lg);padding:26px 28px;position:relative;overflow:hidden}
@@ -440,7 +463,6 @@ td .cell .food{width:38px;height:38px;font-size:20px;border-radius:10px}
 }
 @media all{
   body{font-size:14.5px}
-  .topbar .theme-btn{display:none}
   .welcome .actions .btn{flex:1 1 auto}
   .chips.scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;max-width:100%}
   .chips.scroll .chip{flex:none}
@@ -460,16 +482,11 @@ td .cell .food{width:38px;height:38px;font-size:20px;border-radius:10px}
   .float-card{max-width:220px}
   .row .end .btn{display:none}
   .method-tabs{gap:8px}
+  .result{flex-wrap:wrap}
+  .result .t{flex-basis:100%}
+  .shot,.result .food.lg{width:72px;height:72px}
 }
-/* Escuro: cards e textos com mais destaque */
-:root[data-theme="dark"] :is(.card,.stat,.pcard,.step,.benefit,.alert-item,.table-wrap,.float-card){box-shadow:var(--shadow)}
-:root[data-theme="dark"] :is(h1,h2,h3,strong,.val,.days,.big){color:var(--ink)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.card,.stat,.pcard,.step,.benefit,.alert-item,.table-wrap,.float-card){box-shadow:var(--shadow)}}
-.theme-btn .moon{display:none}
-:root[data-theme="dark"] .theme-btn .sun{display:none}:root[data-theme="dark"] .theme-btn .moon{display:block}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-btn .sun{display:none}:root:not([data-theme="light"]) .theme-btn .moon{display:block}}
 .auth-form{position:relative}
-.auth-form .theme-btn{position:absolute;top:20px;right:20px}
 
 /* ============ APP DE CELULAR ============ */
 html,body{height:100%}
@@ -527,22 +544,8 @@ body{display:block;overflow:hidden}
 .notif-art .n small{color:var(--muted);font-size:.8rem;display:block}
 .notif-art .n .food{width:42px;height:42px;font-size:22px}
 
-/* Câmera */
-.viewfinder{position:relative;border-radius:26px;overflow:hidden;background:#1b201a;aspect-ratio:3/4;max-width:100%;display:grid;place-items:center;border:0;padding:0;cursor:pointer;color:#fff}
-.viewfinder .ill{width:58%;height:auto;opacity:.95}
-.vf-frame{position:absolute;inset:14% 12%;pointer-events:none}
-.vf-frame i{position:absolute;width:34px;height:34px;border-color:#fff;border-style:solid;opacity:.9}
-.vf-frame i:nth-child(1){top:0;left:0;border-width:4px 0 0 4px;border-top-left-radius:14px}
-.vf-frame i:nth-child(2){top:0;right:0;border-width:4px 4px 0 0;border-top-right-radius:14px}
-.vf-frame i:nth-child(3){bottom:0;left:0;border-width:0 0 4px 4px;border-bottom-left-radius:14px}
-.vf-frame i:nth-child(4){bottom:0;right:0;border-width:0 4px 4px 0;border-bottom-right-radius:14px}
-.vf-hint{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);color:#fff;font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.vf-scan{position:absolute;left:12%;right:12%;height:3px;background:#9FD07F;box-shadow:0 0 14px #9FD07F;top:20%;animation:scan 2.4s ease-in-out infinite alternate}
-@keyframes scan{to{top:80%}}
-.shutter-row{display:flex;justify-content:space-around;align-items:center}
-.shutter{width:76px;height:76px;border-radius:50%;border:5px solid var(--green);background:var(--surface);box-shadow:inset 0 0 0 5px var(--surface),inset 0 0 0 40px var(--green)}
-.shutter:active{transform:scale(.94)}
-.vf-side{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center}
+/* Câmera: visor vertical no celular */
+.viewfinder{aspect-ratio:3/4}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
 </style>
 </head>
@@ -617,13 +620,9 @@ const P = {
   lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
   scale:'<path d="M12 3v18M5 7h14M5 7l-3 7a4 4 0 0 0 6 0zM19 7l-3 7a4 4 0 0 0 6 0z"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-  moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>'
+  moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  flip:'<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>'
 };
-const themeBtn = () => `<button class="icon-btn theme-btn" data-theme-toggle aria-label="Alternar tema claro/escuro" title="Alternar tema claro/escuro"><span class="sun">${ic('moon')}</span><span class="moon">${ic('sun')}</span></button>`;
-function isDark(){ const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
-function setTheme(t){ document.documentElement.dataset.theme = t; try { localStorage.setItem('eatwise-theme', t); } catch(e) {} }
-try { const t = localStorage.getItem('eatwise-theme'); if (t) document.documentElement.dataset.theme = t; } catch(e) {}
-document.addEventListener('click', e => { if (e.target.closest('[data-theme-toggle]')) { setTheme(isDark() ? 'light' : 'dark'); closeDropdowns && closeDropdowns(); toast(isDark() ? 'Tema escuro ativado' : 'Tema claro ativado', isDark() ? 'moon' : 'sun'); } });
 const ic = (n, cls='') => `<svg class="svg ${cls}" viewBox="0 0 24 24" aria-hidden="true">${P[n]||''}</svg>`;
 
 /* ---------- Ilustrações ---------- */
@@ -680,76 +679,69 @@ const CATS = {
   mol:{nome:'Molhos e condimentos', cls:'c-mol'},
   emb:{nome:'Frios e embutidos', cls:'c-emb'},
   con:{nome:'Conservas', cls:'c-con'},
-  doc:{nome:'Doces e geleias', cls:'c-doc'},
-  hor:{nome:'Polpas e sucos', cls:'c-hor'}
+  doc:{nome:'Doces e geleias', cls:'c-doc'}
 };
 const LOCS = {gel:'Geladeira', por:'Porta da geladeira', fre:'Freezer', des:'Despensa'};
 const METHODS = {foto:{n:'Foto', i:'camera'}, texto:{n:'Texto', i:'type'}, audio:{n:'Áudio', i:'mic'}};
 
-// Base de referência de prazos pós-abertura (valores ilustrativos do protótipo)
+// Base de prazos pós-abertura. Cada prazo vem do rótulo do fabricante quando foi possível ler,
+// ou da orientação publicada mais conservadora encontrada (fonte em cada item).
 const BASE = [
-  {k:'maionese', emoji:'🥚', item:'Maionese', cat:'mol', dias:30, cons:'Geladeira, 0 a 5 °C, pote bem fechado'},
-  {k:'ketchup', emoji:'🍅', item:'Ketchup', cat:'mol', dias:60, cons:'Geladeira após aberto'},
-  {k:'mostarda', emoji:'🌭', item:'Mostarda', cat:'mol', dias:60, cons:'Geladeira após aberto'},
-  {k:'molho-tomate', emoji:'🥫', item:'Molho de tomate', cat:'mol', dias:3, cons:'Transferir para pote de vidro e refrigerar'},
-  {k:'requeijao', emoji:'🧀', item:'Requeijão cremoso', cat:'lat', dias:7, cons:'Geladeira, tampa sempre fechada'},
-  {k:'leite', emoji:'🥛', item:'Leite UHT', cat:'lat', dias:3, cons:'Geladeira, nunca na porta'},
-  {k:'creme-leite', emoji:'🍶', item:'Creme de leite (caixinha)', cat:'lat', dias:2, cons:'Pote fechado na geladeira'},
-  {k:'iogurte', emoji:'🥣', item:'Iogurte natural', cat:'lat', dias:5, cons:'Geladeira, 1 a 7 °C'},
-  {k:'leite-coco', emoji:'🥥', item:'Leite de coco', cat:'lat', dias:4, cons:'Pote de vidro na geladeira'},
-  {k:'presunto', emoji:'🥓', item:'Presunto fatiado', cat:'emb', dias:3, cons:'Embalagem original bem vedada'},
-  {k:'muçarela', emoji:'🧀', item:'Muçarela fatiada', cat:'emb', dias:5, cons:'Envolver em filme plástico'},
-  {k:'salsicha', emoji:'🌭', item:'Salsicha', cat:'emb', dias:3, cons:'Pote fechado, consumir cozida'},
-  {k:'azeitona', emoji:'🫒', item:'Azeitonas em conserva', cat:'con', dias:15, cons:'Manter cobertas pela salmoura'},
-  {k:'palmito', emoji:'🌴', item:'Palmito em conserva', cat:'con', dias:5, cons:'Trocar para pote de vidro com a água'},
-  {k:'milho', emoji:'🌽', item:'Milho verde em lata', cat:'con', dias:3, cons:'Nunca guardar na lata aberta'},
-  {k:'geleia', emoji:'🍓', item:'Geleia de frutas', cat:'doc', dias:30, cons:'Geladeira, usar colher limpa'},
-  {k:'doce-leite', emoji:'🍯', item:'Doce de leite', cat:'doc', dias:15, cons:'Geladeira, pote bem fechado'},
-  {k:'polpa', emoji:'🍍', item:'Suco integral de uva', cat:'hor', dias:5, cons:'Geladeira, garrafa fechada'}
+  {k:'requeijao', item:'Requeijão cremoso', cat:'lat', dias:5, cons:'Geladeira, de 1 a 10 °C. Não congelar.', doRotulo:true,
+   orient:'Após aberto, consumir em até 05 dias. Manter refrigerado de 1 °C a 10 °C. Não congelar.', fonte:'Rótulo Itambé (foto da embalagem no Open Food Facts)', url:'https://world.openfoodfacts.org/product/7896051167167'},
+  {k:'leite', item:'Leite UHT integral', cat:'lat', dias:3, cons:'Geladeira, caixa bem fechada', orient:'Depois de aberto, refrigerar e consumir em até 3 dias.', fonte:'Orientação da Piracanjuba para leite UHT, reproduzida por varejista', url:'https://www.tendaatacado.com.br/produto/leite-uht-semidesnatado-zero-lactose-protein-piracanjuba-1l'},
+  {k:'creme-leite', item:'Creme de leite (caixinha)', cat:'lat', dias:2, cons:'Pote fechado na geladeira, de 2 a 8 °C', orient:'Transferir para pote fechado e consumir em 2 a 3 dias. Usamos o menor prazo.', fonte:'Orientações de varejo para creme de leite UHT (2 a 3 dias)', url:'https://www.tendaatacado.com.br/creme-de-leite'},
+  {k:'mucarela', item:'Muçarela fatiada', cat:'lat', dias:3, cons:'Embalada em filme, na parte mais fria', orient:'A validade da embalagem vale só fechada. Depois de aberta, até 3 dias refrigerada.', fonte:'Ital, citado pelo Canal Rural', url:'https://www.canalrural.com.br/noticias/saiba-como-escolher-conservar-queijos-67619/'},
+  {k:'maionese', item:'Maionese', cat:'mol', dias:30, cons:'Geladeira, tampa bem fechada', orient:'Depois de aberta, manter refrigerada; a maionese industrializada dura de 3 a 4 semanas.', fonte:'TudoGostoso e Auditório Ibirapuera (3 a 4 semanas)', url:'https://www.tudogostoso.com.br/noticias/leia-antes-de-fazer-salpicao-pode-comer-maionese-caseira-de-um-dia-para-outro-e-a-industrializada-a10919.htm'},
+  {k:'ketchup', item:'Ketchup', cat:'mol', dias:30, cons:'Geladeira após aberto', orient:'A Heinz recomenda refrigerar depois de aberto; especialistas indicam consumir em até 1 mês.', fonte:'Heinz e especialistas citados pelo TudoGostoso', url:'https://www.tudogostoso.com.br/noticias/a-heinz-finalmente-resolve-o-debate-o-ketchup-deve-ser-guardado-na-geladeira-ou-na-despensa-a30937.htm'},
+  {k:'mostarda', item:'Mostarda', cat:'mol', dias:15, cons:'Geladeira após aberto', orient:'Temperos líquidos como mostarda: até 15 dias após abertos, na falta de prazo no rótulo.', fonte:'Critérios de validade, Secretaria de Educação de Goiás', url:'https://goias.gov.br/educacao/wp-content/uploads/sites/40/2019/12/Criterios_de_validade_2024-aa6.pdf'},
+  {k:'molho-tomate', item:'Molho de tomate', cat:'mol', dias:5, cons:'Pote limpo, não metálico e com tampa, na geladeira', orient:'Guardar em recipiente não metálico com tampa, refrigerado; dura em média 5 dias.', fonte:'Pomarola (modo de guardar) e TudoGostoso (5 dias)', url:'https://www.tudogostoso.com.br/noticias/depois-de-abrir-o-sache-de-molho-de-tomate-e-assim-que-voce-deve-guarda-lo-para-nao-estragar-a22410.htm'},
+  {k:'presunto', item:'Presunto fatiado', cat:'emb', dias:3, cons:'Embalagem bem vedada, na geladeira', orient:'Produto de origem animal sem prazo no rótulo: até 3 dias após aberto.', fonte:'Critérios de validade, Secretaria de Educação de Goiás; USDA: 3 a 5 dias', url:'https://goias.gov.br/educacao/wp-content/uploads/sites/40/2019/12/Criterios_de_validade_2024-aa6.pdf'},
+  {k:'salsicha', item:'Salsicha', cat:'emb', dias:3, cons:'Pote fechado; consumir cozida', orient:'Produto de origem animal sem prazo no rótulo: até 3 dias após aberto.', fonte:'Critérios de validade, Secretaria de Educação de Goiás', url:'https://goias.gov.br/educacao/wp-content/uploads/sites/40/2019/12/Criterios_de_validade_2024-aa6.pdf'},
+  {k:'azeitona', item:'Azeitonas em conserva', cat:'con', dias:14, cons:'Sempre cobertas pela salmoura, pote fechado', orient:'Manter na própria salmoura, refrigerada; cerca de 2 semanas depois de aberta.', fonte:'Guia de validade de conservas citado pela Itatiaia', url:'https://www.itatiaia.com.br/curioso/por-quanto-tempo-os-condimentos-abertos-realmente-duram/'},
+  {k:'milho', item:'Milho verde em lata', cat:'con', dias:3, cons:'Nunca guardar na lata aberta; usar pote com tampa', orient:'Passar para um pote com tampa; usar em 2 a 4 dias na geladeira.', fonte:'Catraca Livre e TudoGostoso (2 a 4 dias)', url:'https://catracalivre.com.br/noticias/latas-de-milho-e-ervilha-abertas-nao-podem-ser-usadas-para-guardar-o-restante-do-alimento-na-geladeira-entenda-o-motivo/'},
+  {k:'geleia', item:'Geleia de frutas', cat:'doc', dias:15, cons:'Geladeira, colher limpa e seca', orient:'Geleia aberta vai para a geladeira e deve ser consumida em até 15 dias.', fonte:'TudoGostoso', url:'https://www.tudogostoso.com.br/noticias/a-geleia-deve-ser-armazenada-na-geladeira-ou-em-temperatura-ambiente-aqui-esta-a-resposta-a9440.htm'},
+  {k:'doce-leite', item:'Doce de leite', cat:'doc', dias:15, cons:'Geladeira, pote bem fechado', orient:'Até 15 dias depois de aberto (algumas fontes citam 30; usamos o menor).', fonte:'Critérios de validade, Secretaria de Educação de Goiás', url:'https://goias.gov.br/educacao/wp-content/uploads/sites/40/2019/12/Criterios_de_validade_2024-aa6.pdf'}
 ];
 const baseBy = k => BASE.find(b => b.k === k);
+// Fotos reais das embalagens: Open Food Facts (CC BY-SA), ver assets/produtos/CREDITOS.md
+const IMG = k => `assets/produtos/${k}.jpg`;
+const foodTile = (k, cls='') => `<span class="food photo ${cls}"><img src="${IMG(k)}" alt="" loading="lazy" decoding="async"></span>`;
 
 // Catálogo "reconhecível" pela IA simulada
 const CATALOG = [
-  {k:'maionese', nome:"Maionese Tradicional", marca:"Hellmann's · pote 500 g"},
-  {k:'requeijao', nome:'Requeijão Cremoso', marca:'Itambé · copo 200 g'},
-  {k:'molho-tomate', nome:'Molho de Tomate Tradicional', marca:'Pomarola · sachê 340 g'},
-  {k:'leite', nome:'Leite Integral UHT', marca:'Piracanjuba · caixa 1 L'},
-  {k:'creme-leite', nome:'Creme de Leite', marca:'Nestlé · caixinha 200 g'},
-  {k:'iogurte', nome:'Iogurte Natural Integral', marca:'Nestlé · pote 170 g'},
-  {k:'presunto', nome:'Presunto Cozido Fatiado', marca:'Sadia · bandeja 200 g'},
-  {k:'ketchup', nome:'Ketchup Tradicional', marca:'Heinz · frasco 397 g'},
-  {k:'azeitona', nome:'Azeitona Verde com Caroço', marca:'La Violetera · vidro 200 g'},
-  {k:'palmito', nome:'Palmito Pupunha em Conserva', marca:'Hemmer · vidro 300 g'},
-  {k:'geleia', nome:'Geleia de Morango', marca:'Queensberry · vidro 320 g'},
-  {k:'leite-coco', nome:'Leite de Coco', marca:'Sococo · vidro 200 ml'},
-  {k:'muçarela', nome:'Muçarela Fatiada', marca:'Tirolez · bandeja 150 g'},
-  {k:'mostarda', nome:'Mostarda Amarela', marca:'Hemmer · frasco 200 g'},
-  {k:'milho', nome:'Milho Verde', marca:'Quero · lata 170 g'},
-  {k:'doce-leite', nome:'Doce de Leite Cremoso', marca:'Aviação · pote 400 g'},
-  {k:'polpa', nome:'Suco Integral de Uva', marca:'Aurora · garrafa 1,5 L'},
-  {k:'salsicha', nome:'Salsicha Hot Dog', marca:'Perdigão · pacote 500 g'}
+  {k:'maionese', ean:'7894000050034', nome:"Maionese Tradicional", marca:"Hellmann's · pote 500 g"},
+  {k:'requeijao', ean:'7896051167167', nome:'Requeijão Cremoso', marca:'Itambé · copo 200 g'},
+  {k:'molho-tomate', ean:'7896036099988', nome:'Molho de Tomate Tradicional', marca:'Pomarola · sachê 300 g'},
+  {k:'leite', ean:'7898215151708', nome:'Leite Integral UHT', marca:'Piracanjuba · caixa 1 L'},
+  {k:'creme-leite', ean:'7891000126905', nome:'Creme de Leite Leve', marca:'Nestlé · caixinha 200 g'},
+  {k:'presunto', ean:'7891515432652', nome:'Presunto Cozido Fatiado', marca:'Sadia · bandeja 200 g'},
+  {k:'ketchup', ean:'7896102503708', nome:'Ketchup Tradicional', marca:'Heinz · frasco 397 g'},
+  {k:'azeitona', ean:'7891089101206', nome:'Azeitona Verde Fatiada', marca:'La Violetera · vidro 320 g'},
+  {k:'geleia', ean:'7896214505157', nome:'Geleia de Morango 100% Fruta', marca:'Queensberry · vidro 170 g'},
+  {k:'mucarela', ean:'7896030520181', nome:'Muçarela Fatiada Light', marca:'Tirolez · bandeja 150 g'},
+  {k:'mostarda', ean:'7896102503715', nome:'Mostarda Amarela', marca:'Heinz · frasco 255 g'},
+  {k:'milho', ean:'7896102500608', nome:'Milho Verde em Conserva', marca:'Quero · lata 170 g'},
+  {k:'doce-leite', ean:'7896331100372', nome:'Doce de Leite', marca:'Aviação · pote 400 g'},
+  {k:'salsicha', ean:'7891515742034', nome:'Salsicha Hot Dog', marca:'Perdigão · pacote 500 g'}
 ];
+BASE.forEach(b => { b.marca = CATALOG.find(c => c.k === b.k).marca; });
 
 let nextId = 20;
 // abertoHa = dias desde a abertura (em relação a 06/10/2026)
 let PRODUCTS = [
   {id:1, k:'maionese', abertoHa:27, loc:'gel', via:'foto', alerta:3, quem:'Maria'},
-  {id:2, k:'requeijao', abertoHa:6, loc:'gel', via:'audio', alerta:1, quem:'João'},
+  {id:2, k:'requeijao', abertoHa:4, loc:'gel', via:'audio', alerta:1, quem:'João'},
   {id:3, k:'molho-tomate', abertoHa:1, loc:'gel', via:'texto', alerta:1, quem:'Maria'},
   {id:4, k:'presunto', abertoHa:4, loc:'gel', via:'foto', alerta:1, quem:'Maria'},
   {id:5, k:'leite', abertoHa:1, loc:'gel', via:'audio', alerta:1, quem:'Lia'},
-  {id:6, k:'iogurte', abertoHa:1, loc:'gel', via:'foto', alerta:1, quem:'Maria'},
   {id:7, k:'ketchup', abertoHa:22, loc:'por', via:'foto', alerta:3, quem:'João'},
   {id:8, k:'creme-leite', abertoHa:2, loc:'gel', via:'texto', alerta:1, quem:'Maria'},
   {id:9, k:'azeitona', abertoHa:6, loc:'gel', via:'foto', alerta:2, quem:'Maria'},
-  {id:10, k:'palmito', abertoHa:3, loc:'gel', via:'audio', alerta:1, quem:'João'},
   {id:11, k:'geleia', abertoHa:12, loc:'por', via:'foto', alerta:3, quem:'Lia'},
-  {id:12, k:'leite-coco', abertoHa:1, loc:'gel', via:'texto', alerta:1, quem:'Maria'},
-  {id:13, k:'muçarela', abertoHa:2, loc:'gel', via:'foto', alerta:1, quem:'Maria'},
-  {id:14, k:'mostarda', abertoHa:41, loc:'por', via:'texto', alerta:3, quem:'João'},
+  {id:13, k:'mucarela', abertoHa:2, loc:'gel', via:'foto', alerta:1, quem:'Maria'},
+  {id:14, k:'mostarda', abertoHa:9, loc:'por', via:'texto', alerta:3, quem:'João'},
   // histórico
-  {id:15, k:'polpa', abertoHa:9, loc:'gel', via:'foto', alerta:1, quem:'Maria', estado:'consumido', quando:'04/10'},
   {id:16, k:'salsicha', abertoHa:8, loc:'gel', via:'audio', alerta:1, quem:'João', estado:'descartado', quando:'02/10', motivo:'Passou do prazo'},
   {id:17, k:'doce-leite', abertoHa:20, loc:'gel', via:'texto', alerta:2, quem:'Lia', estado:'consumido', quando:'30/09'},
   {id:18, k:'milho', abertoHa:7, loc:'gel', via:'foto', alerta:1, quem:'Maria', estado:'consumido', quando:'28/09'}
@@ -757,12 +749,12 @@ let PRODUCTS = [
 
 let ALERTS = [
   {id:1, pid:4, tipo:'bad', titulo:'Presunto fatiado venceu ontem', texto:'O prazo pós-abertura terminou em 05/10. Recomendamos descartar.', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
-  {id:2, pid:2, tipo:'today', titulo:'Requeijão Itambé vence amanhã', texto:'Aberto em 30/09. Que tal usar no café da manhã de hoje?', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
+  {id:2, pid:2, tipo:'today', titulo:'Requeijão Itambé vence amanhã', texto:'Aberto em 02/10. O rótulo da Itambé indica 5 dias depois de aberto.', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
   {id:3, pid:1, tipo:'warn', titulo:'Maionese Hellmann\'s vence em 3 dias', texto:'Data-limite: 09/10. Alerta enviado 3 dias antes, como você configurou.', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
   {id:4, pid:8, tipo:'warn', titulo:'Creme de leite vence amanhã', texto:'Aberto em 04/10 para o estrogonofe. Prazo de 2 dias na geladeira.', quando:'Ontem, 19:30', grupo:'Esta semana', lido:true},
   {id:5, pid:null, tipo:'ok', titulo:'Resumo da semana', texto:'Você consumiu 6 itens a tempo e descartou apenas 1. Economia estimada: R$ 23,80.', quando:'Dom, 10:00', grupo:'Esta semana', lido:true},
   {id:6, pid:16, tipo:'bad', titulo:'Salsicha Perdigão venceu', texto:'Item registrado por João marcado como descartado.', quando:'02/10, 08:00', grupo:'Anteriores', lido:true},
-  {id:7, pid:null, tipo:'ok', titulo:'Novo produto na base de prazos', texto:'Adicionamos leite de coco (4 dias após aberto) à categoria Laticínios.', quando:'01/10, 14:12', grupo:'Anteriores', lido:true}
+  {id:7, pid:null, tipo:'ok', titulo:'Novo produto na base de prazos', texto:'Adicionamos o requeijão Itambé com o prazo do próprio rótulo: 5 dias após aberto.', quando:'01/10, 14:12', grupo:'Anteriores', lido:true}
 ];
 
 const USER = {nome:'Maria Oliveira', primeiro:'Maria', email:'maria.oliveira@email.com', cidade:'Campinas, SP', iniciais:'MO', plano:'Gratuito'};
@@ -854,7 +846,6 @@ function pubNav(){
       <a href="#planos" data-scroll="planos">Planos</a>
     </nav>
     <div class="pub-actions">
-      ${themeBtn()}
       <button class="btn btn-ghost" data-go="login">Entrar</button>
       <button class="btn btn-primary" data-go="cadastro">Criar conta grátis</button>
     </div>
@@ -874,15 +865,15 @@ const SLIDES = [
   {eyebrow:'Alertas', title:'Receba o aviso antes de vencer.',
    text:'Menos comida no lixo, mais economia e mais segurança para toda a casa.',
    art:() => `<div class="notif-art">
-     <div class="n"><span class="food c-mol">🥚</span><div><strong>Maionese vence em 3 dias</strong><small>EatWise · agora</small></div></div>
-     <div class="n"><span class="food c-lat">🧀</span><div><strong>Requeijão vence amanhã</strong><small>EatWise · 08:00</small></div></div>
+     <div class="n">${foodTile('maionese')}<div><strong>Maionese vence em 3 dias</strong><small>EatWise · agora</small></div></div>
+     <div class="n">${foodTile('requeijao')}<div><strong>Requeijão vence amanhã</strong><small>EatWise · 08:00</small></div></div>
      <div class="n"><span class="food c-hor">🌱</span><div><strong>Você evitou 33% de desperdício</strong><small>Resumo da semana</small></div></div></div>`}
 ];
 function viewLanding(){
   const sl = SLIDES[obIdx], last = obIdx === SLIDES.length - 1;
   return `<div class="onb" id="onb">
     <div class="onb-top"><span class="logo"><span class="logo-mark">${ic('leaf')}</span><span>Eat<b>Wise</b></span></span>
-      <div style="display:flex;gap:8px;align-items:center">${themeBtn()}${last ? '' : '<button class="link-btn" data-go="login">Pular</button>'}</div></div>
+      ${last ? '' : '<button class="link-btn" data-go="login">Pular</button>'}</div>
     <div class="onb-art">${sl.art()}</div>
     <div class="onb-text"><p class="eyebrow">${sl.eyebrow}</p><h1>${sl.title}</h1><p class="muted">${sl.text}</p></div>
     <div class="dots" role="tablist" aria-label="Apresentação">${SLIDES.map((_,i) => `<button data-dot="${i}" aria-label="Tela ${i+1} de ${SLIDES.length}" aria-current="${i===obIdx}"></button>`).join('')}</div>
@@ -915,7 +906,7 @@ function authArt(quote, who){
 function viewLogin(){
   return `<div class="auth">
     ${authArt('“Parei de abrir a geladeira e achar requeijão estragado que eu nem lembrava que tinha aberto.”', ['CS','Carla Souza, participante do grupo piloto'])}
-    <main class="auth-form">${themeBtn()}
+    <main class="auth-form">
       <form class="auth-box" id="login-form" novalidate>
         <button type="button" class="back-link" data-go="inicio">${ic('left','sm')} Voltar ao início</button>
         <div><h1>Bem-vinda de volta</h1><p class="muted" style="margin-top:6px">Entre para ver o que está perto de vencer na sua geladeira.</p></div>
@@ -937,7 +928,7 @@ function viewLogin(){
 function viewSignup(){
   return `<div class="auth">
     ${authArt('“Registrei a maionese por foto e o app me avisou três dias antes. Simples assim.”', ['RA','Rafael Alves, participante do grupo piloto'])}
-    <main class="auth-form">${themeBtn()}
+    <main class="auth-form">
       <form class="auth-box" id="signup-form" novalidate>
         <button type="button" class="back-link" data-go="inicio">${ic('left','sm')} Voltar ao início</button>
         <div><h1>Crie sua conta</h1><p class="muted" style="margin-top:6px">Leva menos de um minuto. Depois é só registrar o primeiro produto aberto.</p></div>
@@ -1027,8 +1018,7 @@ function shell(){
         <button class="logo app-logo" data-go="dashboard" aria-label="EatWise, início"><span class="logo-mark">${ic('leaf')}</span><span>Eat<b>Wise</b></span></button>
         <div class="search input-icon">${ic('search','sm')}<input class="input" id="global-search" placeholder="Buscar na geladeira: requeijão, molho..." aria-label="Buscar produtos"></div>
         <div class="top-right">
-          ${themeBtn()}
-          <button class="btn btn-primary btn-sm" data-go="adicionar" id="top-add">${ic('plus','sm')} <span>Registrar</span></button>
+              <button class="btn btn-primary btn-sm" data-go="adicionar" id="top-add">${ic('plus','sm')} <span>Registrar</span></button>
           <div class="dd-wrap">
             <button class="icon-btn" id="notif-btn" aria-label="Notificações" aria-expanded="false">${ic('bell')}<span class="dot" id="notif-dot"></span></button>
             <div class="dropdown notif-dd" id="notif-dd" hidden></div>
@@ -1039,7 +1029,6 @@ function shell(){
               <a href="#perfil" data-go="perfil">${ic('user','sm')} Meu perfil</a>
               <a href="#perfil-2" data-go="perfil-2">${ic('sliders','sm')} Notificações</a>
               <a href="#perfil-3" data-go="perfil-3">${ic('users','sm')} Minha casa</a>
-              <button class="dd-item" data-theme-toggle>${ic('moon','sm')} Alternar tema claro/escuro</button>
               <hr style="border:0;border-top:1px solid var(--line);margin:6px 0">
               <button class="dd-item" id="logout-btn">${ic('logout','sm')} Sair</button>
             </div>
@@ -1100,6 +1089,7 @@ function updateBadges(){
 }
 
 function renderView(){
+  stopCamera();
   bindShell();
   const views = {dashboard:viewDashboard, adicionar:viewAdd, despensa:viewDespensa, produto:viewProduto, alertas:viewAlertas, prazos:viewPrazos, impacto:viewImpacto, perfil:viewPerfil};
   const fn = views[route] || viewDashboard;
@@ -1116,7 +1106,7 @@ function pcard(p){
     : `Aberto em ${fmt(p.aberto)} · até ${fmt(p.limite)}`;
   const days = p.restam < 0 ? 'vencido' : p.restam === 0 ? 'hoje' : p.restam + (p.restam===1?' dia':' dias');
   return `<button class="pcard" data-go="produto-${p.id}">
-    <div class="head"><span class="food ${p.cat.cls}">${p.emoji}</span>
+    <div class="head">${foodTile(p.k)}
       <div class="t"><strong>${esc(p.nome)}</strong><small>${esc(p.marca)}</small></div></div>
     <div class="mid"><span class="pill ${p.st.cls}">${p.st.label}</span>${p.estado ? `<span class="tag">${p.cat.nome.split(' ')[0]}</span>` : `<span class="days num">${days}</span>`}</div>
     ${p.estado ? '' : `<div class="bar ${p.st.bar}"><i style="width:${Math.round(p.frac*100)}%"></i></div>`}
@@ -1125,7 +1115,7 @@ function pcard(p){
 }
 function row(p, withAction){
   return `<div class="row">
-    <span class="food ${p.cat.cls}">${p.emoji}</span>
+    ${foodTile(p.k)}
     <button class="info" data-go="produto-${p.id}" style="background:none;border:0;padding:0;text-align:left"><strong>${esc(p.nome)}</strong><small>${esc(p.marca.split(' · ')[0])} · ${LOCS[p.loc]}</small></button>
     <div class="end"><span class="pill ${p.st.cls}">${p.restam < 0 ? 'Vencido' : restamTxt(p.restam)}</span>
     ${withAction ? `<button class="btn btn-soft btn-sm" data-consume="${p.id}">${ic('check','sm')} Consumi</button>` : ''}</div>
@@ -1217,7 +1207,108 @@ function confirmConsume(id, after){
 
 /* ---------- Registrar produto (funcionalidade principal) ---------- */
 let addState = {method:'foto', stage:'input', pick:null, q:''};
-function resetAdd(){ addState = {method:addState.method, stage:'input', pick:null, q:''}; }
+function resetAdd(){ addState = {method:addState.method, stage:'input', pick:null, q:'', camOn:addState.camOn}; }
+
+/* Câmera real (getUserMedia). Sem permissão ou fora de https, cai no seletor de arquivo,
+   que no celular abre o app de câmera do aparelho. O reconhecimento continua simulado. */
+let camStream = null, camFacing = 'environment', guessIdx = 0;
+const GUESS_ORDER = ['maionese','requeijao','molho-tomate','leite','creme-leite','ketchup','presunto','geleia','mostarda','mucarela'];
+const guessesFor = k => (addState.alts && addState.alts.length ? addState.alts : GUESS_ORDER).filter(x => x !== k).slice(0, 3);
+
+/* Reconhecimento feito no próprio aparelho, sem servidor:
+   1) lê o código de barras (BarcodeDetector, disponível no Chrome do Android);
+   2) se não houver código legível, compara as cores da embalagem com as fotos de referência
+      e devolve os produtos mais parecidos. */
+const REF_SIG = {};
+function colorSignature(src, w, h, crop){
+  const N = 56, c = document.createElement('canvas'); c.width = c.height = N;
+  const x = c.getContext('2d', {willReadFrequently:true});
+  const cw = w * crop, ch = h * crop;
+  x.drawImage(src, (w - cw) / 2, (h - ch) / 2, cw, ch, 0, 0, N, N);
+  const d = x.getImageData(0, 0, N, N).data, H = new Float32Array(12 * 2 * 3 + 4);
+  let n = 0;
+  for (let i = 0; i < d.length; i += 4) {
+    const r = d[i] / 255, g = d[i+1] / 255, b = d[i+2] / 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), sat = mx ? (mx - mn) / mx : 0;
+    if (mx > .9 && sat < .1) continue;              // ignora fundo branco
+    let bin;
+    if (sat < .2) bin = 72 + Math.min(3, Math.floor(mx * 4));
+    else {
+      let hue = mx === r ? ((g - b) / (mx - mn)) % 6 : mx === g ? (b - r) / (mx - mn) + 2 : (r - g) / (mx - mn) + 4;
+      hue = (hue * 60 + 360) % 360;
+      bin = Math.floor(hue / 30) * 6 + (sat < .55 ? 0 : 3) + Math.min(2, Math.floor(mx * 3));
+    }
+    H[bin]++; n++;
+  }
+  for (let i = 72; i < H.length; i++) H[i] *= .35;       // cinzas e textos pesam menos que a cor da marca
+  let t = 0; for (let i = 0; i < H.length; i++) t += H[i];
+  if (t) for (let i = 0; i < H.length; i++) H[i] /= t;
+  return H;
+}
+const similarity = (a, b) => { let t = 0; for (let i = 0; i < a.length; i++) t += Math.sqrt(a[i] * b[i]); return t; };
+const loadImg = src => new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
+async function recognize(dataUrl){
+  const photo = await loadImg(dataUrl);
+  if ('BarcodeDetector' in window) {
+    try {
+      const codes = await new BarcodeDetector({formats:['ean_13','ean_8','upc_a']}).detect(photo);
+      for (const code of codes) {
+        const hit = CATALOG.find(c => c.ean === code.rawValue);
+        if (hit) return {pick:hit.k, alts:[], how:'barcode', conf:100};
+      }
+    } catch (e) {}
+  }
+  try {
+    for (const c of CATALOG) if (!REF_SIG[c.k]) { const im = await loadImg(IMG(c.k)); REF_SIG[c.k] = colorSignature(im, im.naturalWidth, im.naturalHeight, 1); }
+    const sig = colorSignature(photo, photo.naturalWidth, photo.naturalHeight, .75);
+    const ranked = CATALOG.map(c => ({k:c.k, score:similarity(sig, REF_SIG[c.k])})).sort((a, b) => b.score - a.score);
+    return {pick:ranked[0].k, alts:ranked.slice(1, 4).map(r => r.k), how:'visual', conf:Math.round(Math.max(40, Math.min(97, ranked[0].score * 100)))};
+  } catch (e) {
+    const k = GUESS_ORDER[guessIdx++ % GUESS_ORDER.length];   // imagens bloqueadas (ex.: aberto direto do disco)
+    return {pick:k, alts:GUESS_ORDER.filter(x => x !== k).slice(0, 3), how:'fallback', conf:60};
+  }
+}
+function stopCamera(){ if (camStream) { camStream.getTracks().forEach(t => t.stop()); camStream = null; } }
+async function startCamera(){
+  const v = $('#vf-video');
+  if (!v || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return false;
+  try {
+    stopCamera();
+    camStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:camFacing}, width:{ideal:1280}, height:{ideal:960}}, audio:false});
+    if (!$('#vf-video')) { stopCamera(); return false; }
+    v.srcObject = camStream; v.hidden = false;
+    await v.play().catch(() => {});
+    $('#vf-idle').hidden = true;
+    $('#vf').classList.add('live');
+    $('#vf').classList.toggle('mirror', camFacing === 'user');
+    addState.camOn = true;
+    return true;
+  } catch (e) { return false; }
+}
+function shrinkToDataURL(src, w, h){
+  const scale = Math.min(1, 900 / Math.max(w, h));
+  const c = document.createElement('canvas');
+  c.width = Math.round(w * scale); c.height = Math.round(h * scale);
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+  return c.toDataURL('image/jpeg', .85);
+}
+function fileToDataURL(file){
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file), im = new Image();
+    im.onload = () => { const d = shrinkToDataURL(im, im.naturalWidth, im.naturalHeight); URL.revokeObjectURL(url); res(d); };
+    im.onerror = () => { URL.revokeObjectURL(url); rej(new Error('imagem inválida')); };
+    im.src = url;
+  });
+}
+function usePhoto(dataUrl){
+  stopCamera();
+  addState.photo = dataUrl;
+  addState.pick = null; addState.recog = null;
+  addState.stage = 'processing';
+  recognize(dataUrl).then(r => { addState.recog = r; addState.pick = r.pick; addState.alts = r.alts; });
+  renderView();
+  if (document.getElementById('root')) document.getElementById('root').scrollTop = 0; else window.scrollTo(0, 0);
+}
 
 function viewAdd(){
   const s = addState;
@@ -1225,16 +1316,20 @@ function viewAdd(){
   let panel = '';
   if (s.stage === 'input') {
     if (s.method === 'foto') panel = `
-      <button class="viewfinder" id="photo-drop" aria-label="Fotografar o produto">
-        ${ILL_JAR}
-        <span class="vf-frame"><i></i><i></i><i></i><i></i></span>
-        <span class="vf-scan"></span>
-        <span class="vf-hint">Enquadre o rótulo do produto</span>
-      </button>
-      <div class="shutter-row">
-        <button class="vf-side" id="vf-gallery" aria-label="Escolher da galeria">${ic('upload')}</button>
-        <button class="shutter" id="vf-shoot" aria-label="Tirar foto"></button>
-        <button class="vf-side" id="vf-flash" aria-label="Ligar o flash">${ic('sun')}</button>
+      <div class="cam">
+        <div class="viewfinder" id="vf">
+          <video id="vf-video" playsinline muted autoplay hidden></video>
+          <div class="vf-idle" id="vf-idle">${ic('camera')}<strong>Fotografe o rótulo do produto</strong><span>Toque no botão redondo para abrir a câmera ou envie uma foto da galeria.</span></div>
+          <span class="vf-frame"><i></i><i></i><i></i><i></i></span>
+          <span class="vf-scan"></span>
+          <span class="vf-hint">Enquadre o rótulo do produto</span>
+        </div>
+        <div class="shutter-row">
+          <label class="vf-side" for="photo-input" title="Enviar foto da galeria" aria-label="Enviar foto da galeria">${ic('upload')}</label>
+          <button class="shutter" id="vf-shoot" aria-label="Tirar foto"></button>
+          <button class="vf-side" id="vf-switch" aria-label="Trocar câmera" title="Trocar câmera">${ic('flip')}</button>
+        </div>
+        <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
       </div>`;
     if (s.method === 'texto') panel = `
       <div class="field"><label for="add-q">Qual produto você abriu?</label>
@@ -1247,10 +1342,10 @@ function viewAdd(){
         <p class="muted" style="font-size:.9rem">Exemplo: “Abri agora um requeijão cremoso Itambé”.</p>
       </div>`;
   } else if (s.stage === 'processing') {
-    panel = `<div class="processing"><div class="spinner" aria-hidden="true"></div><strong>Identificando o produto…</strong>
+    panel = `<div class="processing">${s.photo ? `<img class="proc-photo" src="${s.photo}" alt="Foto tirada do produto">` : ''}<div class="spinner" aria-hidden="true"></div><strong>Identificando o produto…</strong>
       <div class="proc-steps" id="proc-steps">
-        <div class="now" data-i="0">${ic('clock','sm')} ${s.method==='audio'?'Transcrevendo o áudio':s.method==='foto'?'Lendo o rótulo da embalagem':'Interpretando o texto'}</div>
-        <div data-i="1">${ic('clock','sm')} Reconhecendo produto e marca</div>
+        <div class="now" data-i="0">${ic('clock','sm')} ${s.method==='audio'?'Transcrevendo o áudio':s.method==='foto'?'Procurando o código de barras':'Interpretando o texto'}</div>
+        <div data-i="1">${ic('clock','sm')} ${s.method==='foto'?'Comparando com as embalagens conhecidas':'Reconhecendo produto e marca'}</div>
         <div data-i="2">${ic('clock','sm')} Consultando a base de prazos</div>
         <div data-i="3">${ic('clock','sm')} Calculando a nova data-limite</div>
       </div></div>`;
@@ -1258,12 +1353,14 @@ function viewAdd(){
     const c = CATALOG.find(x => x.k === s.pick), b = baseBy(s.pick);
     panel = `
       <div class="result">
-        <span class="food lg ${CATS[b.cat].cls}" style="background:var(--surface)">${b.emoji}</span>
-        <div class="t"><span class="conf">${ic('spark','sm')} Identificado por IA · ${s.method==='texto'?'99':s.method==='audio'?'94':'96'}% de confiança</span>
+        <div class="shot-pair">${s.photo ? `<img class="shot" src="${s.photo}" alt="Sua foto">` : ''}${foodTile(s.pick,'lg')}</div>
+        <div class="t"><span class="conf">${ic('spark','sm')} ${s.method!=='foto' ? `Identificado por IA · ${s.method==='texto'?'99':'94'}% de confiança` : s.recog && s.recog.how==='barcode' ? 'Código de barras lido · produto exato' : `Reconhecido pela imagem · ${s.recog ? s.recog.conf : 60}% de semelhança`}</span>
           <h2 style="margin:4px 0 2px">${c.nome}</h2><p class="muted">${c.marca}</p>
-          <div class="chips" style="margin-top:8px"><span class="tag">${CATS[b.cat].nome}</span><span class="tag">${ic('cal','sm')} ${b.dias} dias após aberto</span></div></div>
+          <div class="chips" style="margin-top:8px"><span class="tag">${CATS[b.cat].nome}</span><span class="tag">${ic('cal','sm')} ${b.dias} ${b.dias===1?'dia':'dias'} após aberto</span></div></div>
       </div>
-      <button class="link-btn" id="not-this" style="justify-self:start">Não é esse produto? Corrigir manualmente</button>
+      <blockquote class="label-quote">${b.doRotulo ? 'No rótulo' : 'Orientação'}: “${b.orient}”</blockquote>
+      ${s.method==='foto' ? `<div class="guess-row"><span class="muted" style="font-size:.85rem;font-weight:700">Não é esse? Parecidos com a sua foto:</span>${guessesFor(s.pick).map(k => `<button type="button" class="guess" data-guess="${k}">${foodTile(k)}${CATALOG.find(x => x.k === k).nome}</button>`).join('')}</div>` : ''}
+      <button class="link-btn" id="not-this" style="justify-self:start">Buscar o produto pelo nome</button>
       <form id="add-form" class="form-grid" novalidate>
         <div class="field"><label for="f-open">Data de abertura</label><input class="input" type="date" id="f-open" value="${iso(TODAY)}" max="${iso(TODAY)}"></div>
         <div class="field"><label for="f-loc">Onde vai ficar guardado?</label><select class="select" id="f-loc">${Object.entries(LOCS).map(([k,n]) => `<option value="${k}" ${k==='gel'?'selected':''}>${n}</option>`).join('')}</select></div>
@@ -1300,17 +1397,35 @@ function bindAdd(){
   $$('[data-method]').forEach(b => b.onclick = () => { addState = {method:b.dataset.method, stage:'input', pick:null, q:''}; renderView(); });
   const s = addState;
   if (s.stage === 'input' && s.method === 'foto') {
-    ['#photo-drop','#vf-shoot','#vf-gallery'].forEach(id => $(id).onclick = () => startProcessing('maionese'));
-    $('#vf-flash').onclick = () => toast('Flash ligado', 'sun');
+    const input = $('#photo-input');
+    const pickFile = () => input.click();
+    input.onchange = async () => {
+      const f = input.files && input.files[0]; if (!f) return;
+      try { usePhoto(await fileToDataURL(f)); } catch (e) { toast('Não foi possível ler essa imagem. Tente outra foto.', 'info'); }
+    };
+    $('#vf-shoot').onclick = async () => {
+      const v = $('#vf-video');
+      if (camStream && v.videoWidth) {
+        $('#vf').insertAdjacentHTML('beforeend', '<span class="vf-flash"></span>');
+        const shot = shrinkToDataURL(v, v.videoWidth, v.videoHeight);
+        setTimeout(() => usePhoto(shot), 250);
+      } else if (!(await startCamera())) {
+        toast('A câmera não abriu aqui. Escolha ou tire uma foto pelo celular.', 'camera');
+        pickFile();
+      }
+    };
+    $('#vf-switch').onclick = async () => { camFacing = camFacing === 'environment' ? 'user' : 'environment'; if (!(await startCamera())) toast('Não há outra câmera disponível', 'camera'); };
+    if (addState.camOn) startCamera();
   }
+  if (s.stage === 'result') $$('[data-guess]').forEach(g => g.onclick = () => { const k = g.dataset.guess; addState.alts = [addState.pick, ...(addState.alts || []).filter(x => x !== k)]; addState.pick = k; renderView(); });
   if (s.stage === 'input' && s.method === 'texto') {
     const q = $('#add-q'), box = $('#add-suggest');
     const fill = () => {
       const t = q.value.trim().toLowerCase();
       const list = (t ? CATALOG.filter(c => (c.nome + ' ' + c.marca + ' ' + baseBy(c.k).item).toLowerCase().includes(t)) : CATALOG.slice(0,5)).slice(0,6);
       box.innerHTML = (t ? '' : `<div style="padding:10px 14px;font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;background:var(--bg)">Mais registrados</div>`) +
-        (list.length ? list.map(c => { const b = baseBy(c.k); return `<button type="button" data-pick="${c.k}"><span class="food ${CATS[b.cat].cls}">${b.emoji}</span><span style="min-width:0;flex:1"><strong style="display:block">${c.nome}</strong><small class="muted">${c.marca}</small></span><span class="tag">${b.dias} dias</span></button>`; }).join('')
-        : `<div style="padding:16px" class="muted">Nenhum produto encontrado. Tente outro nome, como “iogurte” ou “palmito”.</div>`);
+        (list.length ? list.map(c => { const b = baseBy(c.k); return `<button type="button" data-pick="${c.k}">${foodTile(c.k)}<span style="min-width:0;flex:1"><strong style="display:block">${c.nome}</strong><small class="muted">${c.marca}</small></span><span class="tag">${b.dias} dias</span></button>`; }).join('')
+        : `<div style="padding:16px" class="muted">Nenhum produto encontrado. Tente outro nome, como “ketchup” ou “geleia”.</div>`);
       $$('[data-pick]', box).forEach(x => x.onclick = () => startProcessing(x.dataset.pick));
     };
     q.addEventListener('input', fill); fill(); q.focus();
@@ -1333,7 +1448,11 @@ function bindAdd(){
       rows[i].className = 'done'; rows[i].innerHTML = ic('check','sm') + rows[i].textContent;
       i++;
       if (i < rows.length) rows[i].className = 'now';
-      else { clearInterval(tick); setTimeout(() => { addState.stage = 'result'; renderView(); }, 300); }
+      else {
+        clearInterval(tick);
+        const done = () => { if (addState.stage !== 'processing') return; if (addState.method === 'foto' && !addState.recog) return setTimeout(done, 150); addState.stage = 'result'; renderView(); };
+        setTimeout(done, 300);
+      }
     }, 550);
   }
   if (s.stage === 'result') {
@@ -1352,7 +1471,7 @@ function bindAdd(){
       const d = new Date($('#f-open').value + 'T12:00:00');
       const abertoHa = Math.max(0, Math.round((TODAY - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / DAY));
       const id = nextId++;
-      PRODUCTS.unshift({id, k:s.pick, abertoHa, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
+      PRODUCTS.unshift({id, k:s.pick, foto:s.photo || null, abertoHa, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
       const lim = addDays(d, b.dias);
       resetAdd();
       go('produto-' + id);
@@ -1418,8 +1537,7 @@ const TIPS = {
   mol:['Use uma colher limpa a cada vez que servir.','Se mudar de cor, cheiro ou textura antes do prazo, descarte.','Molhos à base de ovo devem voltar à geladeira logo após o uso.'],
   emb:['Mantenha as fatias na embalagem original bem vedada ou em pote fechado.','Fatias com aspecto pegajoso ou cheiro ácido devem ser descartadas.','Não deixe fora da geladeira por mais de 2 horas.'],
   con:['Mantenha o alimento sempre coberto pelo líquido da conserva.','Nunca guarde na lata aberta: transfira para um pote de vidro.','Use garfo limpo para retirar as porções.'],
-  doc:['Use colher limpa e seca para não criar fungos.','Guarde na geladeira depois de aberto.','Manchas brancas ou esverdeadas indicam que o produto deve ir para o lixo.'],
-  hor:['Agite e mantenha a garrafa bem fechada.','Guarde na parte de dentro da geladeira.','Sabor fermentado indica que o prazo passou.']
+  doc:['Use colher limpa e seca para não criar fungos.','Guarde na geladeira depois de aberto.','Manchas brancas ou esverdeadas indicam que o produto deve ir para o lixo.']
 };
 function viewProduto(){
   const raw = PRODUCTS.find(x => x.id === param);
@@ -1437,7 +1555,7 @@ function viewProduto(){
     <div class="stack">
       <article class="card">
         <div class="prod-hero">
-          <span class="food lg ${p.cat.cls}">${p.emoji}</span>
+          ${foodTile(p.k,'lg')}
           <div style="min-width:0;display:grid;gap:6px">
             <span class="pill ${p.st.cls}" style="justify-self:start">${p.st.label}</span>
             <h1 style="font-size:1.7rem">${esc(p.nome)}</h1>
@@ -1474,12 +1592,14 @@ function viewProduto(){
         <h3 style="margin-bottom:14px;display:flex;gap:8px;align-items:center">${ic('db','sm')} Como calculamos</h3>
         <dl class="kv">
           <dt>Categoria</dt><dd>${p.cat.nome}</dd>
-          <dt>Referência</dt><dd>${p.b.item}</dd>
+          <dt>Produto</dt><dd>${p.b.item} · ${p.b.marca}</dd>
           <dt>Prazo pós-abertura</dt><dd class="num">${p.b.dias} dias</dd>
           <dt>Conservação</dt><dd>${p.b.cons}</dd>
-          <dt>Fonte</dt><dd>ANVISA, Guia nº 16 e orientação do fabricante</dd>
+          <dt>Fonte</dt><dd><a href="${p.b.url}" target="_blank" rel="noopener">${p.b.fonte}</a></dd>
         </dl>
+        <blockquote class="label-quote" style="margin-top:14px">${p.b.doRotulo ? 'No rótulo' : 'Orientação'}: “${p.b.orient}”</blockquote>
       </article>
+      ${raw.foto ? `<article class="card"><h3 style="margin-bottom:12px;display:flex;gap:8px;align-items:center">${ic('camera','sm')} Sua foto do produto</h3><img class="user-photo" src="${raw.foto}" alt="Foto tirada por ${p.quem}"><p class="muted" style="font-size:.85rem;margin-top:8px">Tirada em ${fmtFull(p.aberto)} por ${p.quem}</p></article>` : ''}
       <article class="card tip">
         <p class="eyebrow">${ic('leaf','sm')} Dicas para durar até o fim</p>
         <ul class="tips" style="margin-top:12px">${TIPS[p.b.cat].map(t => `<li>${ic('check','sm')}<span>${t}</span></li>`).join('')}</ul>
@@ -1581,17 +1701,17 @@ function viewPrazos(){
   </div>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Produto</th><th>Categoria</th><th>Prazo após aberto</th><th>Como conservar</th></tr></thead>
+      <thead><tr><th>Produto</th><th>Categoria</th><th>Prazo após aberto</th><th>Como conservar</th><th>Fonte</th></tr></thead>
       <tbody>${list.map(b => `<tr>
-        <td><div class="cell"><span class="food ${CATS[b.cat].cls}">${b.emoji}</span><strong>${b.item}</strong></div></td>
+        <td><div class="cell">${foodTile(b.k)}<span><strong>${b.item}</strong><br><small class="muted">${b.marca}</small></span></div></td>
         <td><span class="tag">${CATS[b.cat].nome}</span></td>
         <td><span class="days-badge num" style="color:${b.dias<=3?'var(--terra)':b.dias<=7?'var(--orange)':'var(--green)'}">${b.dias} ${b.dias===1?'dia':'dias'}</span></td>
-        <td class="muted">${b.cons}</td></tr>`).join('') || `<tr><td colspan="4" class="muted" style="text-align:center;padding:30px">Nenhum item encontrado na base.</td></tr>`}</tbody>
+        <td class="muted">${b.cons}</td><td style="font-size:.84rem"><a href="${b.url}" target="_blank" rel="noopener">${b.fonte}</a>${b.doRotulo ? ' <span class="pill st-ok" style="margin-left:4px">rótulo</span>' : ''}</td></tr>`).join('') || `<tr><td colspan="5" class="muted" style="text-align:center;padding:30px">Nenhum item encontrado na base.</td></tr>`}</tbody>
     </table>
   </div>
   <article class="card tip" style="display:flex;gap:14px;align-items:flex-start">
     <span style="color:var(--olive)">${ic('info')}</span>
-    <p class="muted" style="font-size:.9rem">Prazos de referência para produtos mantidos sob refrigeração adequada (0 a 5 °C), com base no Guia nº 16 da ANVISA (versão 3, 2025) e nas orientações dos fabricantes. Neste protótipo, os valores são ilustrativos. Na dúvida, siga sempre o que está escrito no rótulo.</p>
+    <p class="muted" style="font-size:.9rem">Quando o rótulo informa o prazo depois de aberto, usamos o do rótulo (marcado como <strong>rótulo</strong>). Nos demais, usamos a orientação publicada mais conservadora que encontramos, com a fonte ao lado. Os prazos valem para produtos guardados na geladeira e sempre devem ceder ao que estiver escrito na embalagem. Fotos das embalagens: Open Food Facts, licença CC BY-SA.</p>
   </article>`;
 }
 function bindPrazos(){
@@ -1681,7 +1801,6 @@ function viewPerfil(){
     <div>
       ${[['Alertas de vencimento','Aviso antes da data-limite de cada produto aberto',true],['Resumo semanal','Domingo às 10:00, com o que vence na semana',true],['Notificações por e-mail','Uma cópia dos alertas no seu e-mail',false],['Avisos de produtos vencidos','Lembrete diário até você dar baixa no item',true],['Dicas de conservação','No máximo duas por semana',false]].map(([t,d,on],i) => `
       <div class="setting"><div><strong>${t}</strong><p>${d}</p></div><label class="switch"><input type="checkbox" id="sw-${i}" ${on?'checked':''} aria-label="${t}"><span></span></label></div>`).join('')}
-      <div class="setting"><div><strong>Tema</strong><p>Claro (off-white) ou escuro, com mais contraste</p></div><div class="tabs" id="theme-pick"><button data-t="light">Claro</button><button data-t="dark">Escuro</button></div></div>
       <div class="setting"><div><strong>Antecedência padrão</strong><p>Quantos dias antes do vencimento avisar</p></div><select class="select" id="ant" style="width:auto"><option>1 dia</option><option selected>2 dias</option><option>3 dias</option></select></div>
       <div class="setting"><div><strong>Horário dos alertas</strong><p>Escolha um momento em que você costuma estar em casa</p></div><input class="input" type="time" id="hora" value="08:00" style="width:auto"></div>
     </div>`;
@@ -1722,7 +1841,6 @@ function bindPerfil(){
     $('#pf-form').addEventListener('submit', e => { e.preventDefault(); toast('Perfil atualizado com sucesso'); });
   }
   $$('.switch input').forEach(s => s.onchange = () => toast(`${s.getAttribute('aria-label')} ${s.checked ? 'ativado' : 'desativado'}`, 'bell'));
-  $$('#theme-pick button').forEach(b => { b.setAttribute('aria-selected', (b.dataset.t === 'dark') === isDark()); b.onclick = () => { setTheme(b.dataset.t); $$('#theme-pick button').forEach(x => x.setAttribute('aria-selected', x === b)); toast(b.dataset.t === 'dark' ? 'Tema escuro ativado' : 'Tema claro ativado', b.dataset.t === 'dark' ? 'moon' : 'sun'); }; });
   $('#ant') && ($('#ant').onchange = e => toast(`Antecedência padrão: ${e.target.value}`, 'bell'));
   $('#hora') && ($('#hora').onchange = e => toast(`Alertas passam a chegar às ${e.target.value}`, 'clock'));
   $('#invite') && ($('#invite').onclick = () => modal(`

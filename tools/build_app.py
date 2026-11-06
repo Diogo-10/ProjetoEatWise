@@ -89,22 +89,8 @@ body{display:block;overflow:hidden}
 .notif-art .n small{color:var(--muted);font-size:.8rem;display:block}
 .notif-art .n .food{width:42px;height:42px;font-size:22px}
 
-/* Câmera */
-.viewfinder{position:relative;border-radius:26px;overflow:hidden;background:#1b201a;aspect-ratio:3/4;max-width:100%;display:grid;place-items:center;border:0;padding:0;cursor:pointer;color:#fff}
-.viewfinder .ill{width:58%;height:auto;opacity:.95}
-.vf-frame{position:absolute;inset:14% 12%;pointer-events:none}
-.vf-frame i{position:absolute;width:34px;height:34px;border-color:#fff;border-style:solid;opacity:.9}
-.vf-frame i:nth-child(1){top:0;left:0;border-width:4px 0 0 4px;border-top-left-radius:14px}
-.vf-frame i:nth-child(2){top:0;right:0;border-width:4px 4px 0 0;border-top-right-radius:14px}
-.vf-frame i:nth-child(3){bottom:0;left:0;border-width:0 0 4px 4px;border-bottom-left-radius:14px}
-.vf-frame i:nth-child(4){bottom:0;right:0;border-width:0 4px 4px 0;border-bottom-right-radius:14px}
-.vf-hint{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);color:#fff;font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.vf-scan{position:absolute;left:12%;right:12%;height:3px;background:#9FD07F;box-shadow:0 0 14px #9FD07F;top:20%;animation:scan 2.4s ease-in-out infinite alternate}
-@keyframes scan{to{top:80%}}
-.shutter-row{display:flex;justify-content:space-around;align-items:center}
-.shutter{width:76px;height:76px;border-radius:50%;border:5px solid var(--green);background:var(--surface);box-shadow:inset 0 0 0 5px var(--surface),inset 0 0 0 40px var(--green)}
-.shutter:active{transform:scale(.94)}
-.vf-side{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center}
+/* Câmera: visor vertical no celular */
+.viewfinder{aspect-ratio:3/4}
 '''
 rep('@media (prefers-reduced-motion:reduce)', APP_CSS + '@media (prefers-reduced-motion:reduce)')
 
@@ -152,15 +138,15 @@ const SLIDES = [
   {eyebrow:'Alertas', title:'Receba o aviso antes de vencer.',
    text:'Menos comida no lixo, mais economia e mais segurança para toda a casa.',
    art:() => `<div class="notif-art">
-     <div class="n"><span class="food c-mol">🥚</span><div><strong>Maionese vence em 3 dias</strong><small>EatWise · agora</small></div></div>
-     <div class="n"><span class="food c-lat">🧀</span><div><strong>Requeijão vence amanhã</strong><small>EatWise · 08:00</small></div></div>
+     <div class="n">${foodTile('maionese')}<div><strong>Maionese vence em 3 dias</strong><small>EatWise · agora</small></div></div>
+     <div class="n">${foodTile('requeijao')}<div><strong>Requeijão vence amanhã</strong><small>EatWise · 08:00</small></div></div>
      <div class="n"><span class="food c-hor">🌱</span><div><strong>Você evitou 33% de desperdício</strong><small>Resumo da semana</small></div></div></div>`}
 ];
 function viewLanding(){
   const sl = SLIDES[obIdx], last = obIdx === SLIDES.length - 1;
   return `<div class="onb" id="onb">
     <div class="onb-top"><span class="logo"><span class="logo-mark">${ic('leaf')}</span><span>Eat<b>Wise</b></span></span>
-      <div style="display:flex;gap:8px;align-items:center">${themeBtn()}${last ? '' : '<button class="link-btn" data-go="login">Pular</button>'}</div></div>
+      ${last ? '' : '<button class="link-btn" data-go="login">Pular</button>'}</div>
     <div class="onb-art">${sl.art()}</div>
     <div class="onb-text"><p class="eyebrow">${sl.eyebrow}</p><h1>${sl.title}</h1><p class="muted">${sl.text}</p></div>
     <div class="dots" role="tablist" aria-label="Apresentação">${SLIDES.map((_,i) => `<button data-dot="${i}" aria-label="Tela ${i+1} de ${SLIDES.length}" aria-current="${i===obIdx}"></button>`).join('')}</div>
@@ -183,28 +169,6 @@ function bindOnboarding(){
 s = s[:start] + ONB + s[end:]
 rep("function bindPublic(){\n", "function bindPublic(){\n  bindOnboarding();\n")
 
-# câmera no registro por foto
-p0 = s.index("    if (s.method === 'foto') panel = `"); p1 = s.index("    if (s.method === 'texto') panel = `")
-CAM = r'''    if (s.method === 'foto') panel = `
-      <button class="viewfinder" id="photo-drop" aria-label="Fotografar o produto">
-        ${ILL_JAR}
-        <span class="vf-frame"><i></i><i></i><i></i><i></i></span>
-        <span class="vf-scan"></span>
-        <span class="vf-hint">Enquadre o rótulo do produto</span>
-      </button>
-      <div class="shutter-row">
-        <button class="vf-side" id="vf-gallery" aria-label="Escolher da galeria">${ic('upload')}</button>
-        <button class="shutter" id="vf-shoot" aria-label="Tirar foto"></button>
-        <button class="vf-side" id="vf-flash" aria-label="Ligar o flash">${ic('sun')}</button>
-      </div>`;
-'''
-s = s[:p0] + CAM + s[p1:]
-rep("  if (s.stage === 'input' && s.method === 'foto') $('#photo-drop').onclick = () => startProcessing('maionese');",
-    """  if (s.stage === 'input' && s.method === 'foto') {
-    ['#photo-drop','#vf-shoot','#vf-gallery'].forEach(id => $(id).onclick = () => startProcessing('maionese'));
-    $('#vf-flash').onclick = () => toast('Flash ligado', 'sun');
-  }""")
-
 # cabeçalho de app: logo no lugar do botão Registrar (o + da barra inferior já faz isso)
 rep("""<button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Abrir menu">${ic('menu')}</button>""",
     """<button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Abrir menu">${ic('menu')}</button>
@@ -224,4 +188,7 @@ if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
 </script>''')
 
 open(ROOT / 'app' / 'index.html', 'w', encoding='utf-8').write(s)
+import shutil
+shutil.rmtree(ROOT / 'app' / 'assets', ignore_errors=True)
+shutil.copytree(ROOT / 'assets', ROOT / 'app' / 'assets')
 print('ok', len(s))

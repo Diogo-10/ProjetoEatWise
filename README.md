@@ -43,6 +43,13 @@ O `app/index.html` é gerado a partir do `index.html`. Depois de alterar o prot�
 python3 tools/build_app.py
 ```
 
+## Câmera, reconhecimento e prazos
+
+- **Câmera de verdade:** no registro por foto, o botão redondo abre a câmera do aparelho (é preciso `https`, como no GitHub Pages). Sem câmera ou sem permissão, o botão de envio abre a galeria; no celular ele também abre o app de câmera.
+- **Reconhecimento no próprio aparelho, sem servidor:** primeiro o app tenta ler o código de barras da embalagem (funciona no Chrome do Android). Se não houver código legível, compara as cores da foto com as embalagens cadastradas e mostra o produto mais parecido, com outras 3 opções para corrigir. Em um teste com 38 fotos de outros ângulos, acertou de primeira 24 vezes e mostrou o produto certo entre as 4 opções em 31.
+- **Prazos depois de aberto com fonte:** cada produto da base de prazos mostra de onde veio o prazo. O do requeijão Itambé foi lido no próprio rótulo (5 dias). Nos demais, usamos a orientação publicada mais conservadora encontrada; o link está na tela **Base de prazos**.
+- **Fotos reais das embalagens:** vêm do Open Food Facts (licença CC BY-SA). Créditos em `assets/produtos/CREDITOS.md`.
+
 ## Telas
 
 | Tela | O que mostra |
