@@ -138,8 +138,8 @@ const SLIDES = [
   {eyebrow:'Alertas', title:'Receba o aviso antes de vencer.',
    text:'Menos comida no lixo, mais economia e mais segurança para toda a casa.',
    art:() => `<div class="notif-art">
-     <div class="n">${foodTile('maionese')}<div><strong>Maionese vence em 3 dias</strong><small>EatWise · agora</small></div></div>
-     <div class="n">${foodTile('requeijao')}<div><strong>Requeijão vence amanhã</strong><small>EatWise · 08:00</small></div></div>
+     <div class="n"><span class="food c-mol">🥚</span><div><strong>Maionese vence em 3 dias</strong><small>EatWise · agora</small></div></div>
+     <div class="n"><span class="food c-lat">🧀</span><div><strong>Requeijão vence amanhã</strong><small>EatWise · 08:00</small></div></div>
      <div class="n"><span class="food c-hor">🌱</span><div><strong>Você evitou 33% de desperdício</strong><small>Resumo da semana</small></div></div></div>`}
 ];
 function viewLanding(){
