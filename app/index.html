@@ -180,6 +180,8 @@ input,select,textarea{font:inherit;color:var(--ink)}
 .shutter:active{transform:scale(.94)}
 .vf-side{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer}
 .vf-side:hover{background:var(--sand)}
+.vf-btn{display:grid;justify-items:center;gap:4px;font-size:.78rem;font-weight:700;color:var(--muted);cursor:pointer}
+.file-hidden{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 .float-card strong{display:block;font-size:.9rem}
 .float-card small{color:var(--muted);font-size:.8rem}
 .fc-1{top:26px;left:22px}.fc-2{bottom:28px;right:20px}
@@ -1327,11 +1329,12 @@ function viewAdd(){
           <span class="vf-hint">Enquadre o rótulo do produto</span>
         </div>
         <div class="shutter-row">
-          <label class="vf-side" for="photo-input" title="Enviar foto da galeria" aria-label="Enviar foto da galeria">${ic('upload')}</label>
+          <label class="vf-btn" for="photo-gallery" title="Escolher uma foto que já está no aparelho"><span class="vf-side">${ic('upload')}</span>Galeria</label>
           <button class="shutter" id="vf-shoot" aria-label="Tirar foto"></button>
-          <button class="vf-side" id="vf-switch" aria-label="Trocar câmera" title="Trocar câmera">${ic('flip')}</button>
+          <button class="vf-btn" id="vf-switch" type="button" title="Trocar câmera" style="background:none;border:0;padding:0"><span class="vf-side">${ic('flip')}</span>Virar</button>
         </div>
-        <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
+        <input type="file" id="photo-gallery" class="file-hidden" accept="image/*" tabindex="-1">
+        <input type="file" id="photo-input" class="file-hidden" accept="image/*" capture="environment" tabindex="-1">
       </div>`;
     if (s.method === 'texto') panel = `
       <div class="field"><label for="add-q">Qual produto você abriu?</label>
@@ -1401,10 +1404,13 @@ function bindAdd(){
   if (s.stage === 'input' && s.method === 'foto') {
     const input = $('#photo-input');
     const pickFile = () => input.click();
-    input.onchange = async () => {
-      const f = input.files && input.files[0]; if (!f) return;
-      try { usePhoto(await fileToDataURL(f)); } catch (e) { toast('Não foi possível ler essa imagem. Tente outra foto.', 'info'); }
+    const onFile = async e => {
+      const f = e.target.files && e.target.files[0]; if (!f) return;
+      try { usePhoto(await fileToDataURL(f)); }
+      catch (err) { e.target.value = ''; toast('Não foi possível ler essa imagem. Tente uma foto em JPG ou PNG.', 'info'); }
     };
+    input.onchange = onFile;
+    $('#photo-gallery').onchange = onFile;
     $('#vf-shoot').onclick = async () => {
       const v = $('#vf-video');
       if (camStream && v.videoWidth) {

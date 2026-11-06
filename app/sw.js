@@ -1,5 +1,5 @@
 // EatWise · service worker: guarda o app no aparelho para abrir mesmo sem internet.
-const CACHE = 'eatwise-v3';
+const CACHE = 'eatwise-v4';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-180.png'];
 
 self.addEventListener('install', e => {
