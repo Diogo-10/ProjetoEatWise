@@ -64,8 +64,8 @@ body{display:block;overflow:hidden}
 /* Splash */
 .splash{position:absolute;inset:0;z-index:300;background:var(--green);color:var(--on-accent);display:grid;place-items:center;align-content:center;gap:14px;transition:opacity .45s,visibility .45s}
 .splash.hide{opacity:0;visibility:hidden}
-.splash .logo-mark{width:84px;height:84px;border-radius:26px;background:var(--on-accent);color:var(--green);animation:pop .5s}
-.splash .logo-mark .svg{width:46px;height:46px}
+.splash .logo-mark{width:96px;height:96px;border-radius:28px;background:#FAF0D2;animation:pop .5s}
+.splash .logo-mark .jar{width:68px;height:68px}
 .splash strong{font-family:var(--font-display);font-size:2rem;font-weight:800}
 .splash small{opacity:.85;font-weight:600}
 
@@ -100,7 +100,7 @@ rep('''<body>
 <div class="toasts" id="toasts" aria-live="polite"></div>
 <div id="modal-root"></div>''', '''<body>
 <aside class="device-side">
-  <span class="logo"><span class="logo-mark"><svg class="svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span><span>Eat<b>Wise</b></span></span>
+  <span class="logo"><span class="logo-mark"><svg class="jar" viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="26" width="34" height="32" rx="9" fill="#E7B844"/><rect x="21" y="36" width="22" height="11" rx="3.5" fill="#fff"/><g transform="rotate(-22 16 22)"><rect x="13" y="16" width="34" height="7" rx="3.5" fill="#C0603E"/></g><path d="M38 25 C38 18 42 13 49 12 C49 19 45 24 38 25 Z" fill="#4E7A38"/></svg></span><span>Eat<b>Wise</b></span></span>
   <h1>O app que lembra a segunda validade.</h1>
   <p class="muted">Protótipo do aplicativo para celular do grupo Seven. Use o celular ao lado como se fosse o seu.</p>
   <ol>
@@ -115,7 +115,7 @@ rep('''<body>
 <div id="root"></div>
 <div class="toasts" id="toasts" aria-live="polite"></div>
 <div id="modal-root"></div>
-<div class="splash" id="splash" aria-hidden="true"><span class="logo-mark"><svg class="svg" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span><strong>EatWise</strong><small>Abriu? A gente lembra.</small></div>
+<div class="splash" id="splash" aria-hidden="true"><span class="logo-mark"><svg class="jar" viewBox="0 0 64 64" aria-hidden="true"><rect x="15" y="26" width="34" height="32" rx="9" fill="#E7B844"/><rect x="21" y="36" width="22" height="11" rx="3.5" fill="#fff"/><g transform="rotate(-22 16 22)"><rect x="13" y="16" width="34" height="7" rx="3.5" fill="#C0603E"/></g><path d="M38 25 C38 18 42 13 49 12 C49 19 45 24 38 25 Z" fill="#4E7A38"/></svg></span><strong>EatWise</strong><small>Abriu? A gente lembra.</small></div>
 </div>
 </div>''')
 rep('</script>\n</body>', '</script>\n</body>')  # sanity
@@ -145,7 +145,7 @@ const SLIDES = [
 function viewLanding(){
   const sl = SLIDES[obIdx], last = obIdx === SLIDES.length - 1;
   return `<div class="onb" id="onb">
-    <div class="onb-top"><span class="logo"><span class="logo-mark">${ic('leaf')}</span><span>Eat<b>Wise</b></span></span>
+    <div class="onb-top"><span class="logo"><span class="logo-mark">${LOGO}</span><span>Eat<b>Wise</b></span></span>
       ${last ? '' : '<button class="link-btn" data-go="login">Pular</button>'}</div>
     <div class="onb-art">${sl.art()}</div>
     <div class="onb-text"><p class="eyebrow">${sl.eyebrow}</p><h1>${sl.title}</h1><p class="muted">${sl.text}</p></div>
@@ -172,8 +172,8 @@ rep("function bindPublic(){\n", "function bindPublic(){\n  bindOnboarding();\n")
 # cabeçalho de app: logo no lugar do botão Registrar (o + da barra inferior já faz isso)
 rep("""<button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Abrir menu">${ic('menu')}</button>""",
     """<button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Abrir menu">${ic('menu')}</button>
-        <button class="logo app-logo" data-go="dashboard" aria-label="EatWise, início"><span class="logo-mark">${ic('leaf')}</span><span>Eat<b>Wise</b></span></button>""")
-rep(".toasts{left:16px;right:16px;max-width:none}", ".toasts{left:16px;right:16px;max-width:none}\n#top-add{display:none}\n.app-logo{font-size:1.15rem}\n.app-logo .logo-mark{width:32px;height:32px;border-radius:10px}\n.app-logo .logo-mark .svg{width:18px;height:18px}")
+        <button class="logo app-logo" data-go="dashboard" aria-label="EatWise, início"><span class="logo-mark">${LOGO}</span><span>Eat<b>Wise</b></span></button>""")
+rep(".toasts{left:16px;right:16px;max-width:none}", ".toasts{left:16px;right:16px;max-width:none}\n#top-add{display:none}\n.app-logo{font-size:1.15rem}\n.app-logo .logo-mark{width:32px;height:32px;border-radius:10px}\n.app-logo .logo-mark .jar{width:25px;height:25px}")
 
 rep("function startProcessing(k){ addState.pick = k; addState.stage = 'processing'; renderView(); }",
     "function startProcessing(k){ addState.pick = k; addState.stage = 'processing'; renderView(); $('#root').scrollTop = 0; }")
