@@ -6,7 +6,10 @@ rode `python3 tools/build_app.py` para atualizar o app.
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 import re
-src = open(ROOT / 'index.html', encoding='utf-8').read()
+import sys
+sys.path.insert(0, str(ROOT / 'tools'))
+from bundle import bundle
+src = bundle(ROOT / 'index.html')   # index.html com CSS e JS embutidos
 s = src
 
 def rep(old, new, count=1):

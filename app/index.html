@@ -579,7 +579,7 @@ body{display:block;overflow:hidden}
    Tudo aqui é simulado no navegador: sem backend, sem IA real.
    ====================================================================== */
 
-const TODAY = new Date(2026, 9, 6); // terça, 06/10/2026
+const TODAY = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; })(); // hoje, à meia-noite
 const DAY = 86400000;
 
 /* ---------- Ícones (traço simples) ---------- */
@@ -677,6 +677,35 @@ const ILL_JAR = `
   <path d="M30 110 q-6 -26 20 -34 q2 26 -20 34z" fill="var(--olive)"/>
 </svg>`;
 
+/* ======================================================================
+   Serviço de armazenamento
+   Guarda os dados do EatWise no próprio navegador (localStorage).
+   Não há servidor: cada pessoa/navegador tem os seus dados.
+   ====================================================================== */
+window.EW = window.EW || {};
+
+EW.armazenamento = (() => {
+  const PREFIXO = 'eatwise.v1.';
+
+  function ler(chave, padrao){
+    try {
+      const bruto = localStorage.getItem(PREFIXO + chave);
+      return bruto === null ? padrao : JSON.parse(bruto);
+    } catch (e) { return padrao; }   // modo privado, armazenamento bloqueado ou dado corrompido
+  }
+
+  function gravar(chave, valor){
+    try { localStorage.setItem(PREFIXO + chave, JSON.stringify(valor)); return true; }
+    catch (e) { return false; }      // ex.: cota cheia (fotos grandes)
+  }
+
+  function apagarTudo(){
+    try { Object.keys(localStorage).filter(k => k.startsWith(PREFIXO)).forEach(k => localStorage.removeItem(k)); }
+    catch (e) {}
+  }
+
+  return {ler, gravar, apagarTudo};
+})();
 /* ---------- Dados fictícios ---------- */
 const CATS = {
   lat:{nome:'Laticínios', cls:'c-lat'},
@@ -731,37 +760,39 @@ const CATALOG = [
 ];
 BASE.forEach(b => { b.marca = CATALOG.find(c => c.k === b.k).marca; });
 
-let nextId = 20;
-// abertoHa = dias desde a abertura (em relação a 06/10/2026)
-let PRODUCTS = [
-  {id:1, k:'maionese', abertoHa:27, loc:'gel', via:'foto', alerta:3, quem:'Maria'},
-  {id:2, k:'requeijao', abertoHa:4, loc:'gel', via:'audio', alerta:1, quem:'João'},
-  {id:3, k:'molho-tomate', abertoHa:1, loc:'gel', via:'texto', alerta:1, quem:'Maria'},
-  {id:4, k:'presunto', abertoHa:4, loc:'gel', via:'foto', alerta:1, quem:'Maria'},
-  {id:5, k:'leite', abertoHa:1, loc:'gel', via:'audio', alerta:1, quem:'Lia'},
-  {id:7, k:'ketchup', abertoHa:22, loc:'por', via:'foto', alerta:3, quem:'João'},
-  {id:8, k:'creme-leite', abertoHa:2, loc:'gel', via:'texto', alerta:1, quem:'Maria'},
-  {id:9, k:'azeitona', abertoHa:6, loc:'gel', via:'foto', alerta:2, quem:'Maria'},
-  {id:11, k:'geleia', abertoHa:12, loc:'por', via:'foto', alerta:3, quem:'Lia'},
-  {id:13, k:'mucarela', abertoHa:2, loc:'gel', via:'foto', alerta:1, quem:'Maria'},
-  {id:14, k:'mostarda', abertoHa:9, loc:'por', via:'texto', alerta:3, quem:'João'},
-  // histórico
-  {id:16, k:'salsicha', abertoHa:8, loc:'gel', via:'audio', alerta:1, quem:'João', estado:'descartado', quando:'02/10', motivo:'Passou do prazo'},
-  {id:17, k:'doce-leite', abertoHa:20, loc:'gel', via:'texto', alerta:2, quem:'Lia', estado:'consumido', quando:'30/09'},
-  {id:18, k:'milho', abertoHa:7, loc:'gel', via:'foto', alerta:1, quem:'Maria', estado:'consumido', quando:'28/09'}
-];
+/* Dados de exemplo (casa da Maria). As datas são calculadas a partir de hoje,
+   para o protótipo sempre mostrar itens vencendo, vencidos e em dia. */
+const isoHa = dias => { const d = new Date(TODAY.getTime() - dias * DAY); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+const ddmmHa = dias => { const d = new Date(TODAY.getTime() - dias * DAY); return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`; };
+function exemploInventario(){
+  return [
+    {id:1, k:'maionese', abertoEm:isoHa(27), loc:'gel', via:'foto', alerta:3, quem:'Maria'},
+    {id:2, k:'requeijao', abertoEm:isoHa(4), loc:'gel', via:'audio', alerta:1, quem:'João'},
+    {id:3, k:'molho-tomate', abertoEm:isoHa(1), loc:'gel', via:'texto', alerta:1, quem:'Maria'},
+    {id:4, k:'presunto', abertoEm:isoHa(4), loc:'gel', via:'foto', alerta:1, quem:'Maria'},
+    {id:5, k:'leite', abertoEm:isoHa(1), loc:'gel', via:'audio', alerta:1, quem:'Lia'},
+    {id:7, k:'ketchup', abertoEm:isoHa(22), loc:'por', via:'foto', alerta:3, quem:'João'},
+    {id:8, k:'creme-leite', abertoEm:isoHa(2), loc:'gel', via:'texto', alerta:1, quem:'Maria'},
+    {id:9, k:'azeitona', abertoEm:isoHa(6), loc:'gel', via:'foto', alerta:2, quem:'Maria'},
+    {id:11, k:'geleia', abertoEm:isoHa(12), loc:'por', via:'foto', alerta:3, quem:'Lia'},
+    {id:13, k:'mucarela', abertoEm:isoHa(2), loc:'gel', via:'foto', alerta:1, quem:'Maria'},
+    {id:14, k:'mostarda', abertoEm:isoHa(9), loc:'por', via:'texto', alerta:3, quem:'João'},
+    // histórico
+    {id:16, k:'salsicha', abertoEm:isoHa(8), loc:'gel', via:'audio', alerta:1, quem:'João', estado:'descartado', quando:ddmmHa(4), motivo:'Passou do prazo'},
+    {id:17, k:'doce-leite', abertoEm:isoHa(20), loc:'gel', via:'texto', alerta:2, quem:'Lia', estado:'consumido', quando:ddmmHa(6)},
+    {id:18, k:'milho', abertoEm:isoHa(7), loc:'gel', via:'foto', alerta:1, quem:'Maria', estado:'consumido', quando:ddmmHa(8)}
+  ];
+}
 
-let ALERTS = [
-  {id:1, pid:4, tipo:'bad', titulo:'Presunto fatiado venceu ontem', texto:'O prazo pós-abertura terminou em 05/10. Recomendamos descartar.', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
-  {id:2, pid:2, tipo:'today', titulo:'Requeijão Itambé vence amanhã', texto:'Aberto em 02/10. O rótulo da Itambé indica 5 dias depois de aberto.', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
-  {id:3, pid:1, tipo:'warn', titulo:'Maionese Hellmann\'s vence em 3 dias', texto:'Data-limite: 09/10. Alerta enviado 3 dias antes, como você configurou.', quando:'Hoje, 08:00', grupo:'Hoje', lido:false},
-  {id:4, pid:8, tipo:'warn', titulo:'Creme de leite vence amanhã', texto:'Aberto em 04/10 para o estrogonofe. Prazo de 2 dias na geladeira.', quando:'Ontem, 19:30', grupo:'Esta semana', lido:true},
-  {id:5, pid:null, tipo:'ok', titulo:'Resumo da semana', texto:'Você consumiu 6 itens a tempo e descartou apenas 1. Economia estimada: R$ 23,80.', quando:'Dom, 10:00', grupo:'Esta semana', lido:true},
-  {id:6, pid:16, tipo:'bad', titulo:'Salsicha Perdigão venceu', texto:'Item registrado por João marcado como descartado.', quando:'02/10, 08:00', grupo:'Anteriores', lido:true},
-  {id:7, pid:null, tipo:'ok', titulo:'Novo produto na base de prazos', texto:'Adicionamos o requeijão Itambé com o prazo do próprio rótulo: 5 dias após aberto.', quando:'01/10, 14:12', grupo:'Anteriores', lido:true}
-];
+// Inventário salvo no navegador; na primeira visita, usa o exemplo.
+let PRODUCTS = EW.armazenamento.ler('inventario', null) || exemploInventario();
+let nextId = PRODUCTS.reduce((m, p) => Math.max(m, p.id), 0) + 1;
 
-const USER = {nome:'Maria Oliveira', primeiro:'Maria', email:'maria.oliveira@email.com', cidade:'Campinas, SP', iniciais:'MO', plano:'Gratuito'};
+// Alertas: gerados a partir do inventário (ver gerarAlertas em util.js). Guardamos só quais já foram lidos.
+let ALERTAS_LIDOS = new Set(EW.armazenamento.ler('alertasLidos', ['resumo', 'base']));
+let ALERTS = [];
+
+const USER = Object.assign({nome:'Maria Oliveira', primeiro:'Maria', email:'maria.oliveira@email.com', cidade:'Campinas, SP', iniciais:'MO', plano:'Gratuito'}, EW.armazenamento.ler('usuario', {}));
 
 /* ---------- Utilidades ---------- */
 const $ = (s, el=document) => el.querySelector(s);
@@ -776,9 +807,10 @@ const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','a
 
 function enrich(p){
   const b = baseBy(p.k), c = CATALOG.find(x => x.k === p.k);
-  const aberto = addDays(TODAY, -p.abertoHa);
+  const aberto = new Date(p.abertoEm + 'T00:00:00');
+  const abertoHa = Math.round((TODAY - aberto) / DAY);
   const limite = addDays(aberto, b.dias);
-  const restam = b.dias - p.abertoHa;
+  const restam = b.dias - abertoHa;
   let st;
   if (p.estado === 'consumido') st = {k:'done', label:'Consumido', cls:'st-ok', bar:''};
   else if (p.estado === 'descartado') st = {k:'done', label:'Descartado', cls:'st-bad', bar:'bad'};
@@ -787,11 +819,46 @@ function enrich(p){
   else if (restam <= 3) st = {k:'warn', label:'Atenção', cls:'st-warn', bar:'warn'};
   else st = {k:'ok', label:'Em dia', cls:'st-ok', bar:''};
   const frac = Math.max(0, Math.min(1, restam / b.dias));
-  return {...p, b, c, aberto, limite, restam, st, frac, nome:c.nome, marca:c.marca, emoji:b.emoji, cat:CATS[b.cat]};
+  return {...p, b, c, aberto, abertoHa, limite, restam, st, frac, nome:c.nome, marca:c.marca, emoji:b.emoji, cat:CATS[b.cat]};
 }
 const active = () => PRODUCTS.filter(p => !p.estado).map(enrich);
 const restamTxt = r => r < 0 ? `venceu há ${-r} ${-r===1?'dia':'dias'}` : r === 0 ? 'vence hoje' : r === 1 ? 'vence amanhã' : `${r} dias restantes`;
 const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+/* ---------- Alertas gerados do inventário ----------
+   Um item gera alerta quando venceu ou quando chegou o dia do aviso (data-limite menos a antecedência). */
+function gerarAlertas(){
+  const grupo = dias => dias <= 0 ? 'Hoje' : dias <= 7 ? 'Esta semana' : 'Anteriores';
+  const quando = d => { const dias = Math.round((TODAY - d) / DAY); return dias === 0 ? 'Hoje, 08:00' : dias === 1 ? 'Ontem, 08:00' : `${fmt(d)}, 08:00`; };
+  const lista = [];
+  active().sort((a, b) => a.restam - b.restam).forEach(p => {
+    const aviso = addDays(p.limite, -p.alerta);
+    if (p.restam < 0) {
+      const dia = addDays(p.limite, 1);
+      lista.push({id:`venc-${p.id}-${iso(p.limite)}`, pid:p.id, tipo:'bad', titulo:`${p.nome} ${p.restam === -1 ? 'venceu ontem' : `venceu há ${-p.restam} dias`}`,
+        texto:`O prazo depois de aberto terminou em ${fmt(p.limite)}. Recomendamos descartar.`, quando:quando(dia), grupo:grupo(Math.round((TODAY - dia) / DAY)), data:dia});
+    } else if (TODAY >= aviso) {
+      lista.push({id:`aviso-${p.id}-${iso(p.limite)}`, pid:p.id, tipo:p.restam <= 1 ? 'today' : 'warn', titulo:`${p.nome} ${restamTxt(p.restam).replace(' restantes', '').replace(/^(\d+) dias$/, 'vence em $1 dias')}`,
+        texto:`Data-limite: ${fmt(p.limite)}. Aviso enviado ${p.alerta} ${p.alerta === 1 ? 'dia' : 'dias'} antes, como configurado.`, quando:quando(aviso), grupo:grupo(Math.round((TODAY - aviso) / DAY)), data:aviso});
+    }
+  });
+  lista.push({id:'resumo', pid:null, tipo:'ok', titulo:'Resumo da semana', texto:'Você consumiu 6 itens a tempo e descartou apenas 1. Economia estimada: R$ 23,80.', quando:'Domingo, 10:00', grupo:'Esta semana', data:addDays(TODAY, -2)});
+  lista.push({id:'base', pid:null, tipo:'ok', titulo:'Novo produto na base de prazos', texto:'Adicionamos o requeijão Itambé com o prazo do próprio rótulo: 5 dias após aberto.', quando:fmt(addDays(TODAY, -9)) + ', 14:12', grupo:'Anteriores', data:addDays(TODAY, -9)});
+  lista.forEach(a => a.lido = ALERTAS_LIDOS.has(a.id));
+  return lista;
+}
+
+/* ---------- Salvar estado no navegador ---------- */
+function salvarEstado(){
+  ALERTS.filter(a => a.lido).forEach(a => ALERTAS_LIDOS.add(a.id));
+  EW.armazenamento.gravar('alertasLidos', [...ALERTAS_LIDOS]);
+  EW.armazenamento.gravar('usuario', {plano: USER.plano});
+  if (!EW.armazenamento.gravar('inventario', PRODUCTS)) {
+    // sem espaço (fotos grandes): guarda o inventário sem as fotos tiradas pelo usuário
+    EW.armazenamento.gravar('inventario', PRODUCTS.map(p => Object.assign({}, p, {foto:null})));
+  }
+}
+window.addEventListener('pagehide', salvarEstado);
 
 /* ---------- Toast & modal ---------- */
 function toast(msg, icon='check'){
@@ -1094,6 +1161,8 @@ function updateBadges(){
 
 function renderView(){
   stopCamera();
+  salvarEstado();
+  ALERTS = gerarAlertas();
   bindShell();
   const views = {dashboard:viewDashboard, adicionar:viewAdd, despensa:viewDespensa, produto:viewProduto, alertas:viewAlertas, prazos:viewPrazos, impacto:viewImpacto, perfil:viewPerfil};
   const fn = views[route] || viewDashboard;
@@ -1477,9 +1546,8 @@ function bindAdd(){
     $('#add-form').addEventListener('submit', e => {
       e.preventDefault();
       const d = new Date($('#f-open').value + 'T12:00:00');
-      const abertoHa = Math.max(0, Math.round((TODAY - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / DAY));
       const id = nextId++;
-      PRODUCTS.unshift({id, k:s.pick, foto:s.photo || null, abertoHa, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
+      PRODUCTS.unshift({id, k:s.pick, foto:s.photo || null, abertoEm:$('#f-open').value, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
       const lim = addDays(d, b.dias);
       resetAdd();
       go('produto-' + id);
@@ -1646,7 +1714,7 @@ function bindProduto(){
     <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="ok-edit">Salvar alterações</button></div>`,
     m => $('#ok-edit', m).onclick = () => {
       const d = new Date($('#e-open', m).value + 'T12:00:00');
-      raw.abertoHa = Math.max(0, Math.round((TODAY - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / DAY));
+      raw.abertoEm = $('#e-open', m).value;
       raw.loc = $('#e-loc', m).value; raw.alerta = Number($('#e-alert', m).value);
       closeModal(); renderView(); toast('Alterações salvas. Data-limite recalculada.');
     });
@@ -1686,7 +1754,7 @@ function bindAlertas(){
   $$('[data-atab]').forEach(b => b.onclick = () => { alertTab = b.dataset.atab; renderView(); });
   $('#a-read').onclick = () => { ALERTS.forEach(a => a.lido = true); renderView(); toast('Todos os alertas foram marcados como lidos'); };
   $$('[data-alert]').forEach(b => b.onclick = () => {
-    const a = ALERTS.find(x => x.id === Number(b.dataset.alert)); a.lido = true;
+    const a = ALERTS.find(x => x.id === b.dataset.alert); a.lido = true; ALERTAS_LIDOS.add(a.id);
     if (a.pid && PRODUCTS.find(x => x.id === a.pid)) go('produto-' + a.pid); else { renderView(); toast('Alerta marcado como lido'); }
   });
 }
@@ -1870,6 +1938,7 @@ function bindPerfil(){
     m => $('#pm-ok', m).onclick = () => { USER.plano = 'Premium (teste)'; closeModal(); renderView(); toast('Teste grátis de 7 dias ativado. Aproveite o cadastro por áudio!', 'star'); }));
 }
 
+/* Ponto de entrada: desenha a tela atual. */
 render();
 setTimeout(() => { const sp = $('#splash'); sp.classList.add('hide'); setTimeout(() => sp.remove(), 500); }, 1100);
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
