@@ -279,6 +279,15 @@ button.row:hover{background:var(--bg)}
 .tip .eyebrow{display:flex;align-items:center;gap:6px}
 .method-ico{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--sand);color:var(--muted)}
 
+/* Confirmação de ingredientes (texto/imagem) */
+.confirm-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.crow{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg)}
+.crow .cname{flex:1 1 200px;min-width:0;display:grid;gap:4px}
+.crow .cqty{flex:0 0 90px}
+.crow .cun{flex:0 0 110px}
+.crow .icon-btn{flex:none}
+textarea.input{resize:vertical;min-height:84px;line-height:1.5}
+
 /* Despensa */
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .tabs{display:inline-flex;background:var(--sand);border-radius:var(--r-pill);padding:4px;gap:2px;flex-wrap:wrap}

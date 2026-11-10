@@ -65,6 +65,7 @@ function salvarEstado(){
   ALERTS.filter(a => a.lido).forEach(a => ALERTAS_LIDOS.add(a.id));
   EW.armazenamento.gravar('alertasLidos', [...ALERTAS_LIDOS]);
   EW.armazenamento.gravar('usuario', {plano: USER.plano});
+  EW.armazenamento.gravar('informados', INFORMADOS);
   if (!EW.armazenamento.gravar('inventario', PRODUCTS)) {
     // sem espaço (fotos grandes): guarda o inventário sem as fotos tiradas pelo usuário
     EW.armazenamento.gravar('inventario', PRODUCTS.map(p => Object.assign({}, p, {foto:null})));

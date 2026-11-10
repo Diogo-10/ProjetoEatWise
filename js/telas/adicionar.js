@@ -103,7 +103,7 @@ function usePhoto(dataUrl){
   if (document.getElementById('root')) document.getElementById('root').scrollTop = 0; else window.scrollTo(0, 0);
 }
 
-function viewAdd(){
+function viewAddEmbalagem(){
   const s = addState;
   const m = (k, sub) => `<button class="method" role="tab" data-method="${k}" aria-selected="${s.method===k}"><span class="ico">${ic(METHODS[k].i,'lg')}</span>${METHODS[k].n}<small>${sub}</small></button>`;
   let panel = '';
@@ -169,7 +169,6 @@ function viewAdd(){
   const stageIdx = s.stage === 'input' ? 0 : s.stage === 'processing' ? 1 : 3;
   const flow = [['Registro','Foto, texto ou áudio'],['IA de reconhecimento','Identifica produto e marca'],['Base de prazos','Prazo por categoria'],['Cálculo do prazo','Nova data-limite'],['Alerta ao usuário','Aviso antes de vencer']];
   return `
-  <div class="page-head"><div><button class="back-link" data-go="dashboard">${ic('left','sm')} Início</button><h1 style="margin-top:8px">Registrar produto aberto</h1><p>Escolha como prefere registrar. O EatWise cuida do resto.</p></div></div>
   <div class="add-grid">
     <article class="card" style="display:grid;gap:18px">
       <div class="method-tabs" role="tablist" aria-label="Forma de registro">${m('foto','Pelo rótulo')}${m('texto','Digitando')}${m('audio','Falando')}</div>
@@ -188,7 +187,7 @@ function viewAdd(){
   </div>`;
 }
 
-function bindAdd(){
+function bindAddEmbalagem(){
   $$('[data-method]').forEach(b => b.onclick = () => { addState = {method:b.dataset.method, stage:'input', pick:null, q:''}; renderView(); });
   const s = addState;
   if (s.stage === 'input' && s.method === 'foto') {
