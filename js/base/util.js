@@ -9,21 +9,29 @@ const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`
 const WEEK = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
 const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
+/* Base de prazo de um item livre (sem foto/catálogo). */
+function baseLivre(p, ing){
+  return {k:p.k, item:p.nome, marca:'', cat:p.cat || (ing && ing.cat) || 'desp',
+    dias:p.prazoAberto || (ing && ing.aberto) || null,
+    cons:(p.loc && LOCS[p.loc]) || 'Geladeira',
+    orient:p.validadeEstimada ? 'Data estimada pelo tipo de alimento. Se a embalagem trouxer outra data, edite o item.' : '',
+    fonte:p.validadeEstimada ? 'Estimativa típica para o alimento' : 'Data informada no cadastro', url:'', doRotulo:false};
+}
+
+/* Junta os dados do item com o cálculo do contador (EW.validade) para as telas. */
 function enrich(p){
-  const b = baseBy(p.k), c = CATALOG.find(x => x.k === p.k);
-  const aberto = new Date(p.abertoEm + 'T00:00:00');
-  const abertoHa = Math.round((TODAY - aberto) / DAY);
-  const limite = addDays(aberto, b.dias);
-  const restam = b.dias - abertoHa;
-  let st;
-  if (p.estado === 'consumido') st = {k:'done', label:'Consumido', cls:'st-ok', bar:''};
-  else if (p.estado === 'descartado') st = {k:'done', label:'Descartado', cls:'st-bad', bar:'bad'};
-  else if (restam < 0) st = {k:'bad', label:'Vencido', cls:'st-bad', bar:'bad'};
-  else if (restam <= 1) st = {k:'today', label: restam === 0 ? 'Vence hoje' : 'Vence amanhã', cls:'st-today', bar:'today'};
-  else if (restam <= 3) st = {k:'warn', label:'Atenção', cls:'st-warn', bar:'warn'};
-  else st = {k:'ok', label:'Em dia', cls:'st-ok', bar:''};
-  const frac = Math.max(0, Math.min(1, restam / b.dias));
-  return {...p, b, c, aberto, abertoHa, limite, restam, st, frac, nome:c.nome, marca:c.marca, emoji:b.emoji, cat:CATS[b.cat]};
+  const c = CATALOG.find(x => x.k === p.k) || null;          // produto com foto (catálogo de embalagens)
+  const ingrediente = p.ingrediente || (c && c.ing) || '';
+  const ing = INGREDIENTES[ingrediente] || null;
+  const b = c ? baseBy(p.k) : baseLivre(p, ing);
+  const estaAberto = p.aberto !== false && !!p.abertoEm;     // itens antigos do contador: sempre abertos
+  const prazoAberto = estaAberto ? (p.prazoAberto || b.dias || (ing && ing.aberto) || null) : null;
+  const v = EW.validade.calcular({validade:p.validade, abertoEm:estaAberto ? p.abertoEm : null, prazoAberto, criadoEm:p.criadoEm}, TODAY);
+  const st = EW.validade.status(v.restam, p.estado);
+  const nome = c ? c.nome : p.nome;
+  const marca = c ? c.marca : [p.quantidade ? `${p.quantidade} ${p.unidade || ''}`.trim() : '', (EW.normalizacao.limpar(EW.normalizacao.rotulo(ingrediente)) === EW.normalizacao.limpar(p.nome) ? '' : EW.normalizacao.rotulo(ingrediente))].filter(Boolean).join(' · ') || 'Item do inventário';
+  return {...p, b, c, ing, ingrediente, prazoAberto, aberto:v.aberto, abertoHa:v.abertoHa, limite:v.limite, origemLimite:v.origem,
+          restam:v.restam, st, frac:v.frac, nome, marca, cat:CATS[b.cat] || CATS.desp};
 }
 const active = () => PRODUCTS.filter(p => !p.estado).map(enrich);
 const restamTxt = r => r < 0 ? `venceu há ${-r} ${-r===1?'dia':'dias'}` : r === 0 ? 'vence hoje' : r === 1 ? 'vence amanhã' : `${r} dias restantes`;

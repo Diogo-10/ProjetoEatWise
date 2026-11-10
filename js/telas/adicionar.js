@@ -159,6 +159,7 @@ function viewAdd(){
         <div class="field"><label for="f-open">Data de abertura</label><input class="input" type="date" id="f-open" value="${iso(TODAY)}" max="${iso(TODAY)}"></div>
         <div class="field"><label for="f-loc">Onde vai ficar guardado?</label><select class="select" id="f-loc">${Object.entries(LOCS).map(([k,n]) => `<option value="${k}" ${k==='gel'?'selected':''}>${n}</option>`).join('')}</select></div>
         <div class="field"><label for="f-alert">Me avisar</label><select class="select" id="f-alert"><option value="1">1 dia antes</option><option value="2">2 dias antes</option><option value="3" ${b.dias>=7?'selected':''}>3 dias antes</option></select></div>
+        <div class="field"><label for="f-val">Validade da embalagem (opcional)</label><input class="input" type="date" id="f-val"></div>
         <div class="field"><label for="f-who">Quem abriu</label><select class="select" id="f-who"><option>Maria</option><option>João</option><option>Lia</option></select></div>
         <div class="limit-box full" id="limit-box"></div>
         <div class="field full"><label for="f-note">Observação (opcional)</label><input class="input" id="f-note" placeholder="Ex.: sobrou metade, usar na lasanha de sábado"></div>
@@ -255,20 +256,20 @@ function bindAdd(){
   if (s.stage === 'result') {
     const b = baseBy(s.pick);
     const upd = () => {
-      const d = new Date($('#f-open').value + 'T12:00:00');
-      const lim = addDays(d, b.dias), al = addDays(lim, -Number($('#f-alert').value));
+      const v = EW.validade.calcular({abertoEm:$('#f-open').value, prazoAberto:b.dias, validade:$('#f-val').value || null}, TODAY);
+      const lim = v.limite, al = addDays(lim, -Number($('#f-alert').value));
       $('#limit-box').innerHTML = `<span class="food" style="background:var(--green-soft);color:var(--green)">${ic('cal','lg')}</span>
-        <div><p class="muted" style="font-size:.85rem;font-weight:700">Consumir com segurança até</p><p class="big num">${WEEK[lim.getDay()]}, ${fmtFull(lim)}</p><p class="muted" style="font-size:.86rem">Alerta agendado para ${fmt(al)} às 08:00 · ${b.dias} dias para ${CATS[b.cat].nome.toLowerCase()}</p></div>`;
+        <div><p class="muted" style="font-size:.85rem;font-weight:700">Consumir com segurança até</p><p class="big num">${WEEK[lim.getDay()]}, ${fmtFull(lim)}</p><p class="muted" style="font-size:.86rem">Alerta agendado para ${fmt(al)} às 08:00 · ${v.origem === 'aberto' ? `${b.dias} dias para ${CATS[b.cat].nome.toLowerCase()}` : 'a validade da embalagem vence antes'}</p></div>`;
     };
-    ['f-open','f-alert'].forEach(id => $('#'+id).addEventListener('change', upd)); upd();
+    ['f-open','f-alert','f-val'].forEach(id => $('#'+id).addEventListener('change', upd)); upd();
     $('#not-this').onclick = () => { addState = {method:'texto', stage:'input', pick:null, q:''}; renderView(); };
     $('#add-cancel').onclick = () => { resetAdd(); renderView(); };
     $('#add-form').addEventListener('submit', e => {
       e.preventDefault();
-      const d = new Date($('#f-open').value + 'T12:00:00');
       const id = nextId++;
-      PRODUCTS.unshift({id, k:s.pick, foto:s.photo || null, abertoEm:$('#f-open').value, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
-      const lim = addDays(d, b.dias);
+      const validade = $('#f-val').value || null;
+      PRODUCTS.unshift({id, k:s.pick, ingrediente:(CATALOG.find(c => c.k === s.pick) || {}).ing, validade, criadoEm:iso(TODAY), foto:s.photo || null, abertoEm:$('#f-open').value, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
+      const lim = enrich(PRODUCTS[0]).limite;
       resetAdd();
       go('produto-' + id);
       setTimeout(() => toast(`Produto cadastrado! Alerta agendado para ${fmt(addDays(lim, -Number(PRODUCTS[0].alerta)))}.`), 120);

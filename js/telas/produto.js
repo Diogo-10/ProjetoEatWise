@@ -1,4 +1,5 @@
 /* ---------- Detalhe do produto ---------- */
+const TIPS_GERAL = ['Guarde em pote fechado e na parte de dentro da geladeira.', 'Use talher limpo a cada vez.', 'Na dúvida sobre cheiro, cor ou textura, não consuma.'];
 const TIPS = {
   lat:['Guarde nas prateleiras de dentro, nunca na porta: a temperatura varia demais ali.','Use sempre talher limpo para não contaminar o restante.','Mantenha a tampa ou embalagem bem fechada depois de cada uso.'],
   mol:['Use uma colher limpa a cada vez que servir.','Se mudar de cor, cheiro ou textura antes do prazo, descarte.','Molhos à base de ovo devem voltar à geladeira logo após o uso.'],
@@ -27,18 +28,18 @@ function viewProduto(){
             <span class="pill ${p.st.cls}" style="justify-self:start">${p.st.label}</span>
             <h1 style="font-size:1.7rem">${esc(p.nome)}</h1>
             <p class="muted">${esc(p.marca)}</p>
-            <div class="chips"><span class="tag">${p.cat.nome}</span><span class="tag">${ic('thermo','sm')} ${LOCS[p.loc]}</span><span class="tag">${ic(METHODS[p.via].i,'sm')} via ${METHODS[p.via].n.toLowerCase()}</span></div>
+            <div class="chips"><span class="tag">${p.cat.nome}</span><span class="tag">${ic('thermo','sm')} ${LOCS[p.loc]}</span><span class="tag">${ic((METHODS[p.via] || METHODS.manual).i,'sm')} via ${(METHODS[p.via] || METHODS.manual).n.toLowerCase()}</span>${p.ingrediente ? `<span class="tag">ingrediente: ${esc(EW.normalizacao.rotulo(p.ingrediente))}</span>` : ''}</div>
           </div>
           <div class="ring" style="--p:${p.estado ? 100 : Math.round(p.frac*100)};--c:${ringC}"><div><span>${p.estado ? `<b style="font-size:1.4rem">${ic(p.estado==='consumido'?'check':'trash','lg')}</b><small>${p.estado}</small>` : p.restam < 0 ? `<b class="num" style="color:var(--terra)">${-p.restam}</b><small>dia(s) vencido</small>` : `<b class="num">${p.restam}</b><small>${p.restam===1?'dia restante':'dias restantes'}</small>`}</span></div></div>
         </div>
       </article>
 
       <article class="card">
-        <h2 style="margin-bottom:20px">Linha do tempo da segunda validade</h2>
+        <h2 style="margin-bottom:20px">${p.aberto ? 'Linha do tempo da segunda validade' : 'Linha do tempo da validade'}</h2>
         <div class="timeline">
-          <div class="tl done"><span class="ico">${ic('box','sm')}</span><strong>Aberto</strong><small class="num">${fmtFull(p.aberto)}</small><small>por ${p.quem}</small></div>
+          <div class="tl done"><span class="ico">${ic('box','sm')}</span><strong>${p.aberto ? 'Aberto' : 'Cadastrado'}</strong><small class="num">${p.aberto ? fmtFull(p.aberto) : p.criadoEm ? fmtFull(new Date(p.criadoEm + 'T00:00:00')) : '—'}</small><small>por ${p.quem}</small></div>
           <div class="tl ${alertPassed ? 'warn' : ''}"><span class="ico">${ic('bell','sm')}</span><strong>Alerta</strong><small class="num">${fmtFull(alertDay)}</small><small>${p.alerta} ${p.alerta===1?'dia':'dias'} antes</small></div>
-          <div class="tl ${limitPassed ? 'bad' : ''}"><span class="ico">${ic('cal','sm')}</span><strong>Data-limite</strong><small class="num">${fmtFull(p.limite)}</small><small>${p.b.dias} dias após aberto</small></div>
+          <div class="tl ${limitPassed ? 'bad' : ''}"><span class="ico">${ic('cal','sm')}</span><strong>Data-limite</strong><small class="num">${fmtFull(p.limite)}</small><small>${p.origemLimite === 'aberto' ? `${p.prazoAberto} dias após aberto` : p.validadeEstimada ? 'validade estimada' : 'validade da embalagem'}</small></div>
         </div>
       </article>
 
@@ -59,21 +60,23 @@ function viewProduto(){
         <h3 style="margin-bottom:14px;display:flex;gap:8px;align-items:center">${ic('db','sm')} Como calculamos</h3>
         <dl class="kv">
           <dt>Categoria</dt><dd>${p.cat.nome}</dd>
-          <dt>Produto</dt><dd>${p.b.item} · ${p.b.marca}</dd>
-          <dt>Prazo pós-abertura</dt><dd class="num">${p.b.dias} dias</dd>
+          <dt>Produto</dt><dd>${p.c ? `${p.b.item} · ${p.b.marca}` : esc(p.nome)}</dd>
+          ${p.validade ? `<dt>Validade ${p.validadeEstimada ? 'estimada' : 'da embalagem'}</dt><dd class="num">${fmtFull(new Date(p.validade + 'T00:00:00'))}</dd>` : ''}
+          ${p.aberto ? `<dt>Prazo pós-abertura</dt><dd class="num">${p.prazoAberto} dias</dd>` : ''}
+          ${p.aberto && p.validade ? `<dt>Regra</dt><dd>Vale a data que vencer primeiro (${p.origemLimite === 'aberto' ? 'a do prazo depois de aberto' : 'a da embalagem'})</dd>` : ''}
           <dt>Conservação</dt><dd>${p.b.cons}</dd>
-          <dt>Fonte</dt><dd><a href="${p.b.url}" target="_blank" rel="noopener">${p.b.fonte}</a></dd>
+          <dt>Fonte</dt><dd>${p.b.url ? `<a href="${p.b.url}" target="_blank" rel="noopener">${p.b.fonte}</a>` : p.b.fonte}</dd>
         </dl>
-        <blockquote class="label-quote" style="margin-top:14px">${p.b.doRotulo ? 'No rótulo' : 'Orientação'}: “${p.b.orient}”</blockquote>
+        ${p.b.orient ? `<blockquote class="label-quote" style="margin-top:14px">${p.b.doRotulo ? 'No rótulo' : 'Orientação'}: “${p.b.orient}”</blockquote>` : ''}
       </article>
-      ${raw.foto ? `<article class="card"><h3 style="margin-bottom:12px;display:flex;gap:8px;align-items:center">${ic('camera','sm')} Sua foto do produto</h3><img class="user-photo" src="${raw.foto}" alt="Foto tirada por ${p.quem}"><p class="muted" style="font-size:.85rem;margin-top:8px">Tirada em ${fmtFull(p.aberto)} por ${p.quem}</p></article>` : ''}
+      ${raw.foto ? `<article class="card"><h3 style="margin-bottom:12px;display:flex;gap:8px;align-items:center">${ic('camera','sm')} Sua foto do produto</h3><img class="user-photo" src="${raw.foto}" alt="Foto tirada por ${p.quem}"><p class="muted" style="font-size:.85rem;margin-top:8px">Tirada em ${fmtFull(p.aberto || TODAY)} por ${p.quem}</p></article>` : ''}
       <article class="card tip">
         <p class="eyebrow">${ic('leaf','sm')} Dicas para durar até o fim</p>
-        <ul class="tips" style="margin-top:12px">${TIPS[p.b.cat].map(t => `<li>${ic('check','sm')}<span>${t}</span></li>`).join('')}</ul>
+        <ul class="tips" style="margin-top:12px">${(TIPS[p.b.cat] || TIPS_GERAL).map(t => `<li>${ic('check','sm')}<span>${t}</span></li>`).join('')}</ul>
       </article>
       ${p.restam <= 3 && !p.estado && p.restam >= 0 ? `<article class="card" style="background:var(--yellow-soft);border-color:transparent">
         <p class="eyebrow" style="color:var(--terra)">${ic('spark','sm')} Ideia para hoje</p>
-        <p style="margin-top:8px;font-weight:600">${{mol:'Use num sanduíche natural ou numa salada de batata no almoço.', lat:'Vai bem num café da manhã reforçado ou num molho branco rápido.', emb:'Um misto-quente ou uma omelete resolvem ainda hoje.', con:'Entra fácil numa salada, pizza caseira ou torta salgada.', doc:'Combina com iogurte, torradas ou um bolo simples.', hor:'Sirva no lanche da tarde ou transforme em picolé.'}[p.b.cat]}</p></article>` : ''}
+        <p style="margin-top:8px;font-weight:600">${{mol:'Use num sanduíche natural ou numa salada de batata no almoço.', lat:'Vai bem num café da manhã reforçado ou num molho branco rápido.', emb:'Um misto-quente ou uma omelete resolvem ainda hoje.', con:'Entra fácil numa salada, pizza caseira ou torta salgada.', doc:'Combina com iogurte, torradas ou um bolo simples.'}[p.b.cat] || 'Veja em Receitas o que dá para cozinhar com ele ainda hoje.'}</p></article>` : ''}
     </div>
   </div>`;
 }
@@ -99,13 +102,19 @@ function bindProduto(){
   $('#p-edit').onclick = () => modal(`
     <h2>Editar produto</h2>
     <p class="muted">${esc(p.nome)} · ${esc(p.marca)}</p>
-    <div class="field"><label for="e-open">Data de abertura</label><input class="input" type="date" id="e-open" value="${iso(p.aberto)}" max="${iso(TODAY)}"></div>
+    <div class="field"><label for="e-val">Validade da embalagem (opcional)</label><input class="input" type="date" id="e-val" value="${p.validade && !p.validadeEstimada ? p.validade : ''}"></div>
+    <label class="check"><input type="checkbox" id="e-aberto" ${p.aberto ? 'checked' : ''}> Já foi aberto</label>
+    <div class="field"><label for="e-open">Data de abertura</label><input class="input" type="date" id="e-open" value="${iso(p.aberto || TODAY)}" max="${iso(TODAY)}"></div>
     <div class="field"><label for="e-loc">Local</label><select class="select" id="e-loc">${Object.entries(LOCS).map(([k,n]) => `<option value="${k}" ${k===p.loc?'selected':''}>${n}</option>`).join('')}</select></div>
     <div class="field"><label for="e-alert">Avisar com antecedência de</label><select class="select" id="e-alert">${[1,2,3].map(n => `<option value="${n}" ${n===p.alerta?'selected':''}>${n} ${n===1?'dia':'dias'}</option>`).join('')}</select></div>
     <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="ok-edit">Salvar alterações</button></div>`,
     m => $('#ok-edit', m).onclick = () => {
       const d = new Date($('#e-open', m).value + 'T12:00:00');
-      raw.abertoEm = $('#e-open', m).value;
+      const val = $('#e-val', m).value;
+      if (val) { raw.validade = val; raw.validadeEstimada = false; }
+      raw.aberto = $('#e-aberto', m).checked;
+      raw.abertoEm = raw.aberto ? $('#e-open', m).value : null;
+      if (raw.aberto && !raw.prazoAberto && !CATALOG.find(c => c.k === raw.k)) raw.prazoAberto = (INGREDIENTES[raw.ingrediente] || {}).aberto || 3;
       raw.loc = $('#e-loc', m).value; raw.alerta = Number($('#e-alert', m).value);
       closeModal(); renderView(); toast('Alterações salvas. Data-limite recalculada.');
     });

@@ -7,7 +7,7 @@ const CATS = {
   doc:{nome:'Doces e geleias', cls:'c-doc'}
 };
 const LOCS = {gel:'Geladeira', por:'Porta da geladeira', fre:'Freezer', des:'Despensa'};
-const METHODS = {foto:{n:'Foto', i:'camera'}, texto:{n:'Texto', i:'type'}, audio:{n:'Áudio', i:'mic'}};
+const METHODS = {foto:{n:'Foto', i:'camera'}, texto:{n:'Texto', i:'type'}, audio:{n:'Áudio', i:'mic'}, imagem:{n:'Imagem', i:'camera'}, manual:{n:'Cadastro manual', i:'edit'}};
 
 // Base de prazos pós-abertura. Cada prazo vem do rótulo do fabricante quando foi possível ler,
 // ou da orientação publicada mais conservadora encontrada (fonte em cada item).
@@ -31,7 +31,14 @@ const BASE = [
 const baseBy = k => BASE.find(b => b.k === k);
 // Fotos reais das embalagens: Open Food Facts (CC BY-SA), ver assets/produtos/CREDITOS.md
 const IMG = k => `assets/produtos/${k}.jpg`;
-const foodTile = (k, cls='') => `<span class="food photo ${cls}"><img src="${IMG(k)}" alt="" loading="lazy" decoding="async"></span>`;
+// Produtos com foto mostram a embalagem; itens livres ("ing:tomate") mostram um ícone do alimento.
+const foodTile = (k, cls='') => {
+  if (typeof k === 'string' && k.startsWith('ing:')) {
+    const ing = INGREDIENTES[k.slice(4)], cat = CATS[(ing && ing.cat) || 'desp'];
+    return `<span class="food ${cat ? cat.cls : ''} ${cls}" aria-hidden="true">${ing ? ing.emoji : '🥫'}</span>`;
+  }
+  return `<span class="food photo ${cls}"><img src="${IMG(k)}" alt="" loading="lazy" decoding="async"></span>`;
+};
 
 // Catálogo "reconhecível" pela IA simulada
 const CATALOG = [
@@ -69,6 +76,20 @@ function exemploInventario(){
     {id:11, k:'geleia', abertoEm:isoHa(12), loc:'por', via:'foto', alerta:3, quem:'Lia'},
     {id:13, k:'mucarela', abertoEm:isoHa(2), loc:'gel', via:'foto', alerta:1, quem:'Maria'},
     {id:14, k:'mostarda', abertoEm:isoHa(9), loc:'por', via:'texto', alerta:3, quem:'João'},
+    // itens livres (hortifrúti, grãos, ovos...): validade da embalagem ou estimada
+    {id:20, k:'ing:frango', ingrediente:'frango', nome:'Peito de frango', cat:'prot', quantidade:500, unidade:'g', validade:isoHa(-1), aberto:false, loc:'gel', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(1)},
+    {id:21, k:'ing:tomate', ingrediente:'tomate', nome:'Tomate', cat:'hort', quantidade:4, unidade:'un', validade:isoHa(-2), validadeEstimada:true, aberto:false, loc:'gel', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(5)},
+    {id:22, k:'ing:banana', ingrediente:'banana', nome:'Banana prata', cat:'hort', quantidade:5, unidade:'un', validade:isoHa(-2), validadeEstimada:true, aberto:false, loc:'des', via:'texto', alerta:1, quem:'Lia', criadoEm:isoHa(3)},
+    {id:23, k:'ing:abobrinha', ingrediente:'abobrinha', nome:'Abobrinha', cat:'hort', quantidade:2, unidade:'un', validade:isoHa(-3), validadeEstimada:true, aberto:false, loc:'gel', via:'manual', alerta:1, quem:'Maria', criadoEm:isoHa(4)},
+    {id:24, k:'ing:ovo', ingrediente:'ovo', nome:'Ovos', cat:'prot', quantidade:10, unidade:'un', validade:isoHa(-15), aberto:false, loc:'gel', via:'texto', alerta:2, quem:'Maria', criadoEm:isoHa(6)},
+    {id:25, k:'ing:cenoura', ingrediente:'cenoura', nome:'Cenoura', cat:'hort', quantidade:3, unidade:'un', validade:isoHa(-8), validadeEstimada:true, aberto:false, loc:'gel', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(6)},
+    {id:26, k:'ing:cebola', ingrediente:'cebola', nome:'Cebola', cat:'hort', quantidade:3, unidade:'un', validade:isoHa(-25), validadeEstimada:true, aberto:false, loc:'des', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(5)},
+    {id:27, k:'ing:alho', ingrediente:'alho', nome:'Alho', cat:'hort', quantidade:1, unidade:'cabeça', validade:isoHa(-25), validadeEstimada:true, aberto:false, loc:'des', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(5)},
+    {id:28, k:'ing:batata', ingrediente:'batata', nome:'Batata', cat:'hort', quantidade:1, unidade:'kg', validade:isoHa(-12), validadeEstimada:true, aberto:false, loc:'des', via:'manual', alerta:1, quem:'João', criadoEm:isoHa(8)},
+    {id:29, k:'ing:arroz', ingrediente:'arroz', nome:'Arroz branco', cat:'grao', quantidade:1, unidade:'kg', validade:isoHa(-210), aberto:false, loc:'des', via:'texto', alerta:3, quem:'Maria', criadoEm:isoHa(20)},
+    {id:30, k:'ing:feijao', ingrediente:'feijao', nome:'Feijão carioca', cat:'grao', quantidade:1, unidade:'kg', validade:isoHa(-160), aberto:false, loc:'des', via:'texto', alerta:3, quem:'Maria', criadoEm:isoHa(20)},
+    {id:31, k:'ing:macarrao', ingrediente:'macarrao', nome:'Macarrão espaguete', cat:'grao', quantidade:500, unidade:'g', validade:isoHa(-280), aberto:false, loc:'des', via:'manual', alerta:3, quem:'João', criadoEm:isoHa(15)},
+    {id:32, k:'ing:aveia', ingrediente:'aveia', nome:'Aveia em flocos', cat:'grao', quantidade:200, unidade:'g', aberto:true, abertoEm:isoHa(10), prazoAberto:90, validade:isoHa(-120), loc:'des', via:'manual', alerta:3, quem:'Lia', criadoEm:isoHa(30)},
     // histórico
     {id:16, k:'salsicha', abertoEm:isoHa(8), loc:'gel', via:'audio', alerta:1, quem:'João', estado:'descartado', quando:ddmmHa(4), motivo:'Passou do prazo'},
     {id:17, k:'doce-leite', abertoEm:isoHa(20), loc:'gel', via:'texto', alerta:2, quem:'Lia', estado:'consumido', quando:ddmmHa(6)},

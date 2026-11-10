@@ -715,7 +715,7 @@ const CATS = {
   doc:{nome:'Doces e geleias', cls:'c-doc'}
 };
 const LOCS = {gel:'Geladeira', por:'Porta da geladeira', fre:'Freezer', des:'Despensa'};
-const METHODS = {foto:{n:'Foto', i:'camera'}, texto:{n:'Texto', i:'type'}, audio:{n:'Áudio', i:'mic'}};
+const METHODS = {foto:{n:'Foto', i:'camera'}, texto:{n:'Texto', i:'type'}, audio:{n:'Áudio', i:'mic'}, imagem:{n:'Imagem', i:'camera'}, manual:{n:'Cadastro manual', i:'edit'}};
 
 // Base de prazos pós-abertura. Cada prazo vem do rótulo do fabricante quando foi possível ler,
 // ou da orientação publicada mais conservadora encontrada (fonte em cada item).
@@ -739,7 +739,14 @@ const BASE = [
 const baseBy = k => BASE.find(b => b.k === k);
 // Fotos reais das embalagens: Open Food Facts (CC BY-SA), ver assets/produtos/CREDITOS.md
 const IMG = k => `assets/produtos/${k}.jpg`;
-const foodTile = (k, cls='') => `<span class="food photo ${cls}"><img src="${IMG(k)}" alt="" loading="lazy" decoding="async"></span>`;
+// Produtos com foto mostram a embalagem; itens livres ("ing:tomate") mostram um ícone do alimento.
+const foodTile = (k, cls='') => {
+  if (typeof k === 'string' && k.startsWith('ing:')) {
+    const ing = INGREDIENTES[k.slice(4)], cat = CATS[(ing && ing.cat) || 'desp'];
+    return `<span class="food ${cat ? cat.cls : ''} ${cls}" aria-hidden="true">${ing ? ing.emoji : '🥫'}</span>`;
+  }
+  return `<span class="food photo ${cls}"><img src="${IMG(k)}" alt="" loading="lazy" decoding="async"></span>`;
+};
 
 // Catálogo "reconhecível" pela IA simulada
 const CATALOG = [
@@ -777,6 +784,20 @@ function exemploInventario(){
     {id:11, k:'geleia', abertoEm:isoHa(12), loc:'por', via:'foto', alerta:3, quem:'Lia'},
     {id:13, k:'mucarela', abertoEm:isoHa(2), loc:'gel', via:'foto', alerta:1, quem:'Maria'},
     {id:14, k:'mostarda', abertoEm:isoHa(9), loc:'por', via:'texto', alerta:3, quem:'João'},
+    // itens livres (hortifrúti, grãos, ovos...): validade da embalagem ou estimada
+    {id:20, k:'ing:frango', ingrediente:'frango', nome:'Peito de frango', cat:'prot', quantidade:500, unidade:'g', validade:isoHa(-1), aberto:false, loc:'gel', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(1)},
+    {id:21, k:'ing:tomate', ingrediente:'tomate', nome:'Tomate', cat:'hort', quantidade:4, unidade:'un', validade:isoHa(-2), validadeEstimada:true, aberto:false, loc:'gel', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(5)},
+    {id:22, k:'ing:banana', ingrediente:'banana', nome:'Banana prata', cat:'hort', quantidade:5, unidade:'un', validade:isoHa(-2), validadeEstimada:true, aberto:false, loc:'des', via:'texto', alerta:1, quem:'Lia', criadoEm:isoHa(3)},
+    {id:23, k:'ing:abobrinha', ingrediente:'abobrinha', nome:'Abobrinha', cat:'hort', quantidade:2, unidade:'un', validade:isoHa(-3), validadeEstimada:true, aberto:false, loc:'gel', via:'manual', alerta:1, quem:'Maria', criadoEm:isoHa(4)},
+    {id:24, k:'ing:ovo', ingrediente:'ovo', nome:'Ovos', cat:'prot', quantidade:10, unidade:'un', validade:isoHa(-15), aberto:false, loc:'gel', via:'texto', alerta:2, quem:'Maria', criadoEm:isoHa(6)},
+    {id:25, k:'ing:cenoura', ingrediente:'cenoura', nome:'Cenoura', cat:'hort', quantidade:3, unidade:'un', validade:isoHa(-8), validadeEstimada:true, aberto:false, loc:'gel', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(6)},
+    {id:26, k:'ing:cebola', ingrediente:'cebola', nome:'Cebola', cat:'hort', quantidade:3, unidade:'un', validade:isoHa(-25), validadeEstimada:true, aberto:false, loc:'des', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(5)},
+    {id:27, k:'ing:alho', ingrediente:'alho', nome:'Alho', cat:'hort', quantidade:1, unidade:'cabeça', validade:isoHa(-25), validadeEstimada:true, aberto:false, loc:'des', via:'texto', alerta:1, quem:'Maria', criadoEm:isoHa(5)},
+    {id:28, k:'ing:batata', ingrediente:'batata', nome:'Batata', cat:'hort', quantidade:1, unidade:'kg', validade:isoHa(-12), validadeEstimada:true, aberto:false, loc:'des', via:'manual', alerta:1, quem:'João', criadoEm:isoHa(8)},
+    {id:29, k:'ing:arroz', ingrediente:'arroz', nome:'Arroz branco', cat:'grao', quantidade:1, unidade:'kg', validade:isoHa(-210), aberto:false, loc:'des', via:'texto', alerta:3, quem:'Maria', criadoEm:isoHa(20)},
+    {id:30, k:'ing:feijao', ingrediente:'feijao', nome:'Feijão carioca', cat:'grao', quantidade:1, unidade:'kg', validade:isoHa(-160), aberto:false, loc:'des', via:'texto', alerta:3, quem:'Maria', criadoEm:isoHa(20)},
+    {id:31, k:'ing:macarrao', ingrediente:'macarrao', nome:'Macarrão espaguete', cat:'grao', quantidade:500, unidade:'g', validade:isoHa(-280), aberto:false, loc:'des', via:'manual', alerta:3, quem:'João', criadoEm:isoHa(15)},
+    {id:32, k:'ing:aveia', ingrediente:'aveia', nome:'Aveia em flocos', cat:'grao', quantidade:200, unidade:'g', aberto:true, abertoEm:isoHa(10), prazoAberto:90, validade:isoHa(-120), loc:'des', via:'manual', alerta:3, quem:'Lia', criadoEm:isoHa(30)},
     // histórico
     {id:16, k:'salsicha', abertoEm:isoHa(8), loc:'gel', via:'audio', alerta:1, quem:'João', estado:'descartado', quando:ddmmHa(4), motivo:'Passou do prazo'},
     {id:17, k:'doce-leite', abertoEm:isoHa(20), loc:'gel', via:'texto', alerta:2, quem:'Lia', estado:'consumido', quando:ddmmHa(6)},
@@ -794,6 +815,322 @@ let ALERTS = [];
 
 const USER = Object.assign({nome:'Maria Oliveira', primeiro:'Maria', email:'maria.oliveira@email.com', cidade:'Campinas, SP', iniciais:'MO', plano:'Gratuito'}, EW.armazenamento.ler('usuario', {}));
 
+/* ======================================================================
+   Base de ingredientes
+   Chave = nome normalizado (minúsculas, sem acento, singular).
+   geladeira: validade típica do alimento fresco/fechado, em dias (usada como
+              estimativa quando a pessoa não informa a data da embalagem).
+   aberto:    prazo depois de aberto/cortado, em dias (quando faz sentido).
+   basico:    item de despensa que quase toda casa tem (sal, óleo...). Na
+              recomendação ele não conta como "falta".
+   Valores aproximados para uso doméstico; sempre vale o que está no rótulo.
+   ====================================================================== */
+
+Object.assign(CATS, {
+  hort:{nome:'Hortifrúti', cls:'c-hor'},
+  prot:{nome:'Carnes e ovos', cls:'c-emb'},
+  grao:{nome:'Grãos e massas', cls:'c-con'},
+  desp:{nome:'Temperos e básicos', cls:'c-doc'}
+});
+
+const INGREDIENTES = {
+  // Hortifrúti
+  'tomate':        {nome:'Tomate', cat:'hort', emoji:'🍅', geladeira:7},
+  'cebola':        {nome:'Cebola', cat:'hort', emoji:'🧅', geladeira:30, aberto:5},
+  'alho':          {nome:'Alho', cat:'hort', emoji:'🧄', geladeira:30},
+  'batata':        {nome:'Batata', cat:'hort', emoji:'🥔', geladeira:20},
+  'batata doce':   {nome:'Batata-doce', cat:'hort', emoji:'🍠', geladeira:20},
+  'mandioca':      {nome:'Mandioca', cat:'hort', emoji:'🥔', geladeira:5},
+  'cenoura':       {nome:'Cenoura', cat:'hort', emoji:'🥕', geladeira:14},
+  'abobrinha':     {nome:'Abobrinha', cat:'hort', emoji:'🥒', geladeira:7},
+  'berinjela':     {nome:'Berinjela', cat:'hort', emoji:'🍆', geladeira:7},
+  'abobora':       {nome:'Abóbora', cat:'hort', emoji:'🎃', geladeira:20, aberto:5},
+  'chuchu':        {nome:'Chuchu', cat:'hort', emoji:'🥒', geladeira:10},
+  'pimentao':      {nome:'Pimentão', cat:'hort', emoji:'🫑', geladeira:7},
+  'brocolis':      {nome:'Brócolis', cat:'hort', emoji:'🥦', geladeira:5},
+  'couve':         {nome:'Couve', cat:'hort', emoji:'🥬', geladeira:5},
+  'alface':        {nome:'Alface', cat:'hort', emoji:'🥬', geladeira:5},
+  'espinafre':     {nome:'Espinafre', cat:'hort', emoji:'🥬', geladeira:4},
+  'repolho':       {nome:'Repolho', cat:'hort', emoji:'🥬', geladeira:14},
+  'vagem':         {nome:'Vagem', cat:'hort', emoji:'🫛', geladeira:7},
+  'pepino':        {nome:'Pepino', cat:'hort', emoji:'🥒', geladeira:7},
+  'cheiro verde':  {nome:'Cheiro-verde', cat:'hort', emoji:'🌿', geladeira:5},
+  'banana':        {nome:'Banana', cat:'hort', emoji:'🍌', geladeira:5},
+  'maca':          {nome:'Maçã', cat:'hort', emoji:'🍎', geladeira:20},
+  'laranja':       {nome:'Laranja', cat:'hort', emoji:'🍊', geladeira:14},
+  'limao':         {nome:'Limão', cat:'hort', emoji:'🍋', geladeira:14},
+  'morango':       {nome:'Morango', cat:'hort', emoji:'🍓', geladeira:4},
+  'mamao':         {nome:'Mamão', cat:'hort', emoji:'🥭', geladeira:5, aberto:3},
+  'manga':         {nome:'Manga', cat:'hort', emoji:'🥭', geladeira:6},
+  'abacate':       {nome:'Abacate', cat:'hort', emoji:'🥑', geladeira:5, aberto:1},
+  'abacaxi':       {nome:'Abacaxi', cat:'hort', emoji:'🍍', geladeira:5, aberto:3},
+  // Carnes e ovos
+  'ovo':           {nome:'Ovo', cat:'prot', emoji:'🥚', geladeira:21},
+  'frango':        {nome:'Frango', cat:'prot', emoji:'🍗', geladeira:2},
+  'carne moida':   {nome:'Carne moída', cat:'prot', emoji:'🥩', geladeira:2},
+  'carne':         {nome:'Carne bovina', cat:'prot', emoji:'🥩', geladeira:3},
+  'peixe':         {nome:'Peixe', cat:'prot', emoji:'🐟', geladeira:2},
+  'atum':          {nome:'Atum em lata', cat:'con', emoji:'🐟', geladeira:700, aberto:2},
+  // Grãos, massas e farinhas
+  'arroz':         {nome:'Arroz', cat:'grao', emoji:'🍚', geladeira:365},
+  'feijao':        {nome:'Feijão', cat:'grao', emoji:'🫘', geladeira:365},
+  'lentilha':      {nome:'Lentilha', cat:'grao', emoji:'🫘', geladeira:365},
+  'grao de bico':  {nome:'Grão-de-bico', cat:'grao', emoji:'🫘', geladeira:365},
+  'macarrao':      {nome:'Macarrão', cat:'grao', emoji:'🍝', geladeira:365},
+  'aveia':         {nome:'Aveia', cat:'grao', emoji:'🥣', geladeira:180},
+  'farinha de trigo': {nome:'Farinha de trigo', cat:'grao', emoji:'🌾', geladeira:180},
+  'farinha de mandioca': {nome:'Farinha de mandioca', cat:'grao', emoji:'🌾', geladeira:180},
+  'fuba':          {nome:'Fubá', cat:'grao', emoji:'🌽', geladeira:180},
+  'flocao de milho': {nome:'Flocão de milho (cuscuz)', cat:'grao', emoji:'🌽', geladeira:180},
+  'tapioca':       {nome:'Goma de tapioca', cat:'grao', emoji:'🫓', geladeira:90},
+  'pao':           {nome:'Pão', cat:'grao', emoji:'🍞', geladeira:4},
+  // Laticínios
+  'leite':         {nome:'Leite', cat:'lat', emoji:'🥛', geladeira:90, aberto:3},
+  'queijo':        {nome:'Queijo', cat:'lat', emoji:'🧀', geladeira:30, aberto:5},
+  'requeijao':     {nome:'Requeijão', cat:'lat', emoji:'🧀', geladeira:60, aberto:5},
+  'creme de leite':{nome:'Creme de leite', cat:'lat', emoji:'🍶', geladeira:120, aberto:2},
+  'iogurte':       {nome:'Iogurte natural', cat:'lat', emoji:'🥣', geladeira:20, aberto:5},
+  'manteiga':      {nome:'Manteiga', cat:'lat', emoji:'🧈', geladeira:60, aberto:30},
+  'leite de coco': {nome:'Leite de coco', cat:'lat', emoji:'🥥', geladeira:300, aberto:4},
+  'leite condensado': {nome:'Leite condensado', cat:'doc', emoji:'🥫', geladeira:300, aberto:3},
+  // Molhos, embutidos, conservas e doces (iguais aos produtos com foto)
+  'molho de tomate': {nome:'Molho de tomate', cat:'mol', emoji:'🥫', geladeira:300, aberto:5},
+  'maionese':      {nome:'Maionese', cat:'mol', emoji:'🥚', geladeira:180, aberto:30},
+  'ketchup':       {nome:'Ketchup', cat:'mol', emoji:'🍅', geladeira:300, aberto:30},
+  'mostarda':      {nome:'Mostarda', cat:'mol', emoji:'🌭', geladeira:300, aberto:15},
+  'presunto':      {nome:'Presunto', cat:'emb', emoji:'🥓', geladeira:30, aberto:3},
+  'salsicha':      {nome:'Salsicha', cat:'emb', emoji:'🌭', geladeira:30, aberto:3},
+  'azeitona':      {nome:'Azeitona', cat:'con', emoji:'🫒', geladeira:365, aberto:14},
+  'milho':         {nome:'Milho verde', cat:'con', emoji:'🌽', geladeira:365, aberto:3},
+  'ervilha':       {nome:'Ervilha', cat:'con', emoji:'🫛', geladeira:365, aberto:3},
+  'geleia':        {nome:'Geleia', cat:'doc', emoji:'🍓', geladeira:300, aberto:15},
+  'doce de leite': {nome:'Doce de leite', cat:'doc', emoji:'🍯', geladeira:180, aberto:15},
+  'mel':           {nome:'Mel', cat:'doc', emoji:'🍯', geladeira:700},
+  'cacau':         {nome:'Cacau em pó', cat:'doc', emoji:'🍫', geladeira:365},
+  // Temperos e básicos de despensa
+  'sal':           {nome:'Sal', cat:'desp', emoji:'🧂', geladeira:3650, basico:true},
+  'acucar':        {nome:'Açúcar', cat:'desp', emoji:'🍬', geladeira:3650, basico:true},
+  'oleo':          {nome:'Óleo', cat:'desp', emoji:'🫗', geladeira:365, basico:true},
+  'azeite':        {nome:'Azeite', cat:'desp', emoji:'🫒', geladeira:365, basico:true},
+  'agua':          {nome:'Água', cat:'desp', emoji:'💧', geladeira:3650, basico:true},
+  'pimenta do reino': {nome:'Pimenta-do-reino', cat:'desp', emoji:'🌶️', geladeira:730, basico:true},
+  'vinagre':       {nome:'Vinagre', cat:'desp', emoji:'🫗', geladeira:730, basico:true},
+  'oregano':       {nome:'Orégano', cat:'desp', emoji:'🌿', geladeira:365, basico:true},
+  'fermento':      {nome:'Fermento em pó', cat:'desp', emoji:'🧁', geladeira:180, basico:true},
+  'canela':        {nome:'Canela', cat:'desp', emoji:'🌿', geladeira:730, basico:true}
+};
+
+// Produtos com foto (catálogo de embalagens) -> ingrediente usado nas receitas
+const CATALOGO_INGREDIENTE = {
+  'maionese':'maionese', 'requeijao':'requeijao', 'molho-tomate':'molho de tomate', 'leite':'leite',
+  'creme-leite':'creme de leite', 'presunto':'presunto', 'ketchup':'ketchup', 'azeitona':'azeitona',
+  'geleia':'geleia', 'mucarela':'queijo', 'mostarda':'mostarda', 'milho':'milho',
+  'doce-leite':'doce de leite', 'salsicha':'salsicha'
+};
+CATALOG.forEach(c => { c.ing = CATALOGO_INGREDIENTE[c.k]; });
+/* ======================================================================
+   Serviço de normalização de ingredientes
+   Transforma o que a pessoa escreve ("Tomates", "Peito de frango",
+   "creme de leite leve") na chave usada pelas receitas ("tomate",
+   "frango", "creme de leite"). Passos:
+     1. minúsculas, sem acento, sem pontuação;
+     2. cada palavra no singular (regras simples do português);
+     3. sinônimos (ex.: "aipim" -> "mandioca", "mussarela" -> "queijo");
+     4. se começar por um ingrediente conhecido, fica com ele
+        ("tomate italiano" -> "tomate"); se terminar por um, idem
+        ("file de frango" -> "frango").
+   ====================================================================== */
+window.EW = window.EW || {};
+
+EW.normalizacao = (() => {
+  // nomes e variações comuns -> chave do ingrediente
+  const SINONIMOS = {
+    'mussarela':'queijo', 'mucarela':'queijo', 'muzzarela':'queijo', 'queijo mussarela':'queijo', 'queijo mucarela':'queijo',
+    'parmesao':'queijo', 'queijo parmesao':'queijo', 'queijo ralado':'queijo', 'queijo minas':'queijo', 'queijo prato':'queijo',
+    'peito de frango':'frango', 'file de frango':'frango', 'coxa de frango':'frango', 'sobrecoxa':'frango', 'frango desfiado':'frango',
+    'patinho moido':'carne moida', 'carne de boi':'carne', 'bife':'carne', 'acem':'carne', 'patinho':'carne',
+    'file de peixe':'peixe', 'tilapia':'peixe', 'merluza':'peixe', 'sardinha':'peixe',
+    'aipim':'mandioca', 'macaxeira':'mandioca', 'batata inglesa':'batata', 'jerimum':'abobora',
+    'salsinha':'cheiro verde', 'salsa':'cheiro verde', 'cebolinha':'cheiro verde', 'coentro':'cheiro verde',
+    'espaguete':'macarrao', 'massa':'macarrao', 'penne':'macarrao', 'parafuso':'macarrao', 'talharim':'macarrao', 'miojo':'macarrao',
+    'pao frances':'pao', 'pao de forma':'pao', 'pao integral':'pao', 'paozinho':'pao',
+    'farinha':'farinha de trigo', 'trigo':'farinha de trigo', 'farofa pronta':'farinha de mandioca',
+    'goma de tapioca':'tapioca', 'polvilho':'tapioca', 'cuscuz':'flocao de milho', 'flocao':'flocao de milho',
+    'extrato de tomate':'molho de tomate', 'polpa de tomate':'molho de tomate', 'passata':'molho de tomate',
+    'oleo de soja':'oleo', 'oleo de girassol':'oleo', 'azeite de oliva':'azeite',
+    'iogurte natural':'iogurte', 'coalhada':'iogurte', 'manteiga sem sal':'manteiga', 'margarina':'manteiga',
+    'clara':'ovo', 'gema':'ovo', 'ovo caipira':'ovo', 'ovo de galinha':'ovo',
+    'acucar mascavo':'acucar', 'acucar cristal':'acucar', 'adocante':'acucar', 'sal grosso':'sal',
+    'pimenta':'pimenta do reino', 'chocolate em po':'cacau', 'achocolatado':'cacau',
+    'tangerina':'laranja', 'mexerica':'laranja', 'bergamota':'laranja', 'papaia':'mamao',
+    'milho verde':'milho', 'ervilha em conserva':'ervilha', 'grao':'grao de bico'
+  };
+  // palavras que terminam em "s" mas já estão no singular
+  const SINGULAR_EM_S = new Set(['brocolis', 'ananas', 'lapis', 'pires', 'gas', 'mais', 'tres']);
+
+  const semAcento = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  function singular(p){
+    if (p.length <= 3 || SINGULAR_EM_S.has(p)) return p;
+    if (/oes$/.test(p)) return p.replace(/oes$/, 'ao');   // limões -> limao
+    if (/aes$/.test(p)) return p.replace(/aes$/, 'ao');   // pães -> pao
+    if (/ais$/.test(p)) return p.replace(/ais$/, 'al');   // animais -> animal
+    if (/eis$/.test(p)) return p.replace(/eis$/, 'el');   // pastéis -> pastel
+    if (/ns$/.test(p))  return p.replace(/ns$/, 'm');     // vagens -> vagem
+    if (/(r|z)es$/.test(p)) return p.slice(0, -2);        // nozes -> noz
+    if (/s$/.test(p) && !/ss$/.test(p)) return p.slice(0, -1); // tomates -> tomate
+    return p;
+  }
+
+  // texto limpo, palavra a palavra no singular
+  function limpar(texto){
+    return semAcento(String(texto || '').toLowerCase())
+      .replace(/[-_/]/g, ' ').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
+      .split(' ').filter(Boolean).map(singular).join(' ');
+  }
+
+  const conhecidos = () => Object.keys(INGREDIENTES);
+  const canon = k => SINONIMOS[k] || k;
+
+  /** Chave normalizada do ingrediente. Ex.: "Tomates maduros" -> "tomate". */
+  function normalizar(texto){
+    const t = limpar(texto);
+    if (!t) return '';
+    if (SINONIMOS[t]) return SINONIMOS[t];
+    if (INGREDIENTES[t]) return t;
+    const chaves = conhecidos().concat(Object.keys(SINONIMOS)).sort((a, b) => b.length - a.length);
+    const comeco = chaves.find(k => t.startsWith(k + ' '));   // "tomate italiano"
+    if (comeco) return canon(comeco);
+    // "dente de alho", "lata de milho", "fatia de queijo": descritor + "de" + ingrediente
+    const desc = t.match(/^(dente|cabeca|folha|ramo|maco|fatia|pedaco|posta|lata|pacote|pote|caixa|vidro|xicara|colher|copo|file|peito) (de|da|do) (.+)$/);
+    if (desc) return normalizar(desc[3]);
+    return t;                                                  // ingrediente novo: fica como foi escrito (limpo)
+  }
+
+  /** Nome bonito para mostrar na tela. */
+  function rotulo(chave){
+    if (INGREDIENTES[chave]) return INGREDIENTES[chave].nome;
+    return chave ? chave.charAt(0).toUpperCase() + chave.slice(1) : '';
+  }
+
+  const conhecido = chave => !!INGREDIENTES[chave];
+
+  return {normalizar, rotulo, conhecido, limpar};
+})();
+/* ======================================================================
+   Serviço de validade (o contador original do EatWise)
+   Cada item pode ter duas datas:
+     - validade impressa na embalagem (vale para o produto fechado);
+     - data de abertura + prazo depois de aberto (a "segunda validade").
+   A data-limite é a que acontecer primeiro. A partir dela saem os dias
+   restantes e o status usado em todas as telas.
+   ====================================================================== */
+window.EW = window.EW || {};
+
+EW.validade = (() => {
+  const DIA = 86400000;
+  const data = isoTxt => isoTxt ? new Date(isoTxt + 'T00:00:00') : null;
+  const somar = (d, dias) => new Date(d.getTime() + dias * DIA);
+  const diasEntre = (a, b) => Math.round((b - a) / DIA);
+
+  /**
+   * @param {{validade?:string, abertoEm?:string, prazoAberto?:number, criadoEm?:string}} item datas em AAAA-MM-DD
+   * @param {Date} hoje
+   * @returns {{aberto:Date|null, abertoHa:number|null, limite:Date, origem:'aberto'|'impressa', restam:number, frac:number}}
+   */
+  function calcular(item, hoje){
+    const aberto = data(item.abertoEm);
+    const impressa = data(item.validade);
+    const candidatos = [];
+    if (aberto && item.prazoAberto) candidatos.push({d: somar(aberto, item.prazoAberto), origem: 'aberto'});
+    if (impressa) candidatos.push({d: impressa, origem: 'impressa'});
+    // vale a data que vencer primeiro
+    const escolhido = candidatos.sort((a, b) => a.d - b.d)[0] || {d: hoje, origem: 'impressa'};
+    const restam = diasEntre(hoje, escolhido.d);
+    // fração do prazo que ainda resta (para a barra de progresso)
+    const inicio = escolhido.origem === 'aberto' ? aberto : (data(item.criadoEm) || somar(escolhido.d, -14));
+    const total = Math.max(1, diasEntre(inicio, escolhido.d));
+    return {aberto, abertoHa: aberto ? diasEntre(aberto, hoje) : null, limite: escolhido.d, origem: escolhido.origem,
+            restam, frac: Math.max(0, Math.min(1, restam / total))};
+  }
+
+  /** Status mostrado nas telas a partir dos dias restantes. */
+  function status(restam, estado){
+    if (estado === 'consumido') return {k:'done', label:'Consumido', cls:'st-ok', bar:''};
+    if (estado === 'descartado') return {k:'done', label:'Descartado', cls:'st-bad', bar:'bad'};
+    if (restam < 0) return {k:'bad', label:'Vencido', cls:'st-bad', bar:'bad'};
+    if (restam <= 1) return {k:'today', label: restam === 0 ? 'Vence hoje' : 'Vence amanhã', cls:'st-today', bar:'today'};
+    if (restam <= 3) return {k:'warn', label:'Atenção', cls:'st-warn', bar:'warn'};
+    return {k:'ok', label:'Em dia', cls:'st-ok', bar:''};
+  }
+
+  /** "Próximo do vencimento": vence em até 3 dias (inclusive hoje). */
+  const vencendo = restam => restam >= 0 && restam <= 3;
+
+  return {calcular, status, vencendo};
+})();
+/* ======================================================================
+   Serviço de inventário
+   Cria itens livres (tomate, arroz, ovo...) com as regras de validade e
+   expõe os "ingredientes disponíveis" usados pela recomendação de receitas.
+   Os itens ficam no array global PRODUCTS (salvo pelo armazenamento).
+   ====================================================================== */
+window.EW = window.EW || {};
+
+EW.inventario = (() => {
+  const isoDe = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const somar = (d, dias) => new Date(d.getTime() + dias * 86400000);
+
+  /**
+   * Cria um item livre no inventário.
+   * Se a pessoa não informar a validade e o item estiver fechado, estimamos
+   * pela validade típica do alimento (e marcamos como estimada).
+   */
+  function novoItem(dados){
+    const ingrediente = dados.ingrediente || EW.normalizacao.normalizar(dados.nome);
+    const ing = INGREDIENTES[ingrediente] || null;
+    const aberto = !!dados.aberto;
+    let validade = dados.validade || null, validadeEstimada = false;
+    if (!validade && !aberto) { validade = isoDe(somar(TODAY, (ing && ing.geladeira) || 7)); validadeEstimada = true; }
+    const cat = (ing && ing.cat) || 'desp';
+    const item = {
+      id: nextId++,
+      k: 'ing:' + ingrediente,
+      ingrediente,
+      nome: (dados.nome && dados.nome.trim()) ? dados.nome.trim().charAt(0).toUpperCase() + dados.nome.trim().slice(1) : EW.normalizacao.rotulo(ingrediente),
+      cat,
+      quantidade: dados.quantidade || null,
+      unidade: dados.unidade || '',
+      validade, validadeEstimada,
+      aberto,
+      abertoEm: aberto ? (dados.abertoEm || isoDe(TODAY)) : null,
+      prazoAberto: aberto ? (Number(dados.prazoAberto) || (ing && ing.aberto) || 3) : null,
+      loc: dados.loc || (['grao', 'desp'].includes(cat) || ['banana', 'cebola', 'alho', 'batata'].includes(ingrediente) ? 'des' : 'gel'),
+      via: dados.via || 'manual',
+      quem: dados.quem || USER.primeiro,
+      alerta: 1,
+      criadoEm: isoDe(TODAY)
+    };
+    PRODUCTS.unshift(item);
+    return item;
+  }
+
+  /**
+   * Ingredientes disponíveis para cozinhar: itens ativos e não vencidos.
+   * Se o mesmo ingrediente aparece mais de uma vez, fica o que vence primeiro.
+   * @returns {Array<{ingrediente:string, restam:number, id:number, nome:string}>}
+   */
+  function disponiveis(){
+    const mapa = new Map();
+    active().filter(p => p.ingrediente && p.restam >= 0).forEach(p => {
+      const atual = mapa.get(p.ingrediente);
+      if (!atual || p.restam < atual.restam) mapa.set(p.ingrediente, {ingrediente: p.ingrediente, restam: p.restam, id: p.id, nome: p.nome});
+    });
+    return [...mapa.values()];
+  }
+
+  return {novoItem, disponiveis};
+})();
 /* ---------- Utilidades ---------- */
 const $ = (s, el=document) => el.querySelector(s);
 const $$ = (s, el=document) => [...el.querySelectorAll(s)];
@@ -805,21 +1142,29 @@ const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`
 const WEEK = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
 const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
+/* Base de prazo de um item livre (sem foto/catálogo). */
+function baseLivre(p, ing){
+  return {k:p.k, item:p.nome, marca:'', cat:p.cat || (ing && ing.cat) || 'desp',
+    dias:p.prazoAberto || (ing && ing.aberto) || null,
+    cons:(p.loc && LOCS[p.loc]) || 'Geladeira',
+    orient:p.validadeEstimada ? 'Data estimada pelo tipo de alimento. Se a embalagem trouxer outra data, edite o item.' : '',
+    fonte:p.validadeEstimada ? 'Estimativa típica para o alimento' : 'Data informada no cadastro', url:'', doRotulo:false};
+}
+
+/* Junta os dados do item com o cálculo do contador (EW.validade) para as telas. */
 function enrich(p){
-  const b = baseBy(p.k), c = CATALOG.find(x => x.k === p.k);
-  const aberto = new Date(p.abertoEm + 'T00:00:00');
-  const abertoHa = Math.round((TODAY - aberto) / DAY);
-  const limite = addDays(aberto, b.dias);
-  const restam = b.dias - abertoHa;
-  let st;
-  if (p.estado === 'consumido') st = {k:'done', label:'Consumido', cls:'st-ok', bar:''};
-  else if (p.estado === 'descartado') st = {k:'done', label:'Descartado', cls:'st-bad', bar:'bad'};
-  else if (restam < 0) st = {k:'bad', label:'Vencido', cls:'st-bad', bar:'bad'};
-  else if (restam <= 1) st = {k:'today', label: restam === 0 ? 'Vence hoje' : 'Vence amanhã', cls:'st-today', bar:'today'};
-  else if (restam <= 3) st = {k:'warn', label:'Atenção', cls:'st-warn', bar:'warn'};
-  else st = {k:'ok', label:'Em dia', cls:'st-ok', bar:''};
-  const frac = Math.max(0, Math.min(1, restam / b.dias));
-  return {...p, b, c, aberto, abertoHa, limite, restam, st, frac, nome:c.nome, marca:c.marca, emoji:b.emoji, cat:CATS[b.cat]};
+  const c = CATALOG.find(x => x.k === p.k) || null;          // produto com foto (catálogo de embalagens)
+  const ingrediente = p.ingrediente || (c && c.ing) || '';
+  const ing = INGREDIENTES[ingrediente] || null;
+  const b = c ? baseBy(p.k) : baseLivre(p, ing);
+  const estaAberto = p.aberto !== false && !!p.abertoEm;     // itens antigos do contador: sempre abertos
+  const prazoAberto = estaAberto ? (p.prazoAberto || b.dias || (ing && ing.aberto) || null) : null;
+  const v = EW.validade.calcular({validade:p.validade, abertoEm:estaAberto ? p.abertoEm : null, prazoAberto, criadoEm:p.criadoEm}, TODAY);
+  const st = EW.validade.status(v.restam, p.estado);
+  const nome = c ? c.nome : p.nome;
+  const marca = c ? c.marca : [p.quantidade ? `${p.quantidade} ${p.unidade || ''}`.trim() : '', (EW.normalizacao.limpar(EW.normalizacao.rotulo(ingrediente)) === EW.normalizacao.limpar(p.nome) ? '' : EW.normalizacao.rotulo(ingrediente))].filter(Boolean).join(' · ') || 'Item do inventário';
+  return {...p, b, c, ing, ingrediente, prazoAberto, aberto:v.aberto, abertoHa:v.abertoHa, limite:v.limite, origemLimite:v.origem,
+          restam:v.restam, st, frac:v.frac, nome, marca, cat:CATS[b.cat] || CATS.desp};
 }
 const active = () => PRODUCTS.filter(p => !p.estado).map(enrich);
 const restamTxt = r => r < 0 ? `venceu há ${-r} ${-r===1?'dia':'dias'}` : r === 0 ? 'vence hoje' : r === 1 ? 'vence amanhã' : `${r} dias restantes`;
@@ -1176,7 +1521,7 @@ function renderView(){
 function pcard(p){
   const sub = p.estado
     ? `${p.estado === 'consumido' ? 'Consumido' : 'Descartado'} em ${p.quando}`
-    : `Aberto em ${fmt(p.aberto)} · até ${fmt(p.limite)}`;
+    : p.aberto ? `Aberto em ${fmt(p.aberto)} · até ${fmt(p.limite)}` : `Fechado · validade ${fmt(p.limite)}${p.validadeEstimada ? ' (estimada)' : ''}`;
   const days = p.restam < 0 ? 'vencido' : p.restam === 0 ? 'hoje' : p.restam + (p.restam===1?' dia':' dias');
   return `<button class="pcard" data-go="produto-${p.id}">
     <div class="head">${foodTile(p.k)}
@@ -1200,7 +1545,7 @@ function viewDashboard(){
   const A = active().sort((a,b) => a.restam - b.restam);
   const soon = A.filter(p => p.restam >= 0 && p.restam <= 3);
   const bad = A.filter(p => p.restam < 0);
-  const recent = [...A].sort((a,b) => a.abertoHa - b.abertoHa).slice(0,4);
+  const recent = [...A].sort((a,b) => b.id - a.id).slice(0,4);
   const byLoc = Object.entries(LOCS).map(([k,n]) => [n, A.filter(p => p.loc === k).length]).filter(x => x[1]);
   const wd = WEEK[TODAY.getDay()];
   return `
@@ -1230,8 +1575,8 @@ function viewDashboard(){
       <article class="card">
         <div class="card-head"><h2>Últimos registros</h2><span class="muted" style="font-size:.85rem">Foto, texto ou áudio</span></div>
         <div class="list">${recent.map(p => `<button class="row" data-go="produto-${p.id}">
-          <span class="method-ico" title="Registrado por ${METHODS[p.via].n}">${ic(METHODS[p.via].i,'sm')}</span>
-          <span class="info"><strong>${esc(p.nome)}</strong><small>${p.quem} registrou por ${METHODS[p.via].n.toLowerCase()} · ${p.abertoHa===0?'hoje':p.abertoHa===1?'ontem':'há '+p.abertoHa+' dias'}</small></span>
+          <span class="method-ico" title="Registrado por ${(METHODS[p.via] || METHODS.manual).n}">${ic((METHODS[p.via] || METHODS.manual).i,'sm')}</span>
+          <span class="info"><strong>${esc(p.nome)}</strong><small>${p.quem} registrou por ${(METHODS[p.via] || METHODS.manual).n.toLowerCase()} · ${p.abertoHa === null ? 'fechado' : p.abertoHa===0?'aberto hoje':p.abertoHa===1?'aberto ontem':'aberto há '+p.abertoHa+' dias'}</small></span>
           <span class="end">${ic('right','sm')}</span></button>`).join('')}</div>
       </article>
     </div>
@@ -1439,6 +1784,7 @@ function viewAdd(){
         <div class="field"><label for="f-open">Data de abertura</label><input class="input" type="date" id="f-open" value="${iso(TODAY)}" max="${iso(TODAY)}"></div>
         <div class="field"><label for="f-loc">Onde vai ficar guardado?</label><select class="select" id="f-loc">${Object.entries(LOCS).map(([k,n]) => `<option value="${k}" ${k==='gel'?'selected':''}>${n}</option>`).join('')}</select></div>
         <div class="field"><label for="f-alert">Me avisar</label><select class="select" id="f-alert"><option value="1">1 dia antes</option><option value="2">2 dias antes</option><option value="3" ${b.dias>=7?'selected':''}>3 dias antes</option></select></div>
+        <div class="field"><label for="f-val">Validade da embalagem (opcional)</label><input class="input" type="date" id="f-val"></div>
         <div class="field"><label for="f-who">Quem abriu</label><select class="select" id="f-who"><option>Maria</option><option>João</option><option>Lia</option></select></div>
         <div class="limit-box full" id="limit-box"></div>
         <div class="field full"><label for="f-note">Observação (opcional)</label><input class="input" id="f-note" placeholder="Ex.: sobrou metade, usar na lasanha de sábado"></div>
@@ -1535,20 +1881,20 @@ function bindAdd(){
   if (s.stage === 'result') {
     const b = baseBy(s.pick);
     const upd = () => {
-      const d = new Date($('#f-open').value + 'T12:00:00');
-      const lim = addDays(d, b.dias), al = addDays(lim, -Number($('#f-alert').value));
+      const v = EW.validade.calcular({abertoEm:$('#f-open').value, prazoAberto:b.dias, validade:$('#f-val').value || null}, TODAY);
+      const lim = v.limite, al = addDays(lim, -Number($('#f-alert').value));
       $('#limit-box').innerHTML = `<span class="food" style="background:var(--green-soft);color:var(--green)">${ic('cal','lg')}</span>
-        <div><p class="muted" style="font-size:.85rem;font-weight:700">Consumir com segurança até</p><p class="big num">${WEEK[lim.getDay()]}, ${fmtFull(lim)}</p><p class="muted" style="font-size:.86rem">Alerta agendado para ${fmt(al)} às 08:00 · ${b.dias} dias para ${CATS[b.cat].nome.toLowerCase()}</p></div>`;
+        <div><p class="muted" style="font-size:.85rem;font-weight:700">Consumir com segurança até</p><p class="big num">${WEEK[lim.getDay()]}, ${fmtFull(lim)}</p><p class="muted" style="font-size:.86rem">Alerta agendado para ${fmt(al)} às 08:00 · ${v.origem === 'aberto' ? `${b.dias} dias para ${CATS[b.cat].nome.toLowerCase()}` : 'a validade da embalagem vence antes'}</p></div>`;
     };
-    ['f-open','f-alert'].forEach(id => $('#'+id).addEventListener('change', upd)); upd();
+    ['f-open','f-alert','f-val'].forEach(id => $('#'+id).addEventListener('change', upd)); upd();
     $('#not-this').onclick = () => { addState = {method:'texto', stage:'input', pick:null, q:''}; renderView(); };
     $('#add-cancel').onclick = () => { resetAdd(); renderView(); };
     $('#add-form').addEventListener('submit', e => {
       e.preventDefault();
-      const d = new Date($('#f-open').value + 'T12:00:00');
       const id = nextId++;
-      PRODUCTS.unshift({id, k:s.pick, foto:s.photo || null, abertoEm:$('#f-open').value, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
-      const lim = addDays(d, b.dias);
+      const validade = $('#f-val').value || null;
+      PRODUCTS.unshift({id, k:s.pick, ingrediente:(CATALOG.find(c => c.k === s.pick) || {}).ing, validade, criadoEm:iso(TODAY), foto:s.photo || null, abertoEm:$('#f-open').value, loc:$('#f-loc').value, via:s.method, alerta:Number($('#f-alert').value), quem:$('#f-who').value, novo:true});
+      const lim = enrich(PRODUCTS[0]).limite;
       resetAdd();
       go('produto-' + id);
       setTimeout(() => toast(`Produto cadastrado! Alerta agendado para ${fmt(addDays(lim, -Number(PRODUCTS[0].alerta)))}.`), 120);
@@ -1566,25 +1912,25 @@ function viewDespensa(){
   let list = s.tab === 'ativos' ? A : H;
   if (s.tab === 'ativos' && s.status !== 'all') list = list.filter(p => s.status === 'warn' ? (p.restam >= 0 && p.restam <= 3) : p.st.k === s.status);
   if (s.cat !== 'all') list = list.filter(p => p.b.cat === s.cat);
-  if (s.q) list = list.filter(p => (p.nome + p.marca + p.b.item).toLowerCase().includes(s.q.toLowerCase()));
-  list.sort(s.sort === 'nome' ? (a,b) => a.nome.localeCompare(b.nome) : s.sort === 'recentes' ? (a,b) => a.abertoHa - b.abertoHa : (a,b) => a.restam - b.restam);
+  if (s.q) { const q = EW.normalizacao.limpar(s.q); list = list.filter(p => EW.normalizacao.limpar(p.nome + ' ' + p.marca + ' ' + p.b.item + ' ' + (p.ingrediente || '')).includes(q)); }
+  list.sort(s.sort === 'nome' ? (a,b) => a.nome.localeCompare(b.nome) : s.sort === 'recentes' ? (a,b) => b.id - a.id : (a,b) => a.restam - b.restam);
   const cnt = k => A.filter(p => k === 'all' ? true : k === 'warn' ? (p.restam >= 0 && p.restam <= 3) : p.st.k === k).length;
   const stBtn = (k, n) => `<button class="chip" data-status="${k}" aria-pressed="${s.status===k}">${n} <span class="num" style="opacity:.7">${cnt(k)}</span></button>`;
   return `
   <div class="page-head">
-    <div><h1>Minha geladeira</h1><p>Todos os produtos abertos da Casa Oliveira, com a segunda validade de cada um.</p></div>
-    <button class="btn btn-primary" data-go="adicionar">${ic('plus','sm')} Registrar produto</button>
+    <div><h1>Inventário</h1><p>Tudo o que a Casa Oliveira tem em casa, com a data-limite de cada item. Cada item vira um ingrediente para as receitas.</p></div>
+    <div class="actions"><button class="btn btn-ghost" id="add-item">${ic('plus','sm')} Adicionar item</button><button class="btn btn-primary" data-go="adicionar">${ic('camera','sm')} Registrar produto</button></div>
   </div>
   <div class="toolbar">
     <div class="tabs" role="tablist">
-      <button role="tab" data-tab="ativos" aria-selected="${s.tab==='ativos'}">Abertos <span class="count num">${A.length}</span></button>
+      <button role="tab" data-tab="ativos" aria-selected="${s.tab==='ativos'}">Em casa <span class="count num">${A.length}</span></button>
       <button role="tab" data-tab="hist" aria-selected="${s.tab==='hist'}">Histórico <span class="count num">${H.length}</span></button>
     </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;flex:1;justify-content:flex-end">
       <div class="input-icon" style="min-width:0;flex:1;max-width:300px">${ic('search','sm')}<input class="input" id="d-q" placeholder="Buscar produto" value="${esc(s.q)}" style="border-radius:999px"></div>
       <select class="select" id="d-sort" style="width:auto;border-radius:999px" aria-label="Ordenar">
         <option value="limite" ${s.sort==='limite'?'selected':''}>Vence primeiro</option>
-        <option value="recentes" ${s.sort==='recentes'?'selected':''}>Abertos recentemente</option>
+        <option value="recentes" ${s.sort==='recentes'?'selected':''}>Cadastrados recentemente</option>
         <option value="nome" ${s.sort==='nome'?'selected':''}>Nome (A–Z)</option>
       </select>
     </div>
@@ -1604,10 +1950,58 @@ function bindDespensa(){
   $('#d-sort').onchange = e => { despState.sort = e.target.value; renderView(); };
   const q = $('#d-q');
   q.addEventListener('input', () => { despState.q = q.value; const pos = q.selectionStart; renderView(); const n = $('#d-q'); n.focus(); n.setSelectionRange(pos,pos); });
+  $('#add-item').onclick = () => modalNovoItem();
   $('#clear-f') && ($('#clear-f').onclick = () => { despState = {...despState, status:'all', cat:'all', q:''}; renderView(); });
 }
 
+
+/* ---------- Adicionar item livre (com validade da embalagem e/ou prazo depois de aberto) ---------- */
+const UNIDADES = ['un', 'g', 'kg', 'ml', 'L', 'pacote', 'pote', 'lata', 'caixa', 'maço'];
+function modalNovoItem(pre = {}, aoSalvar){
+  modal(`
+    <h2>Adicionar item</h2>
+    <p class="muted">Ele entra no inventário e passa a contar como ingrediente disponível nas receitas.</p>
+    <form id="ni-form" class="form-grid" novalidate>
+      <div class="field full"><label for="ni-nome">Nome do alimento</label><input class="input" id="ni-nome" required placeholder="Ex.: tomate, peito de frango, arroz" value="${esc(pre.nome || '')}"></div>
+      <p class="muted full" id="ni-ing" style="font-size:.88rem;margin-top:-6px"></p>
+      <div class="field"><label for="ni-qtd">Quantidade (opcional)</label><input class="input" id="ni-qtd" type="number" min="0" step="any" inputmode="decimal" value="${pre.quantidade || ''}"></div>
+      <div class="field"><label for="ni-un">Unidade</label><select class="select" id="ni-un">${UNIDADES.map(u => `<option ${u === (pre.unidade || 'un') ? 'selected' : ''}>${u}</option>`).join('')}</select></div>
+      <div class="field full"><label for="ni-val">Validade da embalagem</label><input class="input" id="ni-val" type="date" value="${pre.validade || ''}">
+        <small class="muted">Se deixar em branco, usamos um prazo típico para esse alimento.</small></div>
+      <label class="check full"><input type="checkbox" id="ni-aberto" ${pre.aberto ? 'checked' : ''}> Já foi aberto ou cortado</label>
+      <div class="field" data-aberto><label for="ni-open">Aberto em</label><input class="input" id="ni-open" type="date" value="${iso(TODAY)}" max="${iso(TODAY)}"></div>
+      <div class="field" data-aberto><label for="ni-prazo">Dura depois de aberto (dias)</label><input class="input" id="ni-prazo" type="number" min="1" inputmode="numeric"></div>
+      <div class="field full"><label for="ni-loc">Onde fica guardado?</label><select class="select" id="ni-loc"><option value="">Escolher automaticamente</option>${Object.entries(LOCS).map(([k, n]) => `<option value="${k}">${n}</option>`).join('')}</select></div>
+    </form>
+    <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="ni-ok">${ic('check','sm')} Adicionar ao inventário</button></div>`,
+  m => {
+    const atualizar = () => {
+      const chave = EW.normalizacao.normalizar($('#ni-nome', m).value);
+      const ing = INGREDIENTES[chave];
+      $('#ni-ing', m).innerHTML = chave ? `Nas receitas conta como: <strong>${esc(EW.normalizacao.rotulo(chave))}</strong>${ing ? '' : ' (alimento novo, sem prazo típico)'}` : '';
+      const aberto = $('#ni-aberto', m).checked;
+      $$('[data-aberto]', m).forEach(el => el.hidden = !aberto);
+      if (aberto && !$('#ni-prazo', m).dataset.editado) $('#ni-prazo', m).value = (ing && ing.aberto) || 3;
+    };
+    $('#ni-prazo', m).addEventListener('input', e => e.target.dataset.editado = '1');
+    ['input', 'change'].forEach(ev => { $('#ni-nome', m).addEventListener(ev, atualizar); $('#ni-aberto', m).addEventListener(ev, atualizar); });
+    atualizar();
+    $('#ni-ok', m).onclick = () => {
+      const nome = $('#ni-nome', m).value.trim();
+      if (!nome) { $('#ni-nome', m).focus(); toast('Escreva o nome do alimento', 'info'); return; }
+      const item = EW.inventario.novoItem({
+        nome, quantidade: Number($('#ni-qtd', m).value) || null, unidade: $('#ni-un', m).value,
+        validade: $('#ni-val', m).value || null, aberto: $('#ni-aberto', m).checked,
+        abertoEm: $('#ni-open', m).value, prazoAberto: $('#ni-prazo', m).value, loc: $('#ni-loc', m).value || null,
+        via: pre.via || 'manual'
+      });
+      closeModal();
+      if (aoSalvar) aoSalvar(item); else { renderView(); toast(`${item.nome} adicionado ao inventário`); }
+    };
+  });
+}
 /* ---------- Detalhe do produto ---------- */
+const TIPS_GERAL = ['Guarde em pote fechado e na parte de dentro da geladeira.', 'Use talher limpo a cada vez.', 'Na dúvida sobre cheiro, cor ou textura, não consuma.'];
 const TIPS = {
   lat:['Guarde nas prateleiras de dentro, nunca na porta: a temperatura varia demais ali.','Use sempre talher limpo para não contaminar o restante.','Mantenha a tampa ou embalagem bem fechada depois de cada uso.'],
   mol:['Use uma colher limpa a cada vez que servir.','Se mudar de cor, cheiro ou textura antes do prazo, descarte.','Molhos à base de ovo devem voltar à geladeira logo após o uso.'],
@@ -1636,18 +2030,18 @@ function viewProduto(){
             <span class="pill ${p.st.cls}" style="justify-self:start">${p.st.label}</span>
             <h1 style="font-size:1.7rem">${esc(p.nome)}</h1>
             <p class="muted">${esc(p.marca)}</p>
-            <div class="chips"><span class="tag">${p.cat.nome}</span><span class="tag">${ic('thermo','sm')} ${LOCS[p.loc]}</span><span class="tag">${ic(METHODS[p.via].i,'sm')} via ${METHODS[p.via].n.toLowerCase()}</span></div>
+            <div class="chips"><span class="tag">${p.cat.nome}</span><span class="tag">${ic('thermo','sm')} ${LOCS[p.loc]}</span><span class="tag">${ic((METHODS[p.via] || METHODS.manual).i,'sm')} via ${(METHODS[p.via] || METHODS.manual).n.toLowerCase()}</span>${p.ingrediente ? `<span class="tag">ingrediente: ${esc(EW.normalizacao.rotulo(p.ingrediente))}</span>` : ''}</div>
           </div>
           <div class="ring" style="--p:${p.estado ? 100 : Math.round(p.frac*100)};--c:${ringC}"><div><span>${p.estado ? `<b style="font-size:1.4rem">${ic(p.estado==='consumido'?'check':'trash','lg')}</b><small>${p.estado}</small>` : p.restam < 0 ? `<b class="num" style="color:var(--terra)">${-p.restam}</b><small>dia(s) vencido</small>` : `<b class="num">${p.restam}</b><small>${p.restam===1?'dia restante':'dias restantes'}</small>`}</span></div></div>
         </div>
       </article>
 
       <article class="card">
-        <h2 style="margin-bottom:20px">Linha do tempo da segunda validade</h2>
+        <h2 style="margin-bottom:20px">${p.aberto ? 'Linha do tempo da segunda validade' : 'Linha do tempo da validade'}</h2>
         <div class="timeline">
-          <div class="tl done"><span class="ico">${ic('box','sm')}</span><strong>Aberto</strong><small class="num">${fmtFull(p.aberto)}</small><small>por ${p.quem}</small></div>
+          <div class="tl done"><span class="ico">${ic('box','sm')}</span><strong>${p.aberto ? 'Aberto' : 'Cadastrado'}</strong><small class="num">${p.aberto ? fmtFull(p.aberto) : p.criadoEm ? fmtFull(new Date(p.criadoEm + 'T00:00:00')) : '—'}</small><small>por ${p.quem}</small></div>
           <div class="tl ${alertPassed ? 'warn' : ''}"><span class="ico">${ic('bell','sm')}</span><strong>Alerta</strong><small class="num">${fmtFull(alertDay)}</small><small>${p.alerta} ${p.alerta===1?'dia':'dias'} antes</small></div>
-          <div class="tl ${limitPassed ? 'bad' : ''}"><span class="ico">${ic('cal','sm')}</span><strong>Data-limite</strong><small class="num">${fmtFull(p.limite)}</small><small>${p.b.dias} dias após aberto</small></div>
+          <div class="tl ${limitPassed ? 'bad' : ''}"><span class="ico">${ic('cal','sm')}</span><strong>Data-limite</strong><small class="num">${fmtFull(p.limite)}</small><small>${p.origemLimite === 'aberto' ? `${p.prazoAberto} dias após aberto` : p.validadeEstimada ? 'validade estimada' : 'validade da embalagem'}</small></div>
         </div>
       </article>
 
@@ -1668,21 +2062,23 @@ function viewProduto(){
         <h3 style="margin-bottom:14px;display:flex;gap:8px;align-items:center">${ic('db','sm')} Como calculamos</h3>
         <dl class="kv">
           <dt>Categoria</dt><dd>${p.cat.nome}</dd>
-          <dt>Produto</dt><dd>${p.b.item} · ${p.b.marca}</dd>
-          <dt>Prazo pós-abertura</dt><dd class="num">${p.b.dias} dias</dd>
+          <dt>Produto</dt><dd>${p.c ? `${p.b.item} · ${p.b.marca}` : esc(p.nome)}</dd>
+          ${p.validade ? `<dt>Validade ${p.validadeEstimada ? 'estimada' : 'da embalagem'}</dt><dd class="num">${fmtFull(new Date(p.validade + 'T00:00:00'))}</dd>` : ''}
+          ${p.aberto ? `<dt>Prazo pós-abertura</dt><dd class="num">${p.prazoAberto} dias</dd>` : ''}
+          ${p.aberto && p.validade ? `<dt>Regra</dt><dd>Vale a data que vencer primeiro (${p.origemLimite === 'aberto' ? 'a do prazo depois de aberto' : 'a da embalagem'})</dd>` : ''}
           <dt>Conservação</dt><dd>${p.b.cons}</dd>
-          <dt>Fonte</dt><dd><a href="${p.b.url}" target="_blank" rel="noopener">${p.b.fonte}</a></dd>
+          <dt>Fonte</dt><dd>${p.b.url ? `<a href="${p.b.url}" target="_blank" rel="noopener">${p.b.fonte}</a>` : p.b.fonte}</dd>
         </dl>
-        <blockquote class="label-quote" style="margin-top:14px">${p.b.doRotulo ? 'No rótulo' : 'Orientação'}: “${p.b.orient}”</blockquote>
+        ${p.b.orient ? `<blockquote class="label-quote" style="margin-top:14px">${p.b.doRotulo ? 'No rótulo' : 'Orientação'}: “${p.b.orient}”</blockquote>` : ''}
       </article>
-      ${raw.foto ? `<article class="card"><h3 style="margin-bottom:12px;display:flex;gap:8px;align-items:center">${ic('camera','sm')} Sua foto do produto</h3><img class="user-photo" src="${raw.foto}" alt="Foto tirada por ${p.quem}"><p class="muted" style="font-size:.85rem;margin-top:8px">Tirada em ${fmtFull(p.aberto)} por ${p.quem}</p></article>` : ''}
+      ${raw.foto ? `<article class="card"><h3 style="margin-bottom:12px;display:flex;gap:8px;align-items:center">${ic('camera','sm')} Sua foto do produto</h3><img class="user-photo" src="${raw.foto}" alt="Foto tirada por ${p.quem}"><p class="muted" style="font-size:.85rem;margin-top:8px">Tirada em ${fmtFull(p.aberto || TODAY)} por ${p.quem}</p></article>` : ''}
       <article class="card tip">
         <p class="eyebrow">${ic('leaf','sm')} Dicas para durar até o fim</p>
-        <ul class="tips" style="margin-top:12px">${TIPS[p.b.cat].map(t => `<li>${ic('check','sm')}<span>${t}</span></li>`).join('')}</ul>
+        <ul class="tips" style="margin-top:12px">${(TIPS[p.b.cat] || TIPS_GERAL).map(t => `<li>${ic('check','sm')}<span>${t}</span></li>`).join('')}</ul>
       </article>
       ${p.restam <= 3 && !p.estado && p.restam >= 0 ? `<article class="card" style="background:var(--yellow-soft);border-color:transparent">
         <p class="eyebrow" style="color:var(--terra)">${ic('spark','sm')} Ideia para hoje</p>
-        <p style="margin-top:8px;font-weight:600">${{mol:'Use num sanduíche natural ou numa salada de batata no almoço.', lat:'Vai bem num café da manhã reforçado ou num molho branco rápido.', emb:'Um misto-quente ou uma omelete resolvem ainda hoje.', con:'Entra fácil numa salada, pizza caseira ou torta salgada.', doc:'Combina com iogurte, torradas ou um bolo simples.', hor:'Sirva no lanche da tarde ou transforme em picolé.'}[p.b.cat]}</p></article>` : ''}
+        <p style="margin-top:8px;font-weight:600">${{mol:'Use num sanduíche natural ou numa salada de batata no almoço.', lat:'Vai bem num café da manhã reforçado ou num molho branco rápido.', emb:'Um misto-quente ou uma omelete resolvem ainda hoje.', con:'Entra fácil numa salada, pizza caseira ou torta salgada.', doc:'Combina com iogurte, torradas ou um bolo simples.'}[p.b.cat] || 'Veja em Receitas o que dá para cozinhar com ele ainda hoje.'}</p></article>` : ''}
     </div>
   </div>`;
 }
@@ -1708,13 +2104,19 @@ function bindProduto(){
   $('#p-edit').onclick = () => modal(`
     <h2>Editar produto</h2>
     <p class="muted">${esc(p.nome)} · ${esc(p.marca)}</p>
-    <div class="field"><label for="e-open">Data de abertura</label><input class="input" type="date" id="e-open" value="${iso(p.aberto)}" max="${iso(TODAY)}"></div>
+    <div class="field"><label for="e-val">Validade da embalagem (opcional)</label><input class="input" type="date" id="e-val" value="${p.validade && !p.validadeEstimada ? p.validade : ''}"></div>
+    <label class="check"><input type="checkbox" id="e-aberto" ${p.aberto ? 'checked' : ''}> Já foi aberto</label>
+    <div class="field"><label for="e-open">Data de abertura</label><input class="input" type="date" id="e-open" value="${iso(p.aberto || TODAY)}" max="${iso(TODAY)}"></div>
     <div class="field"><label for="e-loc">Local</label><select class="select" id="e-loc">${Object.entries(LOCS).map(([k,n]) => `<option value="${k}" ${k===p.loc?'selected':''}>${n}</option>`).join('')}</select></div>
     <div class="field"><label for="e-alert">Avisar com antecedência de</label><select class="select" id="e-alert">${[1,2,3].map(n => `<option value="${n}" ${n===p.alerta?'selected':''}>${n} ${n===1?'dia':'dias'}</option>`).join('')}</select></div>
     <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="ok-edit">Salvar alterações</button></div>`,
     m => $('#ok-edit', m).onclick = () => {
       const d = new Date($('#e-open', m).value + 'T12:00:00');
-      raw.abertoEm = $('#e-open', m).value;
+      const val = $('#e-val', m).value;
+      if (val) { raw.validade = val; raw.validadeEstimada = false; }
+      raw.aberto = $('#e-aberto', m).checked;
+      raw.abertoEm = raw.aberto ? $('#e-open', m).value : null;
+      if (raw.aberto && !raw.prazoAberto && !CATALOG.find(c => c.k === raw.k)) raw.prazoAberto = (INGREDIENTES[raw.ingrediente] || {}).aberto || 3;
       raw.loc = $('#e-loc', m).value; raw.alerta = Number($('#e-alert', m).value);
       closeModal(); renderView(); toast('Alterações salvas. Data-limite recalculada.');
     });

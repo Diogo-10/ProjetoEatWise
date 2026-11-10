@@ -115,7 +115,7 @@ function renderView(){
 function pcard(p){
   const sub = p.estado
     ? `${p.estado === 'consumido' ? 'Consumido' : 'Descartado'} em ${p.quando}`
-    : `Aberto em ${fmt(p.aberto)} · até ${fmt(p.limite)}`;
+    : p.aberto ? `Aberto em ${fmt(p.aberto)} · até ${fmt(p.limite)}` : `Fechado · validade ${fmt(p.limite)}${p.validadeEstimada ? ' (estimada)' : ''}`;
   const days = p.restam < 0 ? 'vencido' : p.restam === 0 ? 'hoje' : p.restam + (p.restam===1?' dia':' dias');
   return `<button class="pcard" data-go="produto-${p.id}">
     <div class="head">${foodTile(p.k)}

@@ -3,7 +3,7 @@ function viewDashboard(){
   const A = active().sort((a,b) => a.restam - b.restam);
   const soon = A.filter(p => p.restam >= 0 && p.restam <= 3);
   const bad = A.filter(p => p.restam < 0);
-  const recent = [...A].sort((a,b) => a.abertoHa - b.abertoHa).slice(0,4);
+  const recent = [...A].sort((a,b) => b.id - a.id).slice(0,4);
   const byLoc = Object.entries(LOCS).map(([k,n]) => [n, A.filter(p => p.loc === k).length]).filter(x => x[1]);
   const wd = WEEK[TODAY.getDay()];
   return `
@@ -33,8 +33,8 @@ function viewDashboard(){
       <article class="card">
         <div class="card-head"><h2>Últimos registros</h2><span class="muted" style="font-size:.85rem">Foto, texto ou áudio</span></div>
         <div class="list">${recent.map(p => `<button class="row" data-go="produto-${p.id}">
-          <span class="method-ico" title="Registrado por ${METHODS[p.via].n}">${ic(METHODS[p.via].i,'sm')}</span>
-          <span class="info"><strong>${esc(p.nome)}</strong><small>${p.quem} registrou por ${METHODS[p.via].n.toLowerCase()} · ${p.abertoHa===0?'hoje':p.abertoHa===1?'ontem':'há '+p.abertoHa+' dias'}</small></span>
+          <span class="method-ico" title="Registrado por ${(METHODS[p.via] || METHODS.manual).n}">${ic((METHODS[p.via] || METHODS.manual).i,'sm')}</span>
+          <span class="info"><strong>${esc(p.nome)}</strong><small>${p.quem} registrou por ${(METHODS[p.via] || METHODS.manual).n.toLowerCase()} · ${p.abertoHa === null ? 'fechado' : p.abertoHa===0?'aberto hoje':p.abertoHa===1?'aberto ontem':'aberto há '+p.abertoHa+' dias'}</small></span>
           <span class="end">${ic('right','sm')}</span></button>`).join('')}</div>
       </article>
     </div>
