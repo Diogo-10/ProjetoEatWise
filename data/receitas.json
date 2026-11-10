@@ -1,0 +1,2101 @@
+{
+ "versao": 1,
+ "aviso": "Receitas simples para o protótipo EatWise. Calorias aproximadas por porção; não substituem orientação de nutricionista.",
+ "receitas": [
+  {
+   "id": "omelete-de-legumes",
+   "nome": "Omelete de legumes",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "ovo",
+     "quantidade": "3 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1/2 unidade picado",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "2 colheres de sopa picada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "2 fatias",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 fio",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Bata os ovos com o sal em uma tigela.",
+    "Misture o tomate, a cebola e o cheiro-verde.",
+    "Aqueça o azeite numa frigideira antiaderente e despeje a mistura.",
+    "Cozinhe em fogo baixo com tampa; se quiser, coloque o queijo antes de dobrar."
+   ],
+   "tempo": 15,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 280,
+   "saudavel": true
+  },
+  {
+   "id": "frango-grelhado-com-legumes",
+   "nome": "Frango grelhado com legumes",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "frango",
+     "quantidade": "400 g de peito em filés",
+     "essencial": true
+    },
+    {
+     "ingrediente": "abobrinha",
+     "quantidade": "1 unidade em rodelas",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade em palitos",
+     "essencial": false
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "limao",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "2 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Tempere o frango com alho, limão e sal.",
+    "Grelhe os filés em frigideira com metade do azeite, 5 minutos de cada lado.",
+    "Na mesma frigideira, salteie a abobrinha e a cenoura com o restante do azeite até ficarem macias.",
+    "Sirva o frango com os legumes."
+   ],
+   "tempo": 30,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 320,
+   "saudavel": true
+  },
+  {
+   "id": "arroz-feijao-e-ovo",
+   "nome": "Prato feito com arroz, feijão e ovo",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "arroz",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "feijao",
+     "quantidade": "2 conchas cozido",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade para salada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "1 dente",
+     "essencial": false
+    },
+    {
+     "ingrediente": "oleo",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Refogue metade da cebola e o alho no óleo, junte o arroz e 2 xícaras de água quente com sal; cozinhe tampado.",
+    "Aqueça o feijão já cozido com o restante da cebola refogada.",
+    "Frite ou cozinhe os ovos.",
+    "Monte o prato com arroz, feijão, ovo e uma salada de tomate."
+   ],
+   "tempo": 40,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 450,
+   "saudavel": true
+  },
+  {
+   "id": "sopa-de-legumes",
+   "nome": "Sopa de legumes",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "batata",
+     "quantidade": "2 unidades em cubos",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "2 unidades em cubos",
+     "essencial": true
+    },
+    {
+     "ingrediente": "abobrinha",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "agua",
+     "quantidade": "1,5 litro",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Refogue a cebola e o alho no azeite.",
+    "Junte a batata e a cenoura, cubra com a água e cozinhe por 15 minutos.",
+    "Acrescente a abobrinha e cozinhe mais 10 minutos.",
+    "Acerte o sal e finalize com cheiro-verde. Se preferir, bata metade no liquidificador para engrossar."
+   ],
+   "tempo": 35,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 150,
+   "saudavel": true
+  },
+  {
+   "id": "macarrao-ao-sugo",
+   "nome": "Macarrão ao sugo",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "macarrao",
+     "quantidade": "250 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "molho de tomate",
+     "quantidade": "1 sachê",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "ralado a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "oregano",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe o macarrão em água fervente com sal até ficar al dente.",
+    "Refogue o alho e a cebola no azeite, junte o molho e deixe apurar 5 minutos.",
+    "Misture o macarrão ao molho e finalize com orégano e queijo."
+   ],
+   "tempo": 25,
+   "porcoes": 3,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "baixo açúcar"
+   ],
+   "calorias": 420,
+   "saudavel": false
+  },
+  {
+   "id": "macarrao-com-frango-e-legumes",
+   "nome": "Macarrão com frango e legumes",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "macarrao",
+     "quantidade": "250 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "frango",
+     "quantidade": "300 g em cubos",
+     "essencial": true
+    },
+    {
+     "ingrediente": "abobrinha",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade ralada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "2 unidades",
+     "essencial": false
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "2 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe o macarrão al dente e reserve.",
+    "Doure o frango temperado no azeite com o alho.",
+    "Junte a cenoura, a abobrinha e o tomate e refogue até murchar.",
+    "Misture o macarrão e acerte o sal."
+   ],
+   "tempo": 30,
+   "porcoes": 3,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 480,
+   "saudavel": true
+  },
+  {
+   "id": "escondidinho-de-frango",
+   "nome": "Escondidinho de frango com purê de batata",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "batata",
+     "quantidade": "600 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "frango",
+     "quantidade": "400 g cozido e desfiado",
+     "essencial": true
+    },
+    {
+     "ingrediente": "leite",
+     "quantidade": "1/2 xícara",
+     "essencial": false
+    },
+    {
+     "ingrediente": "requeijao",
+     "quantidade": "3 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "manteiga",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe as batatas, amasse e misture leite, manteiga e sal até virar purê.",
+    "Refogue a cebola e o alho e junte o frango desfiado.",
+    "Em um refratário, faça uma camada de frango, espalhe o requeijão e cubra com o purê.",
+    "Leve ao forno a 200 °C por 20 minutos para dourar."
+   ],
+   "tempo": 50,
+   "porcoes": 4,
+   "dificuldade": "média",
+   "tags": [
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 390,
+   "saudavel": false
+  },
+  {
+   "id": "salada-de-batata",
+   "nome": "Salada de batata com cenoura",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "batata",
+     "quantidade": "500 g em cubos",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade em cubos",
+     "essencial": false
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "2 unidades cozidos",
+     "essencial": false
+    },
+    {
+     "ingrediente": "maionese",
+     "quantidade": "3 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "azeitona",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe a batata e a cenoura em água com sal até ficarem macias, sem desmanchar.",
+    "Escorra e deixe esfriar.",
+    "Misture a maionese, os ovos picados, as azeitonas e o cheiro-verde.",
+    "Guarde na geladeira e consuma no mesmo dia."
+   ],
+   "tempo": 30,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 220,
+   "saudavel": false
+  },
+  {
+   "id": "panqueca-de-banana-e-aveia",
+   "nome": "Panqueca de banana e aveia",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "banana",
+     "quantidade": "1 unidade madura",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "aveia",
+     "quantidade": "3 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "canela",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mel",
+     "quantidade": "1 fio para servir",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Amasse a banana com um garfo.",
+    "Misture o ovo e a aveia até formar uma massa.",
+    "Doure porções pequenas em frigideira antiaderente, 2 minutos de cada lado.",
+    "Sirva com canela e, se quiser, um fio de mel."
+   ],
+   "tempo": 15,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 300,
+   "saudavel": true
+  },
+  {
+   "id": "mingau-de-aveia",
+   "nome": "Mingau de aveia com banana",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "aveia",
+     "quantidade": "4 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "leite",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "banana",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "canela",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mel",
+     "quantidade": "1 colher de chá",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Leve o leite e a aveia ao fogo baixo, mexendo sempre.",
+    "Quando engrossar, desligue.",
+    "Sirva com banana em rodelas e canela."
+   ],
+   "tempo": 10,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "baixo açúcar",
+    "rápida"
+   ],
+   "calorias": 280,
+   "saudavel": true
+  },
+  {
+   "id": "vitamina-de-banana",
+   "nome": "Vitamina de banana",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "banana",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "leite",
+     "quantidade": "2 xícaras",
+     "essencial": true
+    },
+    {
+     "ingrediente": "aveia",
+     "quantidade": "2 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mel",
+     "quantidade": "1 colher de chá",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Bata todos os ingredientes no liquidificador.",
+    "Sirva na hora, gelada."
+   ],
+   "tempo": 5,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem glúten",
+    "baixo açúcar",
+    "rápida"
+   ],
+   "calorias": 200,
+   "saudavel": true
+  },
+  {
+   "id": "strogonoff-de-frango",
+   "nome": "Strogonoff de frango",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "frango",
+     "quantidade": "500 g em cubos",
+     "essencial": true
+    },
+    {
+     "ingrediente": "creme de leite",
+     "quantidade": "1 caixinha",
+     "essencial": true
+    },
+    {
+     "ingrediente": "molho de tomate",
+     "quantidade": "1/2 sachê",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mostarda",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "ketchup",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "oleo",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Doure o frango no óleo com sal.",
+    "Junte a cebola e o alho e refogue.",
+    "Acrescente o molho de tomate, a mostarda e o ketchup e cozinhe 5 minutos.",
+    "Desligue o fogo e misture o creme de leite. Sirva com arroz."
+   ],
+   "tempo": 30,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem glúten",
+    "rica em proteína"
+   ],
+   "calorias": 380,
+   "saudavel": false
+  },
+  {
+   "id": "torta-de-legumes",
+   "nome": "Torta de liquidificador com legumes",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "ovo",
+     "quantidade": "3 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "leite",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "farinha de trigo",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "oleo",
+     "quantidade": "1/2 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "fermento",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "abobrinha",
+     "quantidade": "1 unidade ralada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade ralada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "100 g",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Bata no liquidificador ovos, leite, óleo, farinha e sal.",
+    "Misture o fermento com uma colher.",
+    "Em uma forma untada, despeje metade da massa, os legumes e o queijo, e cubra com o restante.",
+    "Asse a 200 °C por cerca de 35 minutos."
+   ],
+   "tempo": 50,
+   "porcoes": 6,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "baixo açúcar"
+   ],
+   "calorias": 260,
+   "saudavel": false
+  },
+  {
+   "id": "misto-quente",
+   "nome": "Misto-quente",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "pao",
+     "quantidade": "4 fatias",
+     "essencial": true
+    },
+    {
+     "ingrediente": "presunto",
+     "quantidade": "4 fatias",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "4 fatias",
+     "essencial": true
+    },
+    {
+     "ingrediente": "requeijao",
+     "quantidade": "para passar",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Monte os sanduíches com presunto e queijo.",
+    "Passe um pouco de requeijão por fora, se quiser.",
+    "Aqueça numa frigideira ou sanduicheira até o queijo derreter."
+   ],
+   "tempo": 10,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 330,
+   "saudavel": false
+  },
+  {
+   "id": "crepioca",
+   "nome": "Crepioca recheada",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "ovo",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tapioca",
+     "quantidade": "2 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "1 fatia",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "fatias",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "uma pitada",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Misture o ovo, a goma de tapioca e o sal.",
+    "Espalhe em frigideira antiaderente quente e espere firmar.",
+    "Vire, recheie com queijo e tomate e dobre ao meio."
+   ],
+   "tempo": 10,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 250,
+   "saudavel": true
+  },
+  {
+   "id": "cuscuz-com-ovo",
+   "nome": "Cuscuz nordestino com ovo",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "flocao de milho",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "agua",
+     "quantidade": "1/2 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "uma pitada",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "manteiga",
+     "quantidade": "1 colher de chá",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Hidrate o flocão com a água e o sal por 10 minutos.",
+    "Cozinhe na cuscuzeira por cerca de 8 minutos, até ficar macio.",
+    "Sirva com ovos mexidos ou cozidos e um pouco de manteiga."
+   ],
+   "tempo": 15,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 320,
+   "saudavel": true
+  },
+  {
+   "id": "tapioca-de-queijo-e-tomate",
+   "nome": "Tapioca de queijo e tomate",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "tapioca",
+     "quantidade": "4 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "2 fatias",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "oregano",
+     "quantidade": "a gosto",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Espalhe a goma peneirada na frigideira quente.",
+    "Quando unir, vire e recheie com queijo, tomate e orégano.",
+    "Dobre e sirva."
+   ],
+   "tempo": 10,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem glúten",
+    "baixo açúcar",
+    "rápida"
+   ],
+   "calorias": 230,
+   "saudavel": true
+  },
+  {
+   "id": "salada-de-grao-de-bico",
+   "nome": "Salada de grão-de-bico",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "grao de bico",
+     "quantidade": "2 xícaras cozido",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "pepino",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "limao",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "2 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Pique o tomate, o pepino e a cebola.",
+    "Misture com o grão-de-bico cozido.",
+    "Tempere com limão, azeite, sal e cheiro-verde."
+   ],
+   "tempo": 15,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 260,
+   "saudavel": true
+  },
+  {
+   "id": "sopa-de-lentilha",
+   "nome": "Sopa de lentilha",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "lentilha",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "agua",
+     "quantidade": "1 litro",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Refogue a cebola e o alho no azeite.",
+    "Junte a lentilha lavada, a cenoura, o tomate e a água.",
+    "Cozinhe por 30 minutos, até a lentilha ficar macia. Acerte o sal."
+   ],
+   "tempo": 40,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 230,
+   "saudavel": true
+  },
+  {
+   "id": "abobrinha-recheada",
+   "nome": "Abobrinha recheada com queijo",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "abobrinha",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "100 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "oregano",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 fio",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Corte as abobrinhas ao meio no comprimento e retire o miolo.",
+    "Refogue o miolo picado com cebola e tomate.",
+    "Recheie as abobrinhas, cubra com queijo e orégano.",
+    "Asse a 200 °C por 20 minutos."
+   ],
+   "tempo": 30,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 210,
+   "saudavel": true
+  },
+  {
+   "id": "legumes-assados",
+   "nome": "Legumes assados com ervas",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "batata",
+     "quantidade": "3 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "abobora",
+     "quantidade": "300 g",
+     "essencial": false
+    },
+    {
+     "ingrediente": "abobrinha",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "3 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "3 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "oregano",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Corte os legumes em pedaços parecidos.",
+    "Tempere com azeite, alho, sal e orégano.",
+    "Asse a 200 °C por 30 a 35 minutos, mexendo na metade do tempo."
+   ],
+   "tempo": 40,
+   "porcoes": 3,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 220,
+   "saudavel": true
+  },
+  {
+   "id": "carne-moida-com-batata",
+   "nome": "Carne moída com batata",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "carne moida",
+     "quantidade": "500 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "batata",
+     "quantidade": "3 unidades em cubos",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "2 unidades",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "oleo",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Doure a carne no óleo, soltando bem.",
+    "Junte cebola, alho e tomate e refogue.",
+    "Acrescente a batata, a cenoura e meio copo de água.",
+    "Cozinhe tampado até a batata ficar macia."
+   ],
+   "tempo": 35,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 380,
+   "saudavel": true
+  },
+  {
+   "id": "bolinho-de-arroz-assado",
+   "nome": "Bolinho de arroz assado (sobra de arroz)",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "arroz",
+     "quantidade": "2 xícaras cozido",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "50 g ralado",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "farinha de trigo",
+     "quantidade": "2 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Misture o arroz cozido, o ovo, o queijo e o cheiro-verde.",
+    "Se a massa estiver mole, junte a farinha.",
+    "Modele bolinhos e asse em forma untada a 200 °C por 20 minutos."
+   ],
+   "tempo": 30,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 210,
+   "saudavel": false
+  },
+  {
+   "id": "farofa-de-ovo",
+   "nome": "Farofa de ovo com cenoura",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "farinha de mandioca",
+     "quantidade": "1 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade ralada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "manteiga",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Refogue a cebola e a cenoura na manteiga.",
+    "Junte os ovos e mexa até cozinharem.",
+    "Acrescente a farinha aos poucos, mexendo até tostar levemente.",
+    "Finalize com cheiro-verde e sal."
+   ],
+   "tempo": 15,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rápida"
+   ],
+   "calorias": 230,
+   "saudavel": false
+  },
+  {
+   "id": "peixe-assado",
+   "nome": "Peixe assado com batatas",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "peixe",
+     "quantidade": "2 filés",
+     "essencial": true
+    },
+    {
+     "ingrediente": "batata",
+     "quantidade": "2 unidades em rodelas",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "limao",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "2 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Tempere o peixe com limão e sal.",
+    "Forre um refratário com as batatas e regue com azeite.",
+    "Coloque o peixe por cima com rodelas de tomate e cebola.",
+    "Cubra com papel-alumínio e asse a 200 °C por 25 minutos; retire o papel e doure por mais 10."
+   ],
+   "tempo": 40,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 340,
+   "saudavel": true
+  },
+  {
+   "id": "arroz-de-forno",
+   "nome": "Arroz de forno (sobras)",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "arroz",
+     "quantidade": "3 xícaras cozido",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "150 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "presunto",
+     "quantidade": "100 g",
+     "essencial": false
+    },
+    {
+     "ingrediente": "milho",
+     "quantidade": "1/2 lata",
+     "essencial": false
+    },
+    {
+     "ingrediente": "ervilha",
+     "quantidade": "1/2 lata",
+     "essencial": false
+    },
+    {
+     "ingrediente": "molho de tomate",
+     "quantidade": "1/2 sachê",
+     "essencial": false
+    },
+    {
+     "ingrediente": "requeijao",
+     "quantidade": "3 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Misture o arroz com presunto, milho, ervilha, cebola e molho.",
+    "Coloque num refratário, espalhe o requeijão e cubra com queijo.",
+    "Asse a 200 °C até gratinar, cerca de 20 minutos."
+   ],
+   "tempo": 30,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 360,
+   "saudavel": false
+  },
+  {
+   "id": "salada-verde-com-ovo",
+   "nome": "Salada verde com ovo",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "alface",
+     "quantidade": "1 pé pequeno",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "2 unidades cozidos",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade ralada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "limao",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Lave bem as folhas e rasgue com as mãos.",
+    "Junte o tomate, a cenoura e os ovos em quartos.",
+    "Tempere na hora de servir com limão, azeite e sal."
+   ],
+   "tempo": 10,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 150,
+   "saudavel": true
+  },
+  {
+   "id": "frango-desfiado-com-milho",
+   "nome": "Frango desfiado com milho",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "frango",
+     "quantidade": "500 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "2 unidades",
+     "essencial": false
+    },
+    {
+     "ingrediente": "milho",
+     "quantidade": "1 lata",
+     "essencial": false
+    },
+    {
+     "ingrediente": "requeijao",
+     "quantidade": "2 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "azeite",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe o frango em água com sal e desfie.",
+    "Refogue cebola, alho e tomate no azeite.",
+    "Junte o frango e o milho e cozinhe 5 minutos.",
+    "Desligue, misture o requeijão e o cheiro-verde. Serve como prato ou recheio."
+   ],
+   "tempo": 35,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 280,
+   "saudavel": true
+  },
+  {
+   "id": "canja",
+   "nome": "Canja de galinha",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "frango",
+     "quantidade": "400 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "arroz",
+     "quantidade": "1/2 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "batata",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "alho",
+     "quantidade": "2 dentes",
+     "essencial": false
+    },
+    {
+     "ingrediente": "cheiro verde",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "agua",
+     "quantidade": "1,5 litro",
+     "essencial": true
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe o frango na água com cebola, alho e sal por 20 minutos; retire e desfie.",
+    "No mesmo caldo, cozinhe o arroz, a cenoura e a batata em cubos.",
+    "Volte o frango à panela e finalize com cheiro-verde."
+   ],
+   "tempo": 45,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína"
+   ],
+   "calorias": 260,
+   "saudavel": true
+  },
+  {
+   "id": "iogurte-com-frutas",
+   "nome": "Iogurte com frutas e aveia",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "iogurte",
+     "quantidade": "1 pote",
+     "essencial": true
+    },
+    {
+     "ingrediente": "banana",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "morango",
+     "quantidade": "5 unidades",
+     "essencial": false
+    },
+    {
+     "ingrediente": "aveia",
+     "quantidade": "2 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mel",
+     "quantidade": "1 colher de chá",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Coloque o iogurte numa tigela.",
+    "Cubra com as frutas picadas e a aveia.",
+    "Finalize com mel, se quiser."
+   ],
+   "tempo": 5,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 220,
+   "saudavel": true
+  },
+  {
+   "id": "salada-de-frutas",
+   "nome": "Salada de frutas",
+   "refeicao": "Sobremesa",
+   "ingredientes": [
+    {
+     "ingrediente": "banana",
+     "quantidade": "2 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "maca",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "laranja",
+     "quantidade": "2 unidades",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mamao",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "manga",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "morango",
+     "quantidade": "1 xícara",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Pique as frutas em cubos.",
+    "Esprema o suco das laranjas por cima, para não escurecer.",
+    "Sirva gelada no mesmo dia."
+   ],
+   "tempo": 15,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar",
+    "rápida"
+   ],
+   "calorias": 120,
+   "saudavel": true
+  },
+  {
+   "id": "pao-de-queijo-de-frigideira",
+   "nome": "Pão de queijo de frigideira",
+   "refeicao": "Café da manhã",
+   "ingredientes": [
+    {
+     "ingrediente": "ovo",
+     "quantidade": "1 unidade",
+     "essencial": true
+    },
+    {
+     "ingrediente": "tapioca",
+     "quantidade": "2 colheres de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "queijo",
+     "quantidade": "2 colheres de sopa ralado",
+     "essencial": true
+    },
+    {
+     "ingrediente": "requeijao",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "uma pitada",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Misture todos os ingredientes até formar uma massa.",
+    "Despeje em frigideira antiaderente e tampe.",
+    "Doure dos dois lados em fogo baixo."
+   ],
+   "tempo": 10,
+   "porcoes": 1,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem glúten",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 280,
+   "saudavel": false
+  },
+  {
+   "id": "bolo-de-banana-e-aveia",
+   "nome": "Bolo de banana e aveia sem açúcar",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "banana",
+     "quantidade": "4 unidades maduras",
+     "essencial": true
+    },
+    {
+     "ingrediente": "ovo",
+     "quantidade": "3 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "aveia",
+     "quantidade": "2 xícaras",
+     "essencial": true
+    },
+    {
+     "ingrediente": "oleo",
+     "quantidade": "1/4 xícara",
+     "essencial": true
+    },
+    {
+     "ingrediente": "fermento",
+     "quantidade": "1 colher de sopa",
+     "essencial": true
+    },
+    {
+     "ingrediente": "canela",
+     "quantidade": "1 colher de chá",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Bata as bananas, os ovos e o óleo no liquidificador.",
+    "Misture a aveia, a canela e por último o fermento.",
+    "Asse em forma untada a 180 °C por cerca de 35 minutos."
+   ],
+   "tempo": 45,
+   "porcoes": 8,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "sem lactose",
+    "baixo açúcar"
+   ],
+   "calorias": 170,
+   "saudavel": true
+  },
+  {
+   "id": "pure-de-batata",
+   "nome": "Purê de batata",
+   "refeicao": "Almoço e jantar",
+   "ingredientes": [
+    {
+     "ingrediente": "batata",
+     "quantidade": "500 g",
+     "essencial": true
+    },
+    {
+     "ingrediente": "leite",
+     "quantidade": "1/2 xícara",
+     "essencial": false
+    },
+    {
+     "ingrediente": "manteiga",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "sal",
+     "quantidade": "a gosto",
+     "essencial": true
+    }
+   ],
+   "preparo": [
+    "Cozinhe as batatas descascadas em água com sal até ficarem bem macias.",
+    "Amasse ainda quentes.",
+    "Misture o leite e a manteiga aos poucos até ficar cremoso."
+   ],
+   "tempo": 30,
+   "porcoes": 3,
+   "dificuldade": "fácil",
+   "tags": [
+    "vegetariana",
+    "vegana",
+    "sem lactose",
+    "sem glúten",
+    "baixo açúcar"
+   ],
+   "calorias": 190,
+   "saudavel": true
+  },
+  {
+   "id": "cachorro-quente",
+   "nome": "Cachorro-quente caseiro",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "pao",
+     "quantidade": "4 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "salsicha",
+     "quantidade": "4 unidades",
+     "essencial": true
+    },
+    {
+     "ingrediente": "molho de tomate",
+     "quantidade": "1 sachê",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cebola",
+     "quantidade": "1/2 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "1 unidade",
+     "essencial": false
+    },
+    {
+     "ingrediente": "milho",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "ketchup",
+     "quantidade": "a gosto",
+     "essencial": false
+    },
+    {
+     "ingrediente": "mostarda",
+     "quantidade": "a gosto",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Cozinhe as salsichas no molho de tomate com cebola e tomate picados por 10 minutos.",
+    "Abra os pães e recheie com a salsicha e o molho.",
+    "Finalize com milho, ketchup e mostarda."
+   ],
+   "tempo": 20,
+   "porcoes": 4,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 350,
+   "saudavel": false
+  },
+  {
+   "id": "sanduiche-natural",
+   "nome": "Sanduíche natural de frango",
+   "refeicao": "Lanche",
+   "ingredientes": [
+    {
+     "ingrediente": "pao",
+     "quantidade": "4 fatias integrais",
+     "essencial": true
+    },
+    {
+     "ingrediente": "frango",
+     "quantidade": "150 g cozido e desfiado",
+     "essencial": true
+    },
+    {
+     "ingrediente": "cenoura",
+     "quantidade": "1 unidade ralada",
+     "essencial": false
+    },
+    {
+     "ingrediente": "alface",
+     "quantidade": "algumas folhas",
+     "essencial": false
+    },
+    {
+     "ingrediente": "tomate",
+     "quantidade": "fatias",
+     "essencial": false
+    },
+    {
+     "ingrediente": "requeijao",
+     "quantidade": "2 colheres de sopa",
+     "essencial": false
+    },
+    {
+     "ingrediente": "maionese",
+     "quantidade": "1 colher de sopa",
+     "essencial": false
+    }
+   ],
+   "preparo": [
+    "Misture o frango com a cenoura e o requeijão (ou a maionese).",
+    "Monte o sanduíche com alface e tomate.",
+    "Se não for comer na hora, guarde na geladeira e consuma no mesmo dia."
+   ],
+   "tempo": 15,
+   "porcoes": 2,
+   "dificuldade": "fácil",
+   "tags": [
+    "sem lactose",
+    "baixo açúcar",
+    "rica em proteína",
+    "rápida"
+   ],
+   "calorias": 300,
+   "saudavel": true
+  }
+ ]
+}

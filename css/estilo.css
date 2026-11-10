@@ -288,6 +288,43 @@ button.row:hover{background:var(--bg)}
 .crow .icon-btn{flex:none}
 textarea.input{resize:vertical;min-height:84px;line-height:1.5}
 
+/* Receitas */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px}
+.rcard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;transition:transform .15s,box-shadow .15s}
+.rcard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.rart{width:72px;height:72px;border-radius:18px;background:var(--yellow-soft);display:grid;grid-template-columns:1fr 1fr;place-items:center;font-size:24px;line-height:1;padding:6px;flex:none}
+.rart span:only-child{grid-column:1/-1;font-size:34px}
+.rart span:first-child:nth-last-child(3){grid-column:1/-1}
+.rart.lg{width:110px;height:110px;font-size:34px;border-radius:26px}
+.rbody{display:grid;gap:6px;min-width:0}
+.rtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.rtop strong{font-family:var(--font-display);font-size:1.05rem;line-height:1.2}
+.score{flex:none;font-size:.75rem;font-weight:800;background:var(--green-soft);color:var(--green);border-radius:var(--r-pill);padding:3px 9px;white-space:nowrap}
+.rmotivo{display:flex;gap:6px;align-items:flex-start;font-weight:700;font-size:.9rem;color:var(--terra)}
+.rmeta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;color:var(--muted);font-size:.84rem;font-weight:600}
+.rmeta span{display:inline-flex;gap:4px;align-items:center}
+.rfalta{color:var(--terra);font-weight:700}
+.rok{color:var(--green);font-weight:700;display:inline-flex;gap:4px;align-items:center}
+.rhead{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.why{background:var(--olive-soft);border-radius:var(--r-md);padding:14px 16px}
+.why ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;font-weight:600}
+.preparo{margin:0;padding-left:22px;display:grid;gap:12px;line-height:1.6}
+.ilist{list-style:none;margin:0;padding:0;display:grid}
+.ilist li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:start}
+.ilist li:last-child{border-bottom:0}
+.ilist .ist{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--sand);color:var(--muted);font-weight:800}
+.ilist li.tem .ist{background:var(--green-soft);color:var(--green)}
+.ilist li.falta .ist{background:var(--terra-soft);color:var(--terra)}
+.ilist li.tem small{color:var(--green);font-weight:700}
+.ilist li.falta small{color:var(--terra);font-weight:700}
+.ilist li.off{opacity:.55}
+.ilist li.off strong{text-decoration:line-through}
+.ilist small{color:var(--muted)}
+.aviso-nutri{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:.84rem;margin-top:4px}
+.baixa{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.baixa li{display:grid;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.baixa li:last-child{border-bottom:0}
+
 /* Despensa */
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .tabs{display:inline-flex;background:var(--sand);border-radius:var(--r-pill);padding:4px;gap:2px;flex-wrap:wrap}

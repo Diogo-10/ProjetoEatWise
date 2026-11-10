@@ -3,10 +3,11 @@
    ====================================================================== */
 const NAV = [
   {r:'dashboard', n:'Início', i:'home'},
-  {r:'adicionar', n:'Registrar produto', i:'plus'},
-  {r:'despensa', n:'Minha geladeira', i:'box'},
+  {r:'despensa', n:'Inventário', i:'box'},
+  {r:'adicionar', n:'Adicionar ingredientes', i:'plus'},
+  {r:'receitas', n:'Receitas', i:'book'},
   {r:'alertas', n:'Alertas', i:'bell', badge:true},
-  {r:'prazos', n:'Base de prazos', i:'book'},
+  {r:'prazos', n:'Base de prazos', i:'db'},
   {r:'impacto', n:'Meu impacto', i:'chart'}
 ];
 const unread = () => ALERTS.filter(a => !a.lido).length;
@@ -87,12 +88,12 @@ const alertIco = t => ({bad:'alert', today:'clock', warn:'bell', ok:'leaf'}[t]);
 function updateBadges(){
   const n = unread();
   $('#notif-dot').hidden = n === 0;
-  const navRoute = route === 'produto' ? 'despensa' : route;
+  const navRoute = route === 'produto' ? 'despensa' : route === 'receita' ? 'receitas' : route;
   $('#side-nav').innerHTML = `<span class="nav-label">Menu</span>` + NAV.map(x =>
     `<a href="#${x.r}" data-go="${x.r}" class="${navRoute===x.r?'active':''}" ${navRoute===x.r?'aria-current="page"':''}>${ic(x.i)} ${x.n}${x.badge && n ? `<span class="badge">${n}</span>` : ''}</a>`).join('') +
     `<span class="nav-label" style="margin-top:10px">Conta</span>
      <a href="#perfil" data-go="perfil" class="${navRoute==='perfil'?'active':''}">${ic('user')} Perfil e configurações</a>`;
-  const bn = [['dashboard','Início','home'],['despensa','Geladeira','box'],['adicionar','Registrar','plus'],['alertas','Alertas','bell'],['perfil','Perfil','user']];
+  const bn = [['dashboard','Início','home'],['despensa','Inventário','box'],['adicionar','Adicionar','plus'],['receitas','Receitas','book'],['perfil','Perfil','user']];
   $('#bottom-nav').innerHTML = bn.map(([r,n,i]) => r === 'adicionar'
     ? `<a href="#adicionar" data-go="adicionar" class="plus ${navRoute===r?'active':''}"><span class="p">${ic('plus')}</span>${n}</a>`
     : `<a href="#${r}" data-go="${r}" class="${navRoute===r?'active':''}">${ic(i)}${n}</a>`).join('');
@@ -103,11 +104,11 @@ function renderView(){
   salvarEstado();
   ALERTS = gerarAlertas();
   bindShell();
-  const views = {dashboard:viewDashboard, adicionar:viewAdd, despensa:viewDespensa, produto:viewProduto, alertas:viewAlertas, prazos:viewPrazos, impacto:viewImpacto, perfil:viewPerfil};
+  const views = {dashboard:viewDashboard, adicionar:viewAdd, despensa:viewDespensa, produto:viewProduto, receitas:viewReceitas, receita:viewReceita, alertas:viewAlertas, prazos:viewPrazos, impacto:viewImpacto, perfil:viewPerfil};
   const fn = views[route] || viewDashboard;
   $('#view').innerHTML = fn();
   updateBadges();
-  const binders = {dashboard:bindDashboard, adicionar:bindAdd, despensa:bindDespensa, produto:bindProduto, alertas:bindAlertas, prazos:bindPrazos, perfil:bindPerfil, impacto:bindImpacto};
+  const binders = {dashboard:bindDashboard, adicionar:bindAdd, despensa:bindDespensa, produto:bindProduto, receitas:bindReceitas, receita:bindReceita, alertas:bindAlertas, prazos:bindPrazos, perfil:bindPerfil, impacto:bindImpacto};
   binders[route] && binders[route]();
 }
 

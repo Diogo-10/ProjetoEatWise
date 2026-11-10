@@ -66,6 +66,8 @@ function salvarEstado(){
   EW.armazenamento.gravar('alertasLidos', [...ALERTAS_LIDOS]);
   EW.armazenamento.gravar('usuario', {plano: USER.plano});
   EW.armazenamento.gravar('informados', INFORMADOS);
+  EW.armazenamento.gravar('perfil', PERFIL);
+  EW.armazenamento.gravar('historico', HISTORICO);
   if (!EW.armazenamento.gravar('inventario', PRODUCTS)) {
     // sem espaço (fotos grandes): guarda o inventário sem as fotos tiradas pelo usuário
     EW.armazenamento.gravar('inventario', PRODUCTS.map(p => Object.assign({}, p, {foto:null})));
@@ -105,8 +107,11 @@ document.addEventListener('click', e => {
 
 function render(){
   const h = (location.hash.slice(1) || 'inicio');
-  const [r, p] = h.split('-');
-  route = r; param = p ? Number(p) : null;
+  // "#produto-3" -> rota produto, parâmetro 3; "#receita-omelete-de-legumes" -> rota receita, parâmetro texto
+  const i = h.indexOf('-');
+  route = i < 0 ? h : h.slice(0, i);
+  const p = i < 0 ? null : h.slice(i + 1);
+  param = p === null ? null : /^\d+$/.test(p) ? Number(p) : p;
   closeModal();
   if (PUBLIC.includes(route)) {
     $('#root').innerHTML = route === 'inicio' ? viewLanding() : route === 'login' ? viewLogin() : viewSignup();

@@ -299,6 +299,52 @@ button.row:hover{background:var(--bg)}
 .tip .eyebrow{display:flex;align-items:center;gap:6px}
 .method-ico{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--sand);color:var(--muted)}
 
+/* Confirmação de ingredientes (texto/imagem) */
+.confirm-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.crow{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--bg)}
+.crow .cname{flex:1 1 200px;min-width:0;display:grid;gap:4px}
+.crow .cqty{flex:0 0 90px}
+.crow .cun{flex:0 0 110px}
+.crow .icon-btn{flex:none}
+textarea.input{resize:vertical;min-height:84px;line-height:1.5}
+
+/* Receitas */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px}
+.rcard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;transition:transform .15s,box-shadow .15s}
+.rcard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.rart{width:72px;height:72px;border-radius:18px;background:var(--yellow-soft);display:grid;grid-template-columns:1fr 1fr;place-items:center;font-size:24px;line-height:1;padding:6px;flex:none}
+.rart span:only-child{grid-column:1/-1;font-size:34px}
+.rart span:first-child:nth-last-child(3){grid-column:1/-1}
+.rart.lg{width:110px;height:110px;font-size:34px;border-radius:26px}
+.rbody{display:grid;gap:6px;min-width:0}
+.rtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.rtop strong{font-family:var(--font-display);font-size:1.05rem;line-height:1.2}
+.score{flex:none;font-size:.75rem;font-weight:800;background:var(--green-soft);color:var(--green);border-radius:var(--r-pill);padding:3px 9px;white-space:nowrap}
+.rmotivo{display:flex;gap:6px;align-items:flex-start;font-weight:700;font-size:.9rem;color:var(--terra)}
+.rmeta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;color:var(--muted);font-size:.84rem;font-weight:600}
+.rmeta span{display:inline-flex;gap:4px;align-items:center}
+.rfalta{color:var(--terra);font-weight:700}
+.rok{color:var(--green);font-weight:700;display:inline-flex;gap:4px;align-items:center}
+.rhead{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.why{background:var(--olive-soft);border-radius:var(--r-md);padding:14px 16px}
+.why ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;font-weight:600}
+.preparo{margin:0;padding-left:22px;display:grid;gap:12px;line-height:1.6}
+.ilist{list-style:none;margin:0;padding:0;display:grid}
+.ilist li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:start}
+.ilist li:last-child{border-bottom:0}
+.ilist .ist{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--sand);color:var(--muted);font-weight:800}
+.ilist li.tem .ist{background:var(--green-soft);color:var(--green)}
+.ilist li.falta .ist{background:var(--terra-soft);color:var(--terra)}
+.ilist li.tem small{color:var(--green);font-weight:700}
+.ilist li.falta small{color:var(--terra);font-weight:700}
+.ilist li.off{opacity:.55}
+.ilist li.off strong{text-decoration:line-through}
+.ilist small{color:var(--muted)}
+.aviso-nutri{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:.84rem;margin-top:4px}
+.baixa{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.baixa li{display:grid;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.baixa li:last-child{border-bottom:0}
+
 /* Despensa */
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .tabs{display:inline-flex;background:var(--sand);border-radius:var(--r-pill);padding:4px;gap:2px;flex-wrap:wrap}
@@ -574,6 +620,7 @@ body{display:block;overflow:hidden}
 </div>
 
 <script>
+window.EW_RECEITAS = {"versao": 1, "aviso": "Receitas simples para o protótipo EatWise. Calorias aproximadas por porção; não substituem orientação de nutricionista.", "receitas": [{"id": "omelete-de-legumes", "nome": "Omelete de legumes", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "ovo", "quantidade": "3 unidades", "essencial": true}, {"ingrediente": "tomate", "quantidade": "1/2 unidade picado", "essencial": true}, {"ingrediente": "cebola", "quantidade": "2 colheres de sopa picada", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "queijo", "quantidade": "2 fatias", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}, {"ingrediente": "azeite", "quantidade": "1 fio", "essencial": true}], "preparo": ["Bata os ovos com o sal em uma tigela.", "Misture o tomate, a cebola e o cheiro-verde.", "Aqueça o azeite numa frigideira antiaderente e despeje a mistura.", "Cozinhe em fogo baixo com tampa; se quiser, coloque o queijo antes de dobrar."], "tempo": 15, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 280, "saudavel": true}, {"id": "frango-grelhado-com-legumes", "nome": "Frango grelhado com legumes", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "frango", "quantidade": "400 g de peito em filés", "essencial": true}, {"ingrediente": "abobrinha", "quantidade": "1 unidade em rodelas", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade em palitos", "essencial": false}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "limao", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "azeite", "quantidade": "2 colheres de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Tempere o frango com alho, limão e sal.", "Grelhe os filés em frigideira com metade do azeite, 5 minutos de cada lado.", "Na mesma frigideira, salteie a abobrinha e a cenoura com o restante do azeite até ficarem macias.", "Sirva o frango com os legumes."], "tempo": 30, "porcoes": 2, "dificuldade": "fácil", "tags": ["sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 320, "saudavel": true}, {"id": "arroz-feijao-e-ovo", "nome": "Prato feito com arroz, feijão e ovo", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "arroz", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "feijao", "quantidade": "2 conchas cozido", "essencial": true}, {"ingrediente": "ovo", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "tomate", "quantidade": "1 unidade para salada", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "1 dente", "essencial": false}, {"ingrediente": "oleo", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Refogue metade da cebola e o alho no óleo, junte o arroz e 2 xícaras de água quente com sal; cozinhe tampado.", "Aqueça o feijão já cozido com o restante da cebola refogada.", "Frite ou cozinhe os ovos.", "Monte o prato com arroz, feijão, ovo e uma salada de tomate."], "tempo": 40, "porcoes": 2, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 450, "saudavel": true}, {"id": "sopa-de-legumes", "nome": "Sopa de legumes", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "batata", "quantidade": "2 unidades em cubos", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "2 unidades em cubos", "essencial": true}, {"ingrediente": "abobrinha", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "azeite", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "agua", "quantidade": "1,5 litro", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Refogue a cebola e o alho no azeite.", "Junte a batata e a cenoura, cubra com a água e cozinhe por 15 minutos.", "Acrescente a abobrinha e cozinhe mais 10 minutos.", "Acerte o sal e finalize com cheiro-verde. Se preferir, bata metade no liquidificador para engrossar."], "tempo": 35, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar"], "calorias": 150, "saudavel": true}, {"id": "macarrao-ao-sugo", "nome": "Macarrão ao sugo", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "macarrao", "quantidade": "250 g", "essencial": true}, {"ingrediente": "molho de tomate", "quantidade": "1 sachê", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "queijo", "quantidade": "ralado a gosto", "essencial": false}, {"ingrediente": "azeite", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "oregano", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe o macarrão em água fervente com sal até ficar al dente.", "Refogue o alho e a cebola no azeite, junte o molho e deixe apurar 5 minutos.", "Misture o macarrão ao molho e finalize com orégano e queijo."], "tempo": 25, "porcoes": 3, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "baixo açúcar"], "calorias": 420, "saudavel": false}, {"id": "macarrao-com-frango-e-legumes", "nome": "Macarrão com frango e legumes", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "macarrao", "quantidade": "250 g", "essencial": true}, {"ingrediente": "frango", "quantidade": "300 g em cubos", "essencial": true}, {"ingrediente": "abobrinha", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "cenoura", "quantidade": "1 unidade ralada", "essencial": false}, {"ingrediente": "tomate", "quantidade": "2 unidades", "essencial": false}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "azeite", "quantidade": "2 colheres de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe o macarrão al dente e reserve.", "Doure o frango temperado no azeite com o alho.", "Junte a cenoura, a abobrinha e o tomate e refogue até murchar.", "Misture o macarrão e acerte o sal."], "tempo": 30, "porcoes": 3, "dificuldade": "fácil", "tags": ["sem lactose", "baixo açúcar", "rica em proteína"], "calorias": 480, "saudavel": true}, {"id": "escondidinho-de-frango", "nome": "Escondidinho de frango com purê de batata", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "batata", "quantidade": "600 g", "essencial": true}, {"ingrediente": "frango", "quantidade": "400 g cozido e desfiado", "essencial": true}, {"ingrediente": "leite", "quantidade": "1/2 xícara", "essencial": false}, {"ingrediente": "requeijao", "quantidade": "3 colheres de sopa", "essencial": false}, {"ingrediente": "manteiga", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe as batatas, amasse e misture leite, manteiga e sal até virar purê.", "Refogue a cebola e o alho e junte o frango desfiado.", "Em um refratário, faça uma camada de frango, espalhe o requeijão e cubra com o purê.", "Leve ao forno a 200 °C por 20 minutos para dourar."], "tempo": 50, "porcoes": 4, "dificuldade": "média", "tags": ["sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 390, "saudavel": false}, {"id": "salada-de-batata", "nome": "Salada de batata com cenoura", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "batata", "quantidade": "500 g em cubos", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade em cubos", "essencial": false}, {"ingrediente": "ovo", "quantidade": "2 unidades cozidos", "essencial": false}, {"ingrediente": "maionese", "quantidade": "3 colheres de sopa", "essencial": true}, {"ingrediente": "azeitona", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe a batata e a cenoura em água com sal até ficarem macias, sem desmanchar.", "Escorra e deixe esfriar.", "Misture a maionese, os ovos picados, as azeitonas e o cheiro-verde.", "Guarde na geladeira e consuma no mesmo dia."], "tempo": 30, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar"], "calorias": 220, "saudavel": false}, {"id": "panqueca-de-banana-e-aveia", "nome": "Panqueca de banana e aveia", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "banana", "quantidade": "1 unidade madura", "essencial": true}, {"ingrediente": "ovo", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "aveia", "quantidade": "3 colheres de sopa", "essencial": true}, {"ingrediente": "canela", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "mel", "quantidade": "1 fio para servir", "essencial": false}], "preparo": ["Amasse a banana com um garfo.", "Misture o ovo e a aveia até formar uma massa.", "Doure porções pequenas em frigideira antiaderente, 2 minutos de cada lado.", "Sirva com canela e, se quiser, um fio de mel."], "tempo": 15, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 300, "saudavel": true}, {"id": "mingau-de-aveia", "nome": "Mingau de aveia com banana", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "aveia", "quantidade": "4 colheres de sopa", "essencial": true}, {"ingrediente": "leite", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "banana", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "canela", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "mel", "quantidade": "1 colher de chá", "essencial": false}], "preparo": ["Leve o leite e a aveia ao fogo baixo, mexendo sempre.", "Quando engrossar, desligue.", "Sirva com banana em rodelas e canela."], "tempo": 10, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "baixo açúcar", "rápida"], "calorias": 280, "saudavel": true}, {"id": "vitamina-de-banana", "nome": "Vitamina de banana", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "banana", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "leite", "quantidade": "2 xícaras", "essencial": true}, {"ingrediente": "aveia", "quantidade": "2 colheres de sopa", "essencial": false}, {"ingrediente": "mel", "quantidade": "1 colher de chá", "essencial": false}], "preparo": ["Bata todos os ingredientes no liquidificador.", "Sirva na hora, gelada."], "tempo": 5, "porcoes": 2, "dificuldade": "fácil", "tags": ["vegetariana", "sem glúten", "baixo açúcar", "rápida"], "calorias": 200, "saudavel": true}, {"id": "strogonoff-de-frango", "nome": "Strogonoff de frango", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "frango", "quantidade": "500 g em cubos", "essencial": true}, {"ingrediente": "creme de leite", "quantidade": "1 caixinha", "essencial": true}, {"ingrediente": "molho de tomate", "quantidade": "1/2 sachê", "essencial": true}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "mostarda", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "ketchup", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "oleo", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Doure o frango no óleo com sal.", "Junte a cebola e o alho e refogue.", "Acrescente o molho de tomate, a mostarda e o ketchup e cozinhe 5 minutos.", "Desligue o fogo e misture o creme de leite. Sirva com arroz."], "tempo": 30, "porcoes": 4, "dificuldade": "fácil", "tags": ["sem glúten", "rica em proteína"], "calorias": 380, "saudavel": false}, {"id": "torta-de-legumes", "nome": "Torta de liquidificador com legumes", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "ovo", "quantidade": "3 unidades", "essencial": true}, {"ingrediente": "leite", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "farinha de trigo", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "oleo", "quantidade": "1/2 xícara", "essencial": true}, {"ingrediente": "fermento", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "abobrinha", "quantidade": "1 unidade ralada", "essencial": false}, {"ingrediente": "cenoura", "quantidade": "1 unidade ralada", "essencial": false}, {"ingrediente": "tomate", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "queijo", "quantidade": "100 g", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Bata no liquidificador ovos, leite, óleo, farinha e sal.", "Misture o fermento com uma colher.", "Em uma forma untada, despeje metade da massa, os legumes e o queijo, e cubra com o restante.", "Asse a 200 °C por cerca de 35 minutos."], "tempo": 50, "porcoes": 6, "dificuldade": "fácil", "tags": ["vegetariana", "baixo açúcar"], "calorias": 260, "saudavel": false}, {"id": "misto-quente", "nome": "Misto-quente", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "pao", "quantidade": "4 fatias", "essencial": true}, {"ingrediente": "presunto", "quantidade": "4 fatias", "essencial": true}, {"ingrediente": "queijo", "quantidade": "4 fatias", "essencial": true}, {"ingrediente": "requeijao", "quantidade": "para passar", "essencial": false}], "preparo": ["Monte os sanduíches com presunto e queijo.", "Passe um pouco de requeijão por fora, se quiser.", "Aqueça numa frigideira ou sanduicheira até o queijo derreter."], "tempo": 10, "porcoes": 2, "dificuldade": "fácil", "tags": ["baixo açúcar", "rica em proteína", "rápida"], "calorias": 330, "saudavel": false}, {"id": "crepioca", "nome": "Crepioca recheada", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "ovo", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "tapioca", "quantidade": "2 colheres de sopa", "essencial": true}, {"ingrediente": "queijo", "quantidade": "1 fatia", "essencial": false}, {"ingrediente": "tomate", "quantidade": "fatias", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "sal", "quantidade": "uma pitada", "essencial": true}], "preparo": ["Misture o ovo, a goma de tapioca e o sal.", "Espalhe em frigideira antiaderente quente e espere firmar.", "Vire, recheie com queijo e tomate e dobre ao meio."], "tempo": 10, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 250, "saudavel": true}, {"id": "cuscuz-com-ovo", "nome": "Cuscuz nordestino com ovo", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "flocao de milho", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "agua", "quantidade": "1/2 xícara", "essencial": true}, {"ingrediente": "sal", "quantidade": "uma pitada", "essencial": true}, {"ingrediente": "ovo", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "manteiga", "quantidade": "1 colher de chá", "essencial": false}], "preparo": ["Hidrate o flocão com a água e o sal por 10 minutos.", "Cozinhe na cuscuzeira por cerca de 8 minutos, até ficar macio.", "Sirva com ovos mexidos ou cozidos e um pouco de manteiga."], "tempo": 15, "porcoes": 2, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 320, "saudavel": true}, {"id": "tapioca-de-queijo-e-tomate", "nome": "Tapioca de queijo e tomate", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "tapioca", "quantidade": "4 colheres de sopa", "essencial": true}, {"ingrediente": "queijo", "quantidade": "2 fatias", "essencial": true}, {"ingrediente": "tomate", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "oregano", "quantidade": "a gosto", "essencial": false}], "preparo": ["Espalhe a goma peneirada na frigideira quente.", "Quando unir, vire e recheie com queijo, tomate e orégano.", "Dobre e sirva."], "tempo": 10, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "sem glúten", "baixo açúcar", "rápida"], "calorias": 230, "saudavel": true}, {"id": "salada-de-grao-de-bico", "nome": "Salada de grão-de-bico", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "grao de bico", "quantidade": "2 xícaras cozido", "essencial": true}, {"ingrediente": "tomate", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "pepino", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "limao", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "azeite", "quantidade": "2 colheres de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Pique o tomate, o pepino e a cebola.", "Misture com o grão-de-bico cozido.", "Tempere com limão, azeite, sal e cheiro-verde."], "tempo": 15, "porcoes": 2, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 260, "saudavel": true}, {"id": "sopa-de-lentilha", "nome": "Sopa de lentilha", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "lentilha", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "tomate", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "azeite", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "agua", "quantidade": "1 litro", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Refogue a cebola e o alho no azeite.", "Junte a lentilha lavada, a cenoura, o tomate e a água.", "Cozinhe por 30 minutos, até a lentilha ficar macia. Acerte o sal."], "tempo": 40, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 230, "saudavel": true}, {"id": "abobrinha-recheada", "nome": "Abobrinha recheada com queijo", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "abobrinha", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "tomate", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "queijo", "quantidade": "100 g", "essencial": true}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "oregano", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "azeite", "quantidade": "1 fio", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Corte as abobrinhas ao meio no comprimento e retire o miolo.", "Refogue o miolo picado com cebola e tomate.", "Recheie as abobrinhas, cubra com queijo e orégano.", "Asse a 200 °C por 20 minutos."], "tempo": 30, "porcoes": 2, "dificuldade": "fácil", "tags": ["vegetariana", "sem glúten", "baixo açúcar"], "calorias": 210, "saudavel": true}, {"id": "legumes-assados", "nome": "Legumes assados com ervas", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "batata", "quantidade": "3 unidades", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "abobora", "quantidade": "300 g", "essencial": false}, {"ingrediente": "abobrinha", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "alho", "quantidade": "3 dentes", "essencial": false}, {"ingrediente": "azeite", "quantidade": "3 colheres de sopa", "essencial": true}, {"ingrediente": "oregano", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Corte os legumes em pedaços parecidos.", "Tempere com azeite, alho, sal e orégano.", "Asse a 200 °C por 30 a 35 minutos, mexendo na metade do tempo."], "tempo": 40, "porcoes": 3, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar"], "calorias": 220, "saudavel": true}, {"id": "carne-moida-com-batata", "nome": "Carne moída com batata", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "carne moida", "quantidade": "500 g", "essencial": true}, {"ingrediente": "batata", "quantidade": "3 unidades em cubos", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "tomate", "quantidade": "2 unidades", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "oleo", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Doure a carne no óleo, soltando bem.", "Junte cebola, alho e tomate e refogue.", "Acrescente a batata, a cenoura e meio copo de água.", "Cozinhe tampado até a batata ficar macia."], "tempo": 35, "porcoes": 4, "dificuldade": "fácil", "tags": ["sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 380, "saudavel": true}, {"id": "bolinho-de-arroz-assado", "nome": "Bolinho de arroz assado (sobra de arroz)", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "arroz", "quantidade": "2 xícaras cozido", "essencial": true}, {"ingrediente": "ovo", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "queijo", "quantidade": "50 g ralado", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "farinha de trigo", "quantidade": "2 colheres de sopa", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Misture o arroz cozido, o ovo, o queijo e o cheiro-verde.", "Se a massa estiver mole, junte a farinha.", "Modele bolinhos e asse em forma untada a 200 °C por 20 minutos."], "tempo": 30, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar"], "calorias": 210, "saudavel": false}, {"id": "farofa-de-ovo", "nome": "Farofa de ovo com cenoura", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "farinha de mandioca", "quantidade": "1 xícara", "essencial": true}, {"ingrediente": "ovo", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade ralada", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "manteiga", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Refogue a cebola e a cenoura na manteiga.", "Junte os ovos e mexa até cozinharem.", "Acrescente a farinha aos poucos, mexendo até tostar levemente.", "Finalize com cheiro-verde e sal."], "tempo": 15, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "sem glúten", "baixo açúcar", "rápida"], "calorias": 230, "saudavel": false}, {"id": "peixe-assado", "nome": "Peixe assado com batatas", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "peixe", "quantidade": "2 filés", "essencial": true}, {"ingrediente": "batata", "quantidade": "2 unidades em rodelas", "essencial": true}, {"ingrediente": "tomate", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "limao", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "azeite", "quantidade": "2 colheres de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Tempere o peixe com limão e sal.", "Forre um refratário com as batatas e regue com azeite.", "Coloque o peixe por cima com rodelas de tomate e cebola.", "Cubra com papel-alumínio e asse a 200 °C por 25 minutos; retire o papel e doure por mais 10."], "tempo": 40, "porcoes": 2, "dificuldade": "fácil", "tags": ["sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 340, "saudavel": true}, {"id": "arroz-de-forno", "nome": "Arroz de forno (sobras)", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "arroz", "quantidade": "3 xícaras cozido", "essencial": true}, {"ingrediente": "queijo", "quantidade": "150 g", "essencial": true}, {"ingrediente": "presunto", "quantidade": "100 g", "essencial": false}, {"ingrediente": "milho", "quantidade": "1/2 lata", "essencial": false}, {"ingrediente": "ervilha", "quantidade": "1/2 lata", "essencial": false}, {"ingrediente": "molho de tomate", "quantidade": "1/2 sachê", "essencial": false}, {"ingrediente": "requeijao", "quantidade": "3 colheres de sopa", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": false}], "preparo": ["Misture o arroz com presunto, milho, ervilha, cebola e molho.", "Coloque num refratário, espalhe o requeijão e cubra com queijo.", "Asse a 200 °C até gratinar, cerca de 20 minutos."], "tempo": 30, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "sem glúten", "baixo açúcar"], "calorias": 360, "saudavel": false}, {"id": "salada-verde-com-ovo", "nome": "Salada verde com ovo", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "alface", "quantidade": "1 pé pequeno", "essencial": true}, {"ingrediente": "tomate", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "ovo", "quantidade": "2 unidades cozidos", "essencial": false}, {"ingrediente": "cenoura", "quantidade": "1 unidade ralada", "essencial": false}, {"ingrediente": "limao", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "azeite", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Lave bem as folhas e rasgue com as mãos.", "Junte o tomate, a cenoura e os ovos em quartos.", "Tempere na hora de servir com limão, azeite e sal."], "tempo": 10, "porcoes": 2, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 150, "saudavel": true}, {"id": "frango-desfiado-com-milho", "nome": "Frango desfiado com milho", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "frango", "quantidade": "500 g", "essencial": true}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "tomate", "quantidade": "2 unidades", "essencial": false}, {"ingrediente": "milho", "quantidade": "1 lata", "essencial": false}, {"ingrediente": "requeijao", "quantidade": "2 colheres de sopa", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "azeite", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe o frango em água com sal e desfie.", "Refogue cebola, alho e tomate no azeite.", "Junte o frango e o milho e cozinhe 5 minutos.", "Desligue, misture o requeijão e o cheiro-verde. Serve como prato ou recheio."], "tempo": 35, "porcoes": 4, "dificuldade": "fácil", "tags": ["sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 280, "saudavel": true}, {"id": "canja", "nome": "Canja de galinha", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "frango", "quantidade": "400 g", "essencial": true}, {"ingrediente": "arroz", "quantidade": "1/2 xícara", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "batata", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "cebola", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "alho", "quantidade": "2 dentes", "essencial": false}, {"ingrediente": "cheiro verde", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "agua", "quantidade": "1,5 litro", "essencial": true}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe o frango na água com cebola, alho e sal por 20 minutos; retire e desfie.", "No mesmo caldo, cozinhe o arroz, a cenoura e a batata em cubos.", "Volte o frango à panela e finalize com cheiro-verde."], "tempo": 45, "porcoes": 4, "dificuldade": "fácil", "tags": ["sem lactose", "sem glúten", "baixo açúcar", "rica em proteína"], "calorias": 260, "saudavel": true}, {"id": "iogurte-com-frutas", "nome": "Iogurte com frutas e aveia", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "iogurte", "quantidade": "1 pote", "essencial": true}, {"ingrediente": "banana", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "morango", "quantidade": "5 unidades", "essencial": false}, {"ingrediente": "aveia", "quantidade": "2 colheres de sopa", "essencial": false}, {"ingrediente": "mel", "quantidade": "1 colher de chá", "essencial": false}], "preparo": ["Coloque o iogurte numa tigela.", "Cubra com as frutas picadas e a aveia.", "Finalize com mel, se quiser."], "tempo": 5, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 220, "saudavel": true}, {"id": "salada-de-frutas", "nome": "Salada de frutas", "refeicao": "Sobremesa", "ingredientes": [{"ingrediente": "banana", "quantidade": "2 unidades", "essencial": true}, {"ingrediente": "maca", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "laranja", "quantidade": "2 unidades", "essencial": false}, {"ingrediente": "mamao", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "manga", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "morango", "quantidade": "1 xícara", "essencial": false}], "preparo": ["Pique as frutas em cubos.", "Esprema o suco das laranjas por cima, para não escurecer.", "Sirva gelada no mesmo dia."], "tempo": 15, "porcoes": 4, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar", "rápida"], "calorias": 120, "saudavel": true}, {"id": "pao-de-queijo-de-frigideira", "nome": "Pão de queijo de frigideira", "refeicao": "Café da manhã", "ingredientes": [{"ingrediente": "ovo", "quantidade": "1 unidade", "essencial": true}, {"ingrediente": "tapioca", "quantidade": "2 colheres de sopa", "essencial": true}, {"ingrediente": "queijo", "quantidade": "2 colheres de sopa ralado", "essencial": true}, {"ingrediente": "requeijao", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "sal", "quantidade": "uma pitada", "essencial": true}], "preparo": ["Misture todos os ingredientes até formar uma massa.", "Despeje em frigideira antiaderente e tampe.", "Doure dos dois lados em fogo baixo."], "tempo": 10, "porcoes": 1, "dificuldade": "fácil", "tags": ["vegetariana", "sem glúten", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 280, "saudavel": false}, {"id": "bolo-de-banana-e-aveia", "nome": "Bolo de banana e aveia sem açúcar", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "banana", "quantidade": "4 unidades maduras", "essencial": true}, {"ingrediente": "ovo", "quantidade": "3 unidades", "essencial": true}, {"ingrediente": "aveia", "quantidade": "2 xícaras", "essencial": true}, {"ingrediente": "oleo", "quantidade": "1/4 xícara", "essencial": true}, {"ingrediente": "fermento", "quantidade": "1 colher de sopa", "essencial": true}, {"ingrediente": "canela", "quantidade": "1 colher de chá", "essencial": false}], "preparo": ["Bata as bananas, os ovos e o óleo no liquidificador.", "Misture a aveia, a canela e por último o fermento.", "Asse em forma untada a 180 °C por cerca de 35 minutos."], "tempo": 45, "porcoes": 8, "dificuldade": "fácil", "tags": ["vegetariana", "sem lactose", "baixo açúcar"], "calorias": 170, "saudavel": true}, {"id": "pure-de-batata", "nome": "Purê de batata", "refeicao": "Almoço e jantar", "ingredientes": [{"ingrediente": "batata", "quantidade": "500 g", "essencial": true}, {"ingrediente": "leite", "quantidade": "1/2 xícara", "essencial": false}, {"ingrediente": "manteiga", "quantidade": "1 colher de sopa", "essencial": false}, {"ingrediente": "sal", "quantidade": "a gosto", "essencial": true}], "preparo": ["Cozinhe as batatas descascadas em água com sal até ficarem bem macias.", "Amasse ainda quentes.", "Misture o leite e a manteiga aos poucos até ficar cremoso."], "tempo": 30, "porcoes": 3, "dificuldade": "fácil", "tags": ["vegetariana", "vegana", "sem lactose", "sem glúten", "baixo açúcar"], "calorias": 190, "saudavel": true}, {"id": "cachorro-quente", "nome": "Cachorro-quente caseiro", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "pao", "quantidade": "4 unidades", "essencial": true}, {"ingrediente": "salsicha", "quantidade": "4 unidades", "essencial": true}, {"ingrediente": "molho de tomate", "quantidade": "1 sachê", "essencial": true}, {"ingrediente": "cebola", "quantidade": "1/2 unidade", "essencial": false}, {"ingrediente": "tomate", "quantidade": "1 unidade", "essencial": false}, {"ingrediente": "milho", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "ketchup", "quantidade": "a gosto", "essencial": false}, {"ingrediente": "mostarda", "quantidade": "a gosto", "essencial": false}], "preparo": ["Cozinhe as salsichas no molho de tomate com cebola e tomate picados por 10 minutos.", "Abra os pães e recheie com a salsicha e o molho.", "Finalize com milho, ketchup e mostarda."], "tempo": 20, "porcoes": 4, "dificuldade": "fácil", "tags": ["sem lactose", "rica em proteína", "rápida"], "calorias": 350, "saudavel": false}, {"id": "sanduiche-natural", "nome": "Sanduíche natural de frango", "refeicao": "Lanche", "ingredientes": [{"ingrediente": "pao", "quantidade": "4 fatias integrais", "essencial": true}, {"ingrediente": "frango", "quantidade": "150 g cozido e desfiado", "essencial": true}, {"ingrediente": "cenoura", "quantidade": "1 unidade ralada", "essencial": false}, {"ingrediente": "alface", "quantidade": "algumas folhas", "essencial": false}, {"ingrediente": "tomate", "quantidade": "fatias", "essencial": false}, {"ingrediente": "requeijao", "quantidade": "2 colheres de sopa", "essencial": false}, {"ingrediente": "maionese", "quantidade": "1 colher de sopa", "essencial": false}], "preparo": ["Misture o frango com a cenoura e o requeijão (ou a maionese).", "Monte o sanduíche com alface e tomate.", "Se não for comer na hora, guarde na geladeira e consuma no mesmo dia."], "tempo": 15, "porcoes": 2, "dificuldade": "fácil", "tags": ["sem lactose", "baixo açúcar", "rica em proteína", "rápida"], "calorias": 300, "saudavel": true}]};
 /* ======================================================================
    EatWise · protótipo navegável (grupo Seven)
    Tudo aqui é simulado no navegador: sem backend, sem IA real.
@@ -1131,6 +1178,250 @@ EW.inventario = (() => {
 
   return {novoItem, disponiveis};
 })();
+/* ======================================================================
+   Serviço de reconhecimento de texto
+   Entrada: frase livre, ex.: "2 ovos, 3 tomates, meio quilo de frango e queijo".
+   Saída: lista estruturada, ex.:
+     [{nome:'ovos', ingrediente:'ovo', quantidade:2, unidade:'un'}, ...]
+   Passos:
+     1. separar os itens (vírgula, ponto e vírgula, quebra de linha, " e ", "+");
+     2. retirar quantidade (número, fração ou por extenso) e unidade;
+     3. retirar palavras de enchimento ("tenho", "um pouco de", "uns"...);
+     4. normalizar o nome (EW.normalizacao) e juntar itens repetidos.
+   ====================================================================== */
+window.EW = window.EW || {};
+
+EW.texto = (() => {
+  const NUMEROS = {um:1, uma:1, dois:2, duas:2, tres:3, quatro:4, cinco:5, seis:6, sete:7, oito:8, nove:9, dez:10,
+                   onze:11, doze:12, meio:0.5, meia:0.5, duzia:12};
+  // unidade escrita -> unidade padrão
+  const UNIDADES = [
+    [/^(kg|kgs|quilo|quilos|kilo|kilos)$/, 'kg'], [/^(g|gr|grama|gramas)$/, 'g'],
+    [/^(l|lt|litro|litros)$/, 'L'], [/^(ml|mililitro|mililitros)$/, 'ml'],
+    [/^(un|und|unid|unidade|unidades)$/, 'un'], [/^(duzia|duzias)$/, 'dúzia'],
+    [/^(pacote|pacotes|pct)$/, 'pacote'], [/^(lata|latas)$/, 'lata'], [/^(caixa|caixas|cx)$/, 'caixa'],
+    [/^(pote|potes)$/, 'pote'], [/^(vidro|vidros)$/, 'vidro'], [/^(dente|dentes)$/, 'dente'],
+    [/^(maco|macos)$/, 'maço'], [/^(fatia|fatias)$/, 'fatia'], [/^(pedaco|pedacos)$/, 'pedaço'],
+    [/^(xicara|xicaras)$/, 'xícara'], [/^(colher|colheres)$/, 'colher'], [/^(copo|copos)$/, 'copo'],
+    [/^(cabeca|cabecas)$/, 'cabeça'], [/^(bandeja|bandejas)$/, 'bandeja'], [/^(saco|sacos)$/, 'saco']
+  ];
+  const ENCHIMENTO = /^(eu\s+)?(tenho|temos|tem|sobrou|sobraram|comprei|ha|há)\s+|^(um\s+pouco|uns|umas|alguns|algumas|o|a|os|as)\s+(de\s+)?/;
+
+  const semAcento = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  /** Separa a frase em pedaços, um por ingrediente. */
+  function separar(texto){
+    return String(texto || '')
+      .replace(/\([^)]*\)/g, ' ')                        // remove observações entre parênteses
+      .split(/[,;\n+]|\s+e\s+|\s+&\s+/i)
+      .map(t => t.trim()).filter(Boolean);
+  }
+
+  /** Lê "2", "1,5", "1/2", "meio", "uma dúzia" no começo do texto. */
+  function lerQuantidade(palavras){
+    const p0 = semAcento(palavras[0] || '').toLowerCase();
+    let qtd = null, usadas = 0;
+    let m;
+    if ((m = p0.match(/^(\d+)\/(\d+)$/))) { qtd = Number(m[1]) / Number(m[2]); usadas = 1; }
+    else if ((m = p0.match(/^(\d+(?:[.,]\d+)?)([a-z]+)?$/))) {              // "2", "1,5", "500g"
+      qtd = Number(m[1].replace(',', '.')); usadas = 1;
+      if (m[2]) palavras.splice(1, 0, m[2]);                                 // "500g" -> "500" + "g"
+    }
+    else if (NUMEROS[p0] !== undefined) { qtd = NUMEROS[p0]; usadas = 1; }
+    // "uma dúzia de ovos" / "meia dúzia"
+    if (qtd !== null && semAcento(palavras[usadas] || '').toLowerCase() === 'duzia') { qtd = qtd === 1 ? 12 : qtd * 12; usadas++; }
+    return {qtd, usadas};
+  }
+
+  function lerUnidade(palavra){
+    const p = semAcento(palavra || '').toLowerCase();
+    const achada = UNIDADES.find(([re]) => re.test(p));
+    return achada ? achada[1] : null;
+  }
+
+  /** Interpreta um pedaço: "meio quilo de frango" -> {quantidade:0.5, unidade:'kg', nome:'frango'} */
+  function interpretarItem(pedaco){
+    let t = pedaco.trim().replace(/\s+/g, ' ');
+    for (let i = 0; i < 2; i++) t = t.replace(new RegExp(ENCHIMENTO.source, 'i'), '');   // "tenho uns ..."
+    let palavras = t.split(' ');
+    const {qtd, usadas} = lerQuantidade(palavras);
+    palavras = palavras.slice(usadas);
+    let unidade = qtd !== null ? lerUnidade(palavras[0]) : null;
+    if (unidade) palavras = palavras.slice(1);
+    if (/^(de|do|da|dos|das)$/i.test(palavras[0] || '')) palavras = palavras.slice(1);   // "500 g de frango"
+    // quantidade escrita depois: "tomate 3", "ovos x2"
+    let quantidade = qtd;
+    const ult = palavras[palavras.length - 1] || '';
+    if (quantidade === null && /^x?\d+$/i.test(ult)) { quantidade = Number(ult.replace(/x/i, '')); palavras.pop(); }
+    if (quantidade !== null && !unidade) unidade = 'un';
+    if (unidade === 'dúzia') { quantidade = (quantidade || 1) * 12; unidade = 'un'; }
+    const nome = palavras.join(' ').replace(/^[^\p{L}\d]+|[^\p{L}\d]+$/gu, '').trim();
+    const ingrediente = EW.normalizacao.normalizar(nome);
+    return {original: pedaco, nome, ingrediente, quantidade, unidade: unidade || '', conhecido: EW.normalizacao.conhecido(ingrediente)};
+  }
+
+  /** Frase livre -> lista de ingredientes (itens repetidos são somados). */
+  function interpretar(texto){
+    const itens = [];
+    separar(texto).map(interpretarItem).filter(i => i.ingrediente).forEach(i => {
+      const igual = itens.find(x => x.ingrediente === i.ingrediente);
+      if (!igual) itens.push(i);
+      else if (igual.quantidade !== null && i.quantidade !== null && igual.unidade === i.unidade) igual.quantidade += i.quantidade;
+    });
+    return itens;
+  }
+
+  return {interpretar, separar, interpretarItem};
+})();
+/* ======================================================================
+   Serviço de recomendação de receitas (EatWise)
+
+   Entrada
+     - receitas:     base local (data/receitas.json)
+     - disponiveis:  ingredientes que a pessoa tem, com os dias até vencer
+                     (inventário, sem itens vencidos) + os informados por
+                     texto/imagem (sem data, contam como disponíveis)
+     - perfil:       restrições, ingredientes que não gosta e objetivo
+
+   Algoritmo (para cada receita)
+     1. Restrições e preferências
+        - Se um ingrediente ESSENCIAL fere uma restrição ou é algo que a
+          pessoa não gosta, a receita é excluída.
+        - Se um ingrediente OPCIONAL fere, ele é retirado da receita para
+          essa pessoa (ex.: queijo na omelete para quem é sem lactose).
+     2. Cobertura ponderada (0 a 1)
+        - Peso 2 para ingrediente essencial e 1 para opcional.
+        - Itens básicos de despensa (sal, óleo, água...) não entram na conta.
+        - cobertura = pesos dos ingredientes que tenho / pesos de todos.
+     3. Pontuação
+        pontos = 100 × cobertura
+               − 15 por ingrediente essencial que falta
+               + bônus de vencimento: +15 por ingrediente que vence hoje ou
+                 amanhã e +10 por ingrediente que vence em 2 ou 3 dias
+                 (teto de 30; ×1,5 se o objetivo for reduzir desperdício)
+               + 8 se a receita for marcada como saudável
+               + bônus do objetivo do perfil:
+                   "comer mais saudável": +7 se saudável, +3 se baixo açúcar
+                   "refeições rápidas":   +10 até 20 min, +5 até 30 min
+        A pontuação nunca fica negativa.
+     4. Ordenação: maior pontuação; empate -> menos essenciais faltando ->
+        menor tempo de preparo.
+     5. Motivos: frases curtas que explicam a recomendação
+        (ex.: "Usa o leite que vence amanhã").
+   ====================================================================== */
+window.EW = window.EW || {};
+
+EW.recomendacao = (() => {
+  // Grupos de ingredientes usados nas restrições alimentares
+  const CARNES = ['frango', 'carne moida', 'carne', 'peixe', 'atum', 'presunto', 'salsicha'];
+  const ORIGEM_ANIMAL = CARNES.concat(['ovo', 'leite', 'queijo', 'requeijao', 'creme de leite', 'iogurte', 'manteiga', 'leite condensado', 'doce de leite', 'mel', 'maionese']);
+  const LACTOSE = ['leite', 'queijo', 'requeijao', 'creme de leite', 'iogurte', 'manteiga', 'leite condensado', 'doce de leite'];
+  const GLUTEN = ['farinha de trigo', 'macarrao', 'pao', 'aveia'];
+
+  /** Restrições disponíveis no perfil: chave -> {nome, proibidos} */
+  const RESTRICOES = {
+    vegetariano: {nome: 'Vegetariano', proibidos: CARNES},
+    vegano:      {nome: 'Vegano', proibidos: ORIGEM_ANIMAL},
+    sem_lactose: {nome: 'Sem lactose', proibidos: LACTOSE},
+    sem_gluten:  {nome: 'Sem glúten', proibidos: GLUTEN}
+  };
+  const OBJETIVOS = {
+    saudavel:    'Comer mais saudável',
+    rapidas:     'Refeições rápidas',
+    desperdicio: 'Reduzir o desperdício'
+  };
+
+  const PESO_ESSENCIAL = 2, PESO_OPCIONAL = 1;
+  const PENALIDADE_ESSENCIAL = 15;
+  const TETO_VENCIMENTO = 30;
+
+  const ehBasico = k => !!(INGREDIENTES[k] && INGREDIENTES[k].basico);
+  const rotulo = k => EW.normalizacao.rotulo(k).toLowerCase();
+  const quando = d => d <= 0 ? 'vence hoje' : d === 1 ? 'vence amanhã' : `vence em ${d} dias`;
+
+  /** Qual restrição/preferência um ingrediente fere (ou null). */
+  function conflito(ing, perfil){
+    for (const r of perfil.restricoes || []) {
+      if (RESTRICOES[r] && RESTRICOES[r].proibidos.includes(ing)) return RESTRICOES[r].nome.toLowerCase();
+    }
+    if ((perfil.naoGosto || []).includes(ing)) return 'você não gosta';
+    return null;
+  }
+
+  /** Avalia uma receita para a pessoa. Retorna null se a receita for excluída. */
+  function avaliar(receita, disponiveis, perfil){
+    const mapa = new Map(disponiveis.map(d => [d.ingrediente, d]));
+    const objetivo = perfil.objetivo || '';
+
+    // 1. restrições e preferências
+    const removidos = [];
+    const usados = [];
+    for (const i of receita.ingredientes) {
+      const motivo = conflito(i.ingrediente, perfil);
+      if (motivo && i.essencial) return null;                          // exclui a receita
+      if (motivo) { removidos.push({...i, motivo}); continue; }        // retira o opcional
+      usados.push(i);
+    }
+
+    // 2. cobertura ponderada (sem os básicos de despensa)
+    const contaveis = usados.filter(i => !ehBasico(i.ingrediente));
+    let total = 0, tenhoPeso = 0;
+    const tenho = [], falta = [], basicos = usados.filter(i => ehBasico(i.ingrediente));
+    for (const i of contaveis) {
+      const peso = i.essencial ? PESO_ESSENCIAL : PESO_OPCIONAL;
+      total += peso;
+      const d = mapa.get(i.ingrediente);
+      if (d) { tenhoPeso += peso; tenho.push({...i, restam: d.restam, nomeItem: d.nome}); }
+      else falta.push(i);
+    }
+    const cobertura = total ? tenhoPeso / total : 0;
+    const essenciaisFaltando = falta.filter(i => i.essencial);
+
+    // 3. pontuação
+    let pontos = 100 * cobertura - PENALIDADE_ESSENCIAL * essenciaisFaltando.length;
+    const vencendo = tenho.filter(i => Number.isFinite(i.restam) && i.restam >= 0 && i.restam <= 3).sort((a, b) => a.restam - b.restam);
+    let bonusVenc = vencendo.reduce((s, i) => s + (i.restam <= 1 ? 15 : 10), 0);
+    bonusVenc = Math.min(TETO_VENCIMENTO, bonusVenc) * (objetivo === 'desperdicio' ? 1.5 : 1);
+    pontos += bonusVenc;
+    if (receita.saudavel) pontos += 8;
+    if (objetivo === 'saudavel') pontos += (receita.saudavel ? 7 : 0) + (receita.tags.includes('baixo açúcar') ? 3 : 0);
+    if (objetivo === 'rapidas') pontos += receita.tempo <= 20 ? 10 : receita.tempo <= 30 ? 5 : 0;
+    pontos = Math.max(0, Math.round(pontos));
+
+    // 5. motivos (explicação para a pessoa)
+    const motivos = [];
+    vencendo.slice(0, 2).forEach(i => motivos.push(`Usa ${artigo(i.ingrediente)} ${rotulo(i.ingrediente)} que ${quando(i.restam)}`));
+    if (contaveis.length) motivos.push(`Você tem ${tenho.length} de ${contaveis.length} ingredientes`);
+    if (!essenciaisFaltando.length && contaveis.length) motivos.push('Dá para fazer agora, sem comprar nada essencial');
+    if (receita.saudavel) motivos.push('Receita saudável');
+    if (objetivo === 'rapidas' && receita.tempo <= 30) motivos.push(`Pronta em ${receita.tempo} minutos`);
+    (perfil.restricoes || []).forEach(r => { if (RESTRICOES[r]) motivos.push(`Compatível: ${RESTRICOES[r].nome.toLowerCase()}`); });
+
+    return {receita, pontuacao: pontos, cobertura, tenho, falta, essenciaisFaltando, basicos, removidos, vencendo, motivos};
+  }
+
+  // "o leite", "a banana", "os ovos"... (simples: feminino se termina em "a")
+  function artigo(k){
+    const n = rotulo(k);
+    return /a$/.test(n) || ['carne moida', 'farinha de trigo', 'farinha de mandioca', 'manteiga'].includes(k) ? 'a' : 'o';
+  }
+
+  /**
+   * Lista de receitas recomendadas, da mais para a menos indicada.
+   * @param {object} p
+   * @param {Array} p.receitas
+   * @param {Array<{ingrediente:string, restam:number, nome?:string}>} p.disponiveis
+   * @param {{restricoes?:string[], naoGosto?:string[], objetivo?:string}} p.perfil
+   */
+  function recomendar({receitas, disponiveis, perfil}){
+    return receitas
+      .map(r => avaliar(r, disponiveis, perfil || {}))
+      .filter(Boolean)
+      .sort((a, b) => b.pontuacao - a.pontuacao || a.essenciaisFaltando.length - b.essenciaisFaltando.length || a.receita.tempo - b.receita.tempo);
+  }
+
+  return {recomendar, avaliar, RESTRICOES, OBJETIVOS};
+})();
 /* ---------- Utilidades ---------- */
 const $ = (s, el=document) => el.querySelector(s);
 const $$ = (s, el=document) => [...el.querySelectorAll(s)];
@@ -1198,6 +1489,9 @@ function salvarEstado(){
   ALERTS.filter(a => a.lido).forEach(a => ALERTAS_LIDOS.add(a.id));
   EW.armazenamento.gravar('alertasLidos', [...ALERTAS_LIDOS]);
   EW.armazenamento.gravar('usuario', {plano: USER.plano});
+  EW.armazenamento.gravar('informados', INFORMADOS);
+  EW.armazenamento.gravar('perfil', PERFIL);
+  EW.armazenamento.gravar('historico', HISTORICO);
   if (!EW.armazenamento.gravar('inventario', PRODUCTS)) {
     // sem espaço (fotos grandes): guarda o inventário sem as fotos tiradas pelo usuário
     EW.armazenamento.gravar('inventario', PRODUCTS.map(p => Object.assign({}, p, {foto:null})));
@@ -1237,8 +1531,11 @@ document.addEventListener('click', e => {
 
 function render(){
   const h = (location.hash.slice(1) || 'inicio');
-  const [r, p] = h.split('-');
-  route = r; param = p ? Number(p) : null;
+  // "#produto-3" -> rota produto, parâmetro 3; "#receita-omelete-de-legumes" -> rota receita, parâmetro texto
+  const i = h.indexOf('-');
+  route = i < 0 ? h : h.slice(0, i);
+  const p = i < 0 ? null : h.slice(i + 1);
+  param = p === null ? null : /^\d+$/.test(p) ? Number(p) : p;
   closeModal();
   if (PUBLIC.includes(route)) {
     $('#root').innerHTML = route === 'inicio' ? viewLanding() : route === 'login' ? viewLogin() : viewSignup();
@@ -1408,10 +1705,11 @@ function bindPublic(){
    ====================================================================== */
 const NAV = [
   {r:'dashboard', n:'Início', i:'home'},
-  {r:'adicionar', n:'Registrar produto', i:'plus'},
-  {r:'despensa', n:'Minha geladeira', i:'box'},
+  {r:'despensa', n:'Inventário', i:'box'},
+  {r:'adicionar', n:'Adicionar ingredientes', i:'plus'},
+  {r:'receitas', n:'Receitas', i:'book'},
   {r:'alertas', n:'Alertas', i:'bell', badge:true},
-  {r:'prazos', n:'Base de prazos', i:'book'},
+  {r:'prazos', n:'Base de prazos', i:'db'},
   {r:'impacto', n:'Meu impacto', i:'chart'}
 ];
 const unread = () => ALERTS.filter(a => !a.lido).length;
@@ -1493,12 +1791,12 @@ const alertIco = t => ({bad:'alert', today:'clock', warn:'bell', ok:'leaf'}[t]);
 function updateBadges(){
   const n = unread();
   $('#notif-dot').hidden = n === 0;
-  const navRoute = route === 'produto' ? 'despensa' : route;
+  const navRoute = route === 'produto' ? 'despensa' : route === 'receita' ? 'receitas' : route;
   $('#side-nav').innerHTML = `<span class="nav-label">Menu</span>` + NAV.map(x =>
     `<a href="#${x.r}" data-go="${x.r}" class="${navRoute===x.r?'active':''}" ${navRoute===x.r?'aria-current="page"':''}>${ic(x.i)} ${x.n}${x.badge && n ? `<span class="badge">${n}</span>` : ''}</a>`).join('') +
     `<span class="nav-label" style="margin-top:10px">Conta</span>
      <a href="#perfil" data-go="perfil" class="${navRoute==='perfil'?'active':''}">${ic('user')} Perfil e configurações</a>`;
-  const bn = [['dashboard','Início','home'],['despensa','Geladeira','box'],['adicionar','Registrar','plus'],['alertas','Alertas','bell'],['perfil','Perfil','user']];
+  const bn = [['dashboard','Início','home'],['despensa','Inventário','box'],['adicionar','Adicionar','plus'],['receitas','Receitas','book'],['perfil','Perfil','user']];
   $('#bottom-nav').innerHTML = bn.map(([r,n,i]) => r === 'adicionar'
     ? `<a href="#adicionar" data-go="adicionar" class="plus ${navRoute===r?'active':''}"><span class="p">${ic('plus')}</span>${n}</a>`
     : `<a href="#${r}" data-go="${r}" class="${navRoute===r?'active':''}">${ic(i)}${n}</a>`).join('');
@@ -1509,11 +1807,11 @@ function renderView(){
   salvarEstado();
   ALERTS = gerarAlertas();
   bindShell();
-  const views = {dashboard:viewDashboard, adicionar:viewAdd, despensa:viewDespensa, produto:viewProduto, alertas:viewAlertas, prazos:viewPrazos, impacto:viewImpacto, perfil:viewPerfil};
+  const views = {dashboard:viewDashboard, adicionar:viewAdd, despensa:viewDespensa, produto:viewProduto, receitas:viewReceitas, receita:viewReceita, alertas:viewAlertas, prazos:viewPrazos, impacto:viewImpacto, perfil:viewPerfil};
   const fn = views[route] || viewDashboard;
   $('#view').innerHTML = fn();
   updateBadges();
-  const binders = {dashboard:bindDashboard, adicionar:bindAdd, despensa:bindDespensa, produto:bindProduto, alertas:bindAlertas, prazos:bindPrazos, perfil:bindPerfil, impacto:bindImpacto};
+  const binders = {dashboard:bindDashboard, adicionar:bindAdd, despensa:bindDespensa, produto:bindProduto, receitas:bindReceitas, receita:bindReceita, alertas:bindAlertas, prazos:bindPrazos, perfil:bindPerfil, impacto:bindImpacto};
   binders[route] && binders[route]();
 }
 
@@ -1728,7 +2026,7 @@ function usePhoto(dataUrl){
   if (document.getElementById('root')) document.getElementById('root').scrollTop = 0; else window.scrollTo(0, 0);
 }
 
-function viewAdd(){
+function viewAddEmbalagem(){
   const s = addState;
   const m = (k, sub) => `<button class="method" role="tab" data-method="${k}" aria-selected="${s.method===k}"><span class="ico">${ic(METHODS[k].i,'lg')}</span>${METHODS[k].n}<small>${sub}</small></button>`;
   let panel = '';
@@ -1794,7 +2092,6 @@ function viewAdd(){
   const stageIdx = s.stage === 'input' ? 0 : s.stage === 'processing' ? 1 : 3;
   const flow = [['Registro','Foto, texto ou áudio'],['IA de reconhecimento','Identifica produto e marca'],['Base de prazos','Prazo por categoria'],['Cálculo do prazo','Nova data-limite'],['Alerta ao usuário','Aviso antes de vencer']];
   return `
-  <div class="page-head"><div><button class="back-link" data-go="dashboard">${ic('left','sm')} Início</button><h1 style="margin-top:8px">Registrar produto aberto</h1><p>Escolha como prefere registrar. O EatWise cuida do resto.</p></div></div>
   <div class="add-grid">
     <article class="card" style="display:grid;gap:18px">
       <div class="method-tabs" role="tablist" aria-label="Forma de registro">${m('foto','Pelo rótulo')}${m('texto','Digitando')}${m('audio','Falando')}</div>
@@ -1813,7 +2110,7 @@ function viewAdd(){
   </div>`;
 }
 
-function bindAdd(){
+function bindAddEmbalagem(){
   $$('[data-method]').forEach(b => b.onclick = () => { addState = {method:b.dataset.method, stage:'input', pick:null, q:''}; renderView(); });
   const s = addState;
   if (s.stage === 'input' && s.method === 'foto') {
@@ -1903,6 +2200,353 @@ function bindAdd(){
 }
 function startProcessing(k){ addState.pick = k; addState.stage = 'processing'; renderView(); $('#root').scrollTop = 0; }
 
+/* ---------- Adicionar ingredientes: texto, foto dos alimentos e produto embalado ---------- */
+let addMode = 'texto';
+let txtState = {texto: '', itens: null};
+// ingredientes informados por texto/imagem para a recomendação (sem precisar entrar no inventário)
+let INFORMADOS = EW.armazenamento.ler('informados', []);
+
+const UNIDADES_CONF = ['', 'un', 'g', 'kg', 'ml', 'L', 'pacote', 'lata', 'caixa', 'pote', 'vidro', 'dente', 'maço', 'fatia', 'xícara', 'colher', 'cabeça', 'bandeja'];
+const EXEMPLOS_TEXTO = ['2 ovos, tomate, arroz e queijo', 'meio quilo de frango, batata, cenoura e cebola', 'banana, aveia, leite e mel'];
+
+function viewAdd(){
+  const modo = (k, n, i) => `<button role="tab" data-mode="${k}" aria-selected="${addMode === k}">${ic(i, 'sm')} ${n}</button>`;
+  const corpo = addMode === 'texto' ? viewAddTexto() : addMode === 'imagem' ? viewAddImagem() : viewAddEmbalagem();
+  return `
+  <div class="page-head"><div><button class="back-link" data-go="dashboard">${ic('left','sm')} Início</button>
+    <h1 style="margin-top:8px">Adicionar ingredientes</h1>
+    <p>Conte o que você tem em casa escrevendo, mostre numa foto ou registre um produto embalado que acabou de abrir.</p></div></div>
+  <div class="tabs" role="tablist" aria-label="Como adicionar" style="justify-self:start">
+    ${modo('texto', 'Escrever', 'type')}${modo('imagem', 'Foto dos alimentos', 'camera')}${modo('embalagem', 'Produto embalado', 'box')}
+  </div>
+  ${corpo}`;
+}
+
+function bindAdd(){
+  $$('[data-mode]').forEach(b => b.onclick = () => { addMode = b.dataset.mode; renderView(); });
+  if (addMode === 'texto') bindAddTexto();
+  else if (addMode === 'imagem') bindAddImagem();
+  else bindAddEmbalagem();
+}
+
+/* ---------- Escrever ---------- */
+function viewAddTexto(){
+  return `
+  <article class="card" style="display:grid;gap:14px">
+    <div class="field"><label for="tx-in" style="font-size:1rem">O que você tem em casa?</label>
+      <textarea class="input" id="tx-in" rows="3" placeholder="Ex.: 2 ovos, 3 tomates, arroz, meio quilo de frango e queijo">${esc(txtState.texto)}</textarea>
+      <small class="muted">Separe por vírgula ou “e”. Pode escrever quantidades como “meio quilo”, “uma dúzia” ou “2 latas”.</small></div>
+    <div class="chips" aria-label="Exemplos"><span class="muted" style="font-size:.85rem;font-weight:700;align-self:center">Exemplos:</span>
+      ${EXEMPLOS_TEXTO.map((e, i) => `<button class="chip" type="button" data-ex="${i}">${esc(e)}</button>`).join('')}</div>
+    <div class="actions"><button class="btn btn-primary" id="tx-go">${ic('spark','sm')} Reconhecer ingredientes</button></div>
+  </article>
+  ${txtState.itens ? viewConfirmacao(txtState.itens) : ''}`;
+}
+function bindAddTexto(){
+  const campo = $('#tx-in');
+  campo.addEventListener('input', () => txtState.texto = campo.value);
+  $$('[data-ex]').forEach(c => c.onclick = () => { campo.value = txtState.texto = EXEMPLOS_TEXTO[c.dataset.ex]; campo.focus(); });
+  $('#tx-go').onclick = () => {
+    const itens = EW.texto.interpretar(campo.value);
+    if (!itens.length) { toast('Escreva pelo menos um ingrediente, por exemplo “tomate e arroz”.', 'info'); campo.focus(); return; }
+    txtState.itens = itens;
+    renderView();
+    $('#confirm') && $('#confirm').scrollIntoView({behavior: 'smooth', block: 'start'});
+  };
+  if (txtState.itens) bindConfirmacao(txtState.itens, 'texto', () => { txtState = {texto: '', itens: null}; });
+}
+
+/* ---------- Confirmação (usada por texto e por imagem) ---------- */
+function dicaIngrediente(item){
+  if (!item.ingrediente) return '<span style="color:var(--terra)">escreva o nome</span>';
+  const base = INGREDIENTES[item.ingrediente];
+  return `conta como <strong>${esc(EW.normalizacao.rotulo(item.ingrediente))}</strong>` +
+    (base ? (base.basico ? ' · item básico de despensa' : '') : ' · alimento novo (vale para receitas que o usam)');
+}
+function viewConfirmacao(itens, titulo = 'Confira os ingredientes'){
+  return `
+  <article class="card" id="confirm" style="display:grid;gap:14px">
+    <div><h2>${titulo}</h2><p class="muted" style="margin-top:4px">Reconhecemos ${itens.length} ${itens.length === 1 ? 'item' : 'itens'}. Corrija o nome ou a quantidade e remova o que não estiver certo.</p></div>
+    <ul class="confirm-list">
+      ${itens.map((it, i) => `<li class="crow">
+        ${foodTile('ing:' + it.ingrediente)}
+        <div class="cname"><input class="input" id="c-nome-${i}" data-i="${i}" data-f="nome" value="${esc(it.nome)}" aria-label="Nome do ingrediente ${i + 1}">
+          <small class="muted" id="c-dica-${i}">${dicaIngrediente(it)}${it.confianca ? ` · ${it.confianca}% de confiança` : ''}</small></div>
+        <input class="input cqty" id="c-q-${i}" data-i="${i}" data-f="quantidade" type="number" min="0" step="any" inputmode="decimal" value="${it.quantidade ?? ''}" placeholder="Qtd." aria-label="Quantidade">
+        <select class="select cun" id="c-u-${i}" data-i="${i}" data-f="unidade" aria-label="Unidade">${UNIDADES_CONF.map(u => `<option value="${u}" ${u === it.unidade ? 'selected' : ''}>${u || '—'}</option>`).join('')}</select>
+        <button class="icon-btn" type="button" data-rm="${i}" aria-label="Remover ${esc(it.nome)}">${ic('x','sm')}</button>
+      </li>`).join('')}
+    </ul>
+    <button class="link-btn" type="button" id="c-add" style="justify-self:start">${ic('plus','sm')} Adicionar outro ingrediente</button>
+    <div class="actions">
+      <button class="btn btn-primary" id="c-receitas">${ic('book','sm')} Ver receitas com estes ingredientes</button>
+      <button class="btn btn-ghost" id="c-inv">${ic('box','sm')} Adicionar ao inventário</button>
+    </div>
+  </article>`;
+}
+function bindConfirmacao(itens, origem, aoConcluir){
+  $$('#confirm [data-f]').forEach(el => el.addEventListener('input', () => {
+    const it = itens[el.dataset.i];
+    if (el.dataset.f === 'nome') { it.nome = el.value; it.ingrediente = EW.normalizacao.normalizar(el.value); $('#c-dica-' + el.dataset.i).innerHTML = dicaIngrediente(it); }
+    else if (el.dataset.f === 'quantidade') it.quantidade = el.value === '' ? null : Number(el.value);
+    else it.unidade = el.value;
+  }));
+  $$('[data-rm]').forEach(b => b.onclick = () => { itens.splice(Number(b.dataset.rm), 1); renderView(); });
+  $('#c-add').onclick = () => { itens.push({nome: '', ingrediente: '', quantidade: null, unidade: ''}); renderView(); $('#c-nome-' + (itens.length - 1)).focus(); };
+  const validos = () => itens.filter(i => i.ingrediente);
+  $('#c-receitas').onclick = () => {
+    const v = validos(); if (!v.length) { toast('Nenhum ingrediente na lista', 'info'); return; }
+    v.forEach(i => { if (!INFORMADOS.includes(i.ingrediente)) INFORMADOS.push(i.ingrediente); });
+    aoConcluir && aoConcluir();
+    go('receitas');
+  };
+  $('#c-inv').onclick = () => {
+    const v = validos(); if (!v.length) { toast('Nenhum ingrediente na lista', 'info'); return; }
+    v.forEach(i => EW.inventario.novoItem({nome: i.nome || EW.normalizacao.rotulo(i.ingrediente), ingrediente: i.ingrediente, quantidade: i.quantidade, unidade: i.unidade, via: origem}));
+    aoConcluir && aoConcluir();
+    despState.tab = 'ativos'; despState.sort = 'recentes';
+    go('despensa');
+    setTimeout(() => toast(`${v.length} ${v.length === 1 ? 'item adicionado' : 'itens adicionados'} ao inventário. Confira as validades estimadas.`), 120);
+  };
+}
+
+/* ---------- Foto dos alimentos (implementada na etapa de imagem) ---------- */
+function viewAddImagem(){
+  return `<article class="card empty"><span class="food">📷</span><h3>Em breve</h3><p>Aqui você vai poder fotografar os alimentos para o app reconhecer os ingredientes.</p></article>`;
+}
+function bindAddImagem(){}
+/* ======================================================================
+   Dados de receitas, perfil e histórico de receitas feitas
+   - As receitas vêm de data/receitas.json. No app de celular e no pacote
+     offline, o JSON já vem embutido (window.EW_RECEITAS); no site, é
+     carregado com fetch.
+   - Perfil e histórico ficam salvos no navegador (armazenamento).
+   ====================================================================== */
+let RECEITAS = (window.EW_RECEITAS && window.EW_RECEITAS.receitas) || [];
+let RECEITAS_ERRO = false;
+
+function carregarReceitas(){
+  if (RECEITAS.length) return Promise.resolve(RECEITAS);
+  return fetch('data/receitas.json')
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(d => { RECEITAS = d.receitas || []; return RECEITAS; })
+    .catch(() => { RECEITAS_ERRO = true; return RECEITAS; });
+}
+
+// Preferências e restrições alimentares (tela Perfil)
+let PERFIL = Object.assign({restricoes: [], naoGosto: [], objetivo: 'desperdicio'}, EW.armazenamento.ler('perfil', {}));
+
+// Receitas feitas: {receita, data, itens:[{id, nome, antesDeVencer}]}
+let HISTORICO = EW.armazenamento.ler('historico', []);
+
+/** Ingredientes disponíveis = inventário (não vencidos) + informados por texto/imagem. */
+function ingredientesDisponiveis(){
+  const lista = EW.inventario.disponiveis();
+  INFORMADOS.forEach(k => { if (!lista.find(d => d.ingrediente === k)) lista.push({ingrediente: k, restam: Infinity, nome: EW.normalizacao.rotulo(k), informado: true}); });
+  return lista;
+}
+
+/** Recomendação com os dados atuais da pessoa. */
+function recomendacoes(){
+  return EW.recomendacao.recomendar({receitas: RECEITAS, disponiveis: ingredientesDisponiveis(), perfil: PERFIL});
+}
+/* ---------- Receitas: lista recomendada e detalhe ---------- */
+let recState = {aba: 'recomendadas', refeicao: 'all', saudavel: false, rapida: false, agora: false, q: ''};
+const AVISO_NUTRI = `<p class="aviso-nutri">${ic('info','sm')} As sugestões são informativas e não substituem a orientação de um nutricionista.</p>`;
+const REFEICOES = ['Café da manhã', 'Almoço e jantar', 'Lanche', 'Sobremesa'];
+
+// "Arte" da receita: ícones dos principais ingredientes
+function arteReceita(receita, cls = ''){
+  const principais = receita.ingredientes.filter(i => i.essencial && INGREDIENTES[i.ingrediente] && !INGREDIENTES[i.ingrediente].basico).slice(0, 3);
+  return `<div class="rart ${cls}" aria-hidden="true">${principais.map(i => `<span>${INGREDIENTES[i.ingrediente].emoji}</span>`).join('')}</div>`;
+}
+
+function carregandoReceitas(){
+  if (RECEITAS_ERRO) return `<div class="card empty"><span class="food">📖</span><h3>Não foi possível carregar as receitas</h3>
+    <p>Abra o EatWise pelo endereço do site ou pelo pacote para baixar (arquivo único). Abrindo os arquivos soltos direto do computador, o navegador bloqueia a leitura do arquivo de receitas.</p></div>`;
+  carregarReceitas().then(() => { if (route === 'receitas' || route === 'receita' || route === 'dashboard') renderView(); });
+  return `<div class="card empty"><div class="spinner" aria-hidden="true"></div><p>Carregando receitas…</p></div>`;
+}
+
+function cardReceita(x){
+  const r = x.receita;
+  const total = x.tenho.length + x.falta.length;
+  return `<button class="rcard" data-go="receita-${r.id}">
+    ${arteReceita(r)}
+    <div class="rbody">
+      <div class="rtop"><strong>${esc(r.nome)}</strong><span class="score" title="Pontuação da recomendação">${x.pontuacao} pts</span></div>
+      ${x.motivos[0] ? `<p class="rmotivo">${ic(x.vencendo.length ? 'clock' : 'spark','sm')} ${esc(x.motivos[0])}</p>` : ''}
+      <div class="rmeta"><span>${ic('clock','sm')} ${r.tempo} min</span><span>${r.calorias} kcal/porção</span><span>${x.tenho.length}/${total} ingredientes</span>${r.saudavel ? `<span class="tag" style="background:var(--green-soft);color:var(--green)">${ic('leaf','sm')} saudável</span>` : ''}</div>
+      ${x.essenciaisFaltando.length ? `<small class="rfalta">Falta: ${x.essenciaisFaltando.map(i => esc(EW.normalizacao.rotulo(i.ingrediente).toLowerCase())).join(', ')}</small>` : `<small class="rok">${ic('check','sm')} Você tem todos os essenciais</small>`}
+    </div>
+  </button>`;
+}
+
+function viewReceitas(){
+  if (!RECEITAS.length) return `<div class="page-head"><div><h1>Receitas</h1></div></div>` + carregandoReceitas();
+  const s = recState;
+  const todas = recomendacoes();
+  const disp = ingredientesDisponiveis();
+  const vencendo = disp.filter(d => Number.isFinite(d.restam) && d.restam <= 3).sort((a, b) => a.restam - b.restam);
+  let lista = s.aba === 'recomendadas' ? todas.filter(x => x.tenho.length > 0) : todas.slice().sort((a, b) => a.receita.nome.localeCompare(b.receita.nome));
+  if (s.refeicao !== 'all') lista = lista.filter(x => x.receita.refeicao === s.refeicao);
+  if (s.saudavel) lista = lista.filter(x => x.receita.saudavel);
+  if (s.rapida) lista = lista.filter(x => x.receita.tempo <= 20);
+  if (s.agora) lista = lista.filter(x => !x.essenciaisFaltando.length);
+  if (s.q) { const q = EW.normalizacao.limpar(s.q); lista = lista.filter(x => EW.normalizacao.limpar(x.receita.nome + ' ' + x.receita.ingredientes.map(i => i.ingrediente).join(' ')).includes(q)); }
+  const excluidas = RECEITAS.length - todas.length;
+  const toggle = (k, n) => `<button class="chip" data-tg="${k}" aria-pressed="${s[k]}">${n}</button>`;
+  return `
+  <div class="page-head">
+    <div><h1>O que cozinhar hoje?</h1><p>Receitas ordenadas pelo que você já tem em casa, dando prioridade ao que vence primeiro.</p></div>
+    <button class="btn btn-ghost" data-go="adicionar">${ic('plus','sm')} Informar ingredientes</button>
+  </div>
+  <article class="card" style="display:grid;gap:10px">
+    <p><strong>${disp.length} ingredientes disponíveis</strong>${vencendo.length ? ` · <span style="color:var(--terra);font-weight:700">${vencendo.length} vencendo em até 3 dias:</span> ${vencendo.slice(0, 5).map(v => esc(v.nome)).join(', ')}` : ''}</p>
+    ${INFORMADOS.length ? `<div class="chips" aria-label="Ingredientes informados"><span class="muted" style="font-size:.85rem;font-weight:700;align-self:center">Também considerando:</span>${INFORMADOS.map(k => `<button class="chip" data-inf="${esc(k)}" aria-label="Retirar ${esc(EW.normalizacao.rotulo(k))}">${esc(EW.normalizacao.rotulo(k))} ${ic('x','sm')}</button>`).join('')}<button class="link-btn" id="inf-limpar">limpar</button></div>` : ''}
+    ${PERFIL.restricoes.length || PERFIL.naoGosto.length ? `<p class="muted" style="font-size:.88rem">Seguindo seu perfil: ${PERFIL.restricoes.map(r => EW.recomendacao.RESTRICOES[r].nome.toLowerCase()).concat(PERFIL.naoGosto.length ? ['sem ' + PERFIL.naoGosto.map(k => EW.normalizacao.rotulo(k).toLowerCase()).join(', ')] : []).join(' · ')}${excluidas ? ` (${excluidas} receitas ocultas)` : ''}. <button class="link-btn" data-go="perfil">Alterar</button></p>` : ''}
+  </article>
+  <div class="toolbar">
+    <div class="tabs" role="tablist">
+      <button role="tab" data-raba="recomendadas" aria-selected="${s.aba === 'recomendadas'}">Recomendadas</button>
+      <button role="tab" data-raba="todas" aria-selected="${s.aba === 'todas'}">Todas <span class="count num">${todas.length}</span></button>
+    </div>
+    <div class="input-icon" style="flex:1;max-width:300px;min-width:0">${ic('search','sm')}<input class="input" id="r-q" placeholder="Buscar receita ou ingrediente" value="${esc(s.q)}" style="border-radius:999px"></div>
+  </div>
+  <div class="chips scroll" aria-label="Filtros">
+    <button class="chip" data-ref="all" aria-pressed="${s.refeicao === 'all'}">Todas as refeições</button>
+    ${REFEICOES.map(r => `<button class="chip" data-ref="${r}" aria-pressed="${s.refeicao === r}">${r}</button>`).join('')}
+    ${toggle('agora', 'Posso fazer agora')}${toggle('saudavel', 'Só saudáveis')}${toggle('rapida', 'Até 20 min')}
+  </div>
+  ${lista.length ? `<div class="rgrid">${lista.map(cardReceita).join('')}</div>` :
+    `<div class="card empty"><span class="food">🍳</span><h3>Nenhuma receita com esses filtros</h3><p>Tente tirar um filtro ou informe mais ingredientes que você tem em casa.</p></div>`}
+  ${AVISO_NUTRI}`;
+}
+
+function bindReceitas(){
+  if (!RECEITAS.length) return;
+  $$('[data-raba]').forEach(b => b.onclick = () => { recState.aba = b.dataset.raba; renderView(); });
+  $$('[data-ref]').forEach(b => b.onclick = () => { recState.refeicao = b.dataset.ref; renderView(); });
+  $$('[data-tg]').forEach(b => b.onclick = () => { recState[b.dataset.tg] = !recState[b.dataset.tg]; renderView(); });
+  $$('[data-inf]').forEach(b => b.onclick = () => { INFORMADOS = INFORMADOS.filter(k => k !== b.dataset.inf); renderView(); });
+  $('#inf-limpar') && ($('#inf-limpar').onclick = () => { INFORMADOS = []; renderView(); });
+  const q = $('#r-q');
+  q.addEventListener('input', () => { recState.q = q.value; const pos = q.selectionStart; renderView(); const n = $('#r-q'); n.focus(); n.setSelectionRange(pos, pos); });
+}
+
+/* ---------- Detalhe da receita ---------- */
+function viewReceita(){
+  if (!RECEITAS.length) return carregandoReceitas();
+  const receita = RECEITAS.find(r => r.id === param);
+  if (!receita) return `<div class="card empty"><span class="food">🔍</span><h3>Receita não encontrada</h3><button class="btn btn-primary" data-go="receitas">Ver receitas</button></div>`;
+  const disp = ingredientesDisponiveis();
+  let x = EW.recomendacao.avaliar(receita, disp, PERFIL);
+  const bloqueada = !x;
+  if (bloqueada) x = EW.recomendacao.avaliar(receita, disp, {});
+  const st = i => {
+    if (x.removidos.find(r => r.ingrediente === i.ingrediente)) return {cls: 'off', txt: `retirado (${x.removidos.find(r => r.ingrediente === i.ingrediente).motivo})`};
+    if (x.basicos.find(r => r.ingrediente === i.ingrediente)) return {cls: 'basico', txt: 'básico de despensa'};
+    const t = x.tenho.find(r => r.ingrediente === i.ingrediente);
+    if (t) return {cls: 'tem', txt: 'tenho' + (Number.isFinite(t.restam) && t.restam <= 3 ? ` · ${t.restam <= 0 ? 'vence hoje' : t.restam === 1 ? 'vence amanhã' : `vence em ${t.restam} dias`}` : '')};
+    return {cls: i.essencial ? 'falta' : 'falta-op', txt: i.essencial ? 'falta' : 'opcional · não tenho'};
+  };
+  return `
+  <div class="page-head"><div><button class="back-link" data-go="receitas">${ic('left','sm')} Receitas</button></div></div>
+  ${bloqueada ? `<div class="card" style="background:var(--terra-soft);border-color:transparent"><strong>Esta receita não combina com o seu perfil.</strong> Ela tem ingrediente essencial que você marcou como restrição ou que não gosta.</div>` : ''}
+  <div class="detail-grid">
+    <div class="stack">
+      <article class="card" style="display:grid;gap:14px">
+        <div class="rhead">${arteReceita(receita, 'lg')}
+          <div style="min-width:0;display:grid;gap:6px">
+            <p class="eyebrow">${receita.refeicao}</p>
+            <h1 style="font-size:1.7rem">${esc(receita.nome)}</h1>
+            <div class="rmeta"><span>${ic('clock','sm')} ${receita.tempo} min</span><span>${receita.porcoes} ${receita.porcoes === 1 ? 'porção' : 'porções'}</span><span>${receita.dificuldade}</span><span>≈ ${receita.calorias} kcal por porção</span></div>
+            <div class="chips">${receita.saudavel ? `<span class="tag" style="background:var(--green-soft);color:var(--green)">${ic('leaf','sm')} saudável</span>` : ''}${receita.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          </div>
+        </div>
+        ${!bloqueada && x.motivos.length ? `<div class="why"><p class="eyebrow">${ic('spark','sm')} Por que recomendamos</p><ul>${x.motivos.map(m => `<li>${esc(m)}</li>`).join('')}</ul></div>` : ''}
+      </article>
+      <article class="card">
+        <h2 style="margin-bottom:12px">Modo de preparo</h2>
+        <ol class="preparo">${receita.preparo.map(p => `<li>${esc(p)}</li>`).join('')}</ol>
+      </article>
+    </div>
+    <div class="stack">
+      <article class="card">
+        <div class="card-head" style="margin-bottom:10px"><h2>Ingredientes</h2><span class="muted" style="font-size:.85rem">${x.tenho.length} de ${x.tenho.length + x.falta.length} em casa</span></div>
+        <ul class="ilist">${receita.ingredientes.map(i => { const s = st(i); return `<li class="${s.cls}">
+          <span class="ist" aria-hidden="true">${s.cls === 'tem' ? ic('check','sm') : s.cls === 'falta' ? ic('x','sm') : '•'}</span>
+          <span><strong>${esc(EW.normalizacao.rotulo(i.ingrediente))}</strong> <span class="muted">${esc(i.quantidade || '')}</span>${i.essencial ? '' : ' <span class="muted">(opcional)</span>'}<br><small>${s.txt}</small></span></li>`; }).join('')}</ul>
+      </article>
+      ${bloqueada ? '' : `<article class="card" style="display:grid;gap:10px">
+        <h3>Fez a receita?</h3>
+        <p class="muted" style="font-size:.92rem">Damos baixa nos ingredientes usados no seu inventário. Você pode ajustar o que sobrou.</p>
+        <button class="btn btn-primary btn-block" id="fiz">${ic('check','sm')} Fiz esta receita</button>
+      </article>`}
+      ${AVISO_NUTRI}
+    </div>
+  </div>`;
+}
+
+function bindReceita(){
+  const receita = RECEITAS.find(r => r.id === param);
+  if (!receita || !$('#fiz')) return;
+  $('#fiz').onclick = () => modalFizReceita(receita);
+}
+
+/* ---------- "Fiz esta receita": baixa no inventário ---------- */
+function modalFizReceita(receita){
+  const x = EW.recomendacao.avaliar(receita, ingredientesDisponiveis(), PERFIL) || EW.recomendacao.avaliar(receita, ingredientesDisponiveis(), {});
+  // para cada ingrediente que tenho, o item do inventário que vence primeiro
+  const itens = x.tenho.map(t => active().filter(p => p.ingrediente === t.ingrediente && p.restam >= 0).sort((a, b) => a.restam - b.restam)[0]).filter(Boolean);
+  if (!itens.length) {
+    HISTORICO.push({receita: receita.id, nome: receita.nome, data: iso(TODAY), itens: []});
+    salvarEstado(); toast('Receita registrada! Os ingredientes informados não estavam no inventário.', 'leaf'); return;
+  }
+  // padrão sugerido: "usei tudo" se vence em até 3 dias ou se é 1 unidade ou menos; senão "sobrou"
+  const padrao = itens.map(p => (p.restam <= 3 || (p.quantidade !== null && p.quantidade !== undefined && p.quantidade <= 1 && (p.unidade || 'un') === 'un')) ? 'tudo' : 'sobrou');
+  modal(`
+    <h2>Fiz esta receita</h2>
+    <p class="muted">Para cada ingrediente, diga se usou tudo ou se ainda sobrou.</p>
+    <ul class="baixa">${itens.map((p, i) => `<li>
+      <div style="display:flex;gap:10px;align-items:center">${foodTile(p.k)}<div style="min-width:0"><strong>${esc(p.nome)}</strong><br><small class="muted">${p.restam <= 3 ? `<span style="color:var(--terra);font-weight:700">${restamTxt(p.restam)}</span>` : restamTxt(p.restam)}${p.quantidade ? ` · ${p.quantidade} ${p.unidade}` : ''}</small></div></div>
+      <div class="chips" data-single data-bx="${i}">
+        <button type="button" class="chip" data-v="tudo" aria-pressed="${padrao[i] === 'tudo'}">Usei tudo</button>
+        <button type="button" class="chip" data-v="sobrou" aria-pressed="${padrao[i] === 'sobrou'}">Sobrou</button>
+        <button type="button" class="chip" data-v="nao" aria-pressed="false">Não usei</button>
+      </div>
+      <div class="field" data-sobra="${i}" ${padrao[i] === 'sobrou' ? '' : 'hidden'}><label for="bx-q-${i}">Quanto sobrou${p.unidade ? ` (${p.unidade})` : ''}?</label><input class="input" id="bx-q-${i}" type="number" min="0" step="any" inputmode="decimal" value="${p.quantidade ? Math.round(p.quantidade / 2 * 10) / 10 : ''}" placeholder="opcional"></div>
+    </li>`).join('')}</ul>
+    <div class="modal-actions"><button class="btn btn-ghost" data-close>Cancelar</button><button class="btn btn-primary" id="bx-ok">${ic('check','sm')} Confirmar baixa</button></div>`,
+  m => {
+    bindChips(m);
+    const escolha = padrao.slice();
+    $$('[data-bx]', m).forEach(g => g.addEventListener('pick', e => {
+      const i = Number(g.dataset.bx); escolha[i] = $('[aria-pressed="true"]', g).dataset.v;
+      $(`[data-sobra="${i}"]`, m).hidden = escolha[i] !== 'sobrou';
+    }));
+    $('#bx-ok', m).onclick = () => {
+      let usados = 0, antes = 0;
+      const registro = [];
+      itens.forEach((p, i) => {
+        const raw = PRODUCTS.find(r => r.id === p.id);
+        if (escolha[i] === 'tudo') {
+          raw.estado = 'consumido'; raw.quando = fmt(TODAY); raw.usadoEm = receita.id;
+          usados++; if (p.restam >= 0) antes++;
+          registro.push({id: p.id, nome: p.nome, consumido: true, antesDeVencer: p.restam >= 0});
+        } else if (escolha[i] === 'sobrou') {
+          const q = $('#bx-q-' + i, m).value;
+          if (q !== '') raw.quantidade = Number(q);
+          registro.push({id: p.id, nome: p.nome, consumido: false, sobrou: q === '' ? null : Number(q)});
+        }
+      });
+      HISTORICO.push({receita: receita.id, nome: receita.nome, data: iso(TODAY), itens: registro});
+      closeModal();
+      go('receitas');
+      setTimeout(() => toast(usados ? `Bom apetite! ${antes} ${antes === 1 ? 'item usado' : 'itens usados'} antes de vencer.` : 'Receita registrada. O inventário foi atualizado.', 'leaf'), 120);
+    };
+  });
+}
 /* ---------- Minha geladeira (listagem) ---------- */
 let despState = {tab:'ativos', status:'all', cat:'all', q:'', sort:'limite'};
 function viewDespensa(){
