@@ -31,6 +31,8 @@ const INGREDIENTES = {
   'chuchu':        {nome:'Chuchu', cat:'hort', emoji:'🥒', geladeira:10},
   'pimentao':      {nome:'Pimentão', cat:'hort', emoji:'🫑', geladeira:7},
   'brocolis':      {nome:'Brócolis', cat:'hort', emoji:'🥦', geladeira:5},
+  'couve flor':    {nome:'Couve-flor', cat:'hort', emoji:'🥦', geladeira:7},
+  'cogumelo':      {nome:'Cogumelo', cat:'hort', emoji:'🍄', geladeira:5},
   'couve':         {nome:'Couve', cat:'hort', emoji:'🥬', geladeira:5},
   'alface':        {nome:'Alface', cat:'hort', emoji:'🥬', geladeira:5},
   'espinafre':     {nome:'Espinafre', cat:'hort', emoji:'🥬', geladeira:4},

@@ -108,8 +108,70 @@ function bindConfirmacao(itens, origem, aoConcluir){
   };
 }
 
-/* ---------- Foto dos alimentos (implementada na etapa de imagem) ---------- */
+/* ---------- Foto dos alimentos (reconhecimento por imagem) ---------- */
+let imgState = {etapa: 'escolher', foto: null, itens: null, fonte: null, motivo: '', progresso: ''};
+
 function viewAddImagem(){
-  return `<article class="card empty"><span class="food">📷</span><h3>Em breve</h3><p>Aqui você vai poder fotografar os alimentos para o app reconhecer os ingredientes.</p></article>`;
+  const s = imgState;
+  if (s.etapa === 'analisando') return `
+  <article class="card"><div class="processing">
+    <img class="proc-photo" src="${s.foto}" alt="Foto enviada">
+    <div class="spinner" aria-hidden="true"></div>
+    <strong>Reconhecendo os alimentos…</strong>
+    <p class="muted" id="img-prog">${esc(s.progresso || 'Preparando')}</p>
+  </div></article>`;
+  if (s.etapa === 'resultado') return `
+  <article class="card" style="display:grid;gap:12px">
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <img class="shot" src="${s.foto}" alt="Foto enviada">
+      <div style="flex:1 1 220px;min-width:0">
+        ${s.fonte === 'modelo'
+          ? `<p class="conf">${ic('spark','sm')} Reconhecido por visão computacional no seu aparelho (TensorFlow.js)</p><p class="muted" style="font-size:.88rem">A foto não sai do seu celular ou computador.</p>`
+          : `<p class="conf" style="color:var(--terra)">${ic('info','sm')} Modo simulado</p><p class="muted" style="font-size:.88rem">Não deu para carregar o modelo de reconhecimento (${esc(s.motivo)}). Sugerimos pela cor da foto: confira com atenção.</p>`}
+      </div>
+      <button class="btn btn-ghost btn-sm" id="img-nova">${ic('camera','sm')} Outra foto</button>
+    </div>
+  </article>
+  ${s.itens.length ? viewConfirmacao(s.itens, 'Encontramos na foto') : `
+  <article class="card empty" id="confirm"><span class="food">🔍</span><h3>Não reconhecemos alimentos nesta foto</h3>
+    <p>Tente fotografar um alimento por vez, de perto e com boa luz. Ou escreva o que você tem.</p>
+    <div class="actions" style="justify-content:center"><button class="btn btn-primary" id="img-escrever">${ic('type','sm')} Escrever ingredientes</button></div></article>`}`;
+  return `
+  <article class="card" style="display:grid;gap:16px">
+    <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+      <span class="food lg c-hor" aria-hidden="true">🥕</span>
+      <div style="flex:1 1 260px;min-width:0;display:grid;gap:6px">
+        <h2>Mostre os alimentos numa foto</h2>
+        <p class="muted">Funciona melhor com frutas, legumes e verduras à vista, um ou poucos por foto. Depois você confere e corrige a lista.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <label class="btn btn-primary" for="img-camera">${ic('camera','sm')} Tirar foto</label>
+      <label class="btn btn-ghost" for="img-galeria">${ic('upload','sm')} Escolher da galeria</label>
+    </div>
+    <input type="file" id="img-camera" class="file-hidden" accept="image/*" capture="environment" tabindex="-1">
+    <input type="file" id="img-galeria" class="file-hidden" accept="image/*" tabindex="-1">
+    <p class="muted" style="font-size:.85rem">${ic('info','sm')} Usamos visão computacional no próprio navegador (TensorFlow.js com os modelos COCO-SSD e MobileNet). Na primeira vez, o download dos modelos leva alguns segundos.</p>
+  </article>`;
 }
-function bindAddImagem(){}
+
+function bindAddImagem(){
+  const s = imgState;
+  const analisar = async arquivo => {
+    let foto;
+    try { foto = await fileToDataURL(arquivo); } catch (e) { toast('Não foi possível ler essa imagem. Tente uma foto em JPG ou PNG.', 'info'); return; }
+    imgState = {etapa: 'analisando', foto, itens: null, fonte: null, motivo: '', progresso: 'Preparando'};
+    renderView();
+    const r = await EW.imagem.reconhecer(foto, msg => { imgState.progresso = msg; const el = $('#img-prog'); if (el) el.textContent = msg; });
+    if (imgState.foto !== foto) return;                       // a pessoa trocou de foto no meio
+    imgState.etapa = 'resultado'; imgState.fonte = r.fonte; imgState.motivo = r.motivo || '';
+    imgState.itens = r.itens.map(i => ({nome: EW.normalizacao.rotulo(i.ingrediente), ingrediente: i.ingrediente, quantidade: null, unidade: '', confianca: Math.round(i.confianca * 100)}));
+    if (route === 'adicionar' && addMode === 'imagem') renderView();
+  };
+  ['#img-camera', '#img-galeria'].forEach(id => { const el = $(id); el && (el.onchange = () => el.files && el.files[0] && analisar(el.files[0])); });
+  if (s.etapa === 'resultado') {
+    $('#img-nova').onclick = () => { imgState = {etapa: 'escolher'}; renderView(); };
+    if (s.itens.length) bindConfirmacao(s.itens, 'imagem', () => { imgState = {etapa: 'escolher'}; });
+    else $('#img-escrever').onclick = () => { addMode = 'texto'; renderView(); };
+  }
+}
