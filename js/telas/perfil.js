@@ -1,17 +1,16 @@
 /* ---------- Perfil e configurações ---------- */
-let perfTab = 1;
+let perfTab = 5;
 function viewPerfil(){
   if (param) perfTab = param;
-  const tabs = [[1,'Meus dados'],[2,'Notificações'],[3,'Minha casa'],[4,'Plano']];
+  const tabs = [[5,'Alimentação'],[1,'Meus dados'],[2,'Notificações'],[3,'Minha casa'],[4,'Plano']];
   let body = '';
+  if (perfTab === 5) body = viewPreferencias();
   if (perfTab === 1) body = `
     <form class="form-grid" id="pf-form" novalidate>
       <div class="field"><label for="pf-n">Nome</label><input class="input" id="pf-n" value="${USER.nome}"></div>
       <div class="field"><label for="pf-e">E-mail</label><input class="input" id="pf-e" value="${USER.email}"></div>
       <div class="field"><label for="pf-c">Cidade</label><input class="input" id="pf-c" value="${USER.cidade}"></div>
       <div class="field"><label for="pf-t">Celular</label><input class="input" id="pf-t" value="(19) 99812-4407"></div>
-      <div class="field full"><label>Restrições e preferências alimentares</label>
-        <div class="chips" id="pf-pref">${['Sem lactose','Vegetariano','Sem glúten','Low carb','Sem restrições'].map((x,i) => `<button type="button" class="chip" aria-pressed="${i===4}">${x}</button>`).join('')}</div></div>
       <div class="actions full"><button class="btn btn-primary" type="submit">Salvar alterações</button></div>
     </form>`;
   if (perfTab === 2) body = `
@@ -53,8 +52,8 @@ function viewPerfil(){
 }
 function bindPerfil(){
   $$('[data-ptab]').forEach(b => b.onclick = () => go('perfil-' + b.dataset.ptab));
+  if (perfTab === 5) bindPreferencias();
   if ($('#pf-form')) {
-    $$('#pf-pref .chip').forEach(c => c.onclick = () => c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'));
     $('#pf-form').addEventListener('submit', e => { e.preventDefault(); toast('Perfil atualizado com sucesso'); });
   }
   $$('.switch input').forEach(s => s.onchange = () => toast(`${s.getAttribute('aria-label')} ${s.checked ? 'ativado' : 'desativado'}`, 'bell'));
@@ -79,3 +78,53 @@ function bindPerfil(){
     m => $('#pm-ok', m).onclick = () => { USER.plano = 'Premium (teste)'; closeModal(); renderView(); toast('Teste grátis de 7 dias ativado. Aproveite o cadastro por áudio!', 'star'); }));
 }
 
+
+/* ---------- Preferências e restrições alimentares (influenciam as receitas) ---------- */
+function viewPreferencias(){
+  const R = EW.recomendacao.RESTRICOES, O = EW.recomendacao.OBJETIVOS;
+  const visiveis = RECEITAS.length ? recomendacoes().length : null;
+  return `
+    <div style="display:grid;gap:22px">
+      <section style="display:grid;gap:10px">
+        <h3>Restrições alimentares</h3>
+        <p class="muted" style="font-size:.9rem">Receitas com ingrediente essencial proibido não aparecem. Ingredientes opcionais proibidos são retirados da receita.</p>
+        <div class="chips">${Object.entries(R).map(([k, r]) => `<button type="button" class="chip" data-restr="${k}" aria-pressed="${PERFIL.restricoes.includes(k)}">${r.nome}</button>`).join('')}</div>
+      </section>
+      <section style="display:grid;gap:10px">
+        <h3>Ingredientes que você não gosta</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input class="input" id="ng-in" list="ng-lista" placeholder="Ex.: berinjela" style="flex:1 1 200px;width:auto" aria-label="Ingrediente que você não gosta">
+          <datalist id="ng-lista">${Object.values(INGREDIENTES).filter(i => !i.basico).map(i => `<option value="${i.nome}">`).join('')}</datalist>
+          <button class="btn btn-ghost" type="button" id="ng-add">${ic('plus','sm')} Adicionar</button>
+        </div>
+        <div class="chips">${PERFIL.naoGosto.length ? PERFIL.naoGosto.map(k => `<button type="button" class="chip" data-ng="${esc(k)}" aria-label="Retirar ${esc(EW.normalizacao.rotulo(k))}">${esc(EW.normalizacao.rotulo(k))} ${ic('x','sm')}</button>`).join('') : '<span class="muted" style="font-size:.9rem">Nenhum por enquanto.</span>'}</div>
+      </section>
+      <section style="display:grid;gap:10px">
+        <h3>Seu objetivo</h3>
+        <div class="chips" data-single id="obj">${Object.entries(O).map(([k, n]) => `<button type="button" class="chip" data-v="${k}" aria-pressed="${PERFIL.objetivo === k}">${n}</button>`).join('')}</div>
+        <p class="muted" style="font-size:.9rem">${{saudavel: 'Receitas saudáveis e com pouco açúcar sobem na lista.', rapidas: 'Receitas de até 20 ou 30 minutos sobem na lista.', desperdicio: 'Receitas que usam o que vence primeiro ganham ainda mais prioridade.'}[PERFIL.objetivo] || ''}</p>
+      </section>
+      ${visiveis !== null ? `<p class="tag" style="justify-self:start;background:var(--green-soft);color:var(--green)">${ic('book','sm')} Com essas escolhas, ${visiveis} de ${RECEITAS.length} receitas ficam disponíveis</p>` : ''}
+      ${AVISO_NUTRI}
+    </div>`;
+}
+function bindPreferencias(){
+  if (!RECEITAS.length) carregarReceitas().then(() => route === 'perfil' && renderView());
+  const salvou = () => { renderView(); toast('Preferências salvas. As receitas já foram atualizadas.', 'check'); };
+  $$('[data-restr]').forEach(b => b.onclick = () => {
+    const k = b.dataset.restr;
+    PERFIL.restricoes = PERFIL.restricoes.includes(k) ? PERFIL.restricoes.filter(x => x !== k) : PERFIL.restricoes.concat(k);
+    salvou();
+  });
+  const add = () => {
+    const k = EW.normalizacao.normalizar($('#ng-in').value);
+    if (!k) { $('#ng-in').focus(); return; }
+    if (!PERFIL.naoGosto.includes(k)) PERFIL.naoGosto = PERFIL.naoGosto.concat(k);
+    salvou();
+  };
+  $('#ng-add').onclick = add;
+  $('#ng-in').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); add(); } });
+  $$('[data-ng]').forEach(b => b.onclick = () => { PERFIL.naoGosto = PERFIL.naoGosto.filter(x => x !== b.dataset.ng); salvou(); });
+  bindChips($('#preferencias') || document);
+  $('#obj').addEventListener('pick', () => { PERFIL.objetivo = $('#obj [aria-pressed="true"]').dataset.v; salvou(); });
+}

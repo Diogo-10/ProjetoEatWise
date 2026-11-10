@@ -325,6 +325,14 @@ textarea.input{resize:vertical;min-height:84px;line-height:1.5}
 .baixa li{display:grid;gap:8px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .baixa li:last-child{border-bottom:0}
 
+/* Atalhos do painel */
+.atalhos{display:grid;gap:10px}
+.atalho{display:flex;gap:12px;align-items:center;text-align:left;padding:12px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);width:100%}
+.atalho:hover{background:var(--bg);border-color:var(--sand-2)}
+.atalho .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none}
+.atalho strong{display:block}
+.atalho small{color:var(--muted);font-size:.84rem}
+
 /* Despensa */
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 .tabs{display:inline-flex;background:var(--sand);border-radius:var(--r-pill);padding:4px;gap:2px;flex-wrap:wrap}
