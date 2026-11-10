@@ -36,16 +36,16 @@ function viewLanding(){
   <main>
     <section class="wrap hero">
       <div>
-        <p class="eyebrow">Controle da validade pós-abertura</p>
-        <h1 style="margin-top:12px">Abriu o pote? O EatWise lembra <em>até quando</em> dá pra consumir.</h1>
-        <p class="lead">A validade impressa vale para o produto fechado. Depois de aberto, começa um novo prazo que ninguém guarda de cabeça. Registre por foto, texto ou áudio e receba um alerta antes de vencer.</p>
+        <p class="eyebrow">Assistente digital de cozinha</p>
+        <h1 style="margin-top:12px">O que cozinhar hoje <em>com o que você já tem</em> em casa?</h1>
+        <p class="lead">O EatWise acompanha a validade dos seus alimentos, inclusive depois de abertos, e sugere receitas simples e saudáveis que usam primeiro o que vence antes. Conte o que tem escrevendo, numa foto ou pelo código de barras.</p>
         <div class="hero-ctas">
           <button class="btn btn-primary" data-go="cadastro">Começar agora ${ic('arrow')}</button>
           <button class="btn btn-ghost" data-go="login">Já tenho conta</button>
         </div>
         <div class="hero-proof">
           <span>${ic('check','sm')} Grátis para começar</span>
-          <span>${ic('check','sm')} Prazos baseados no Guia nº 16 da ANVISA</span>
+          <span>${ic('check','sm')} 36 receitas do dia a dia</span><span>${ic('check','sm')} Prazos com fonte</span>
         </div>
       </div>
       <div class="hero-art">

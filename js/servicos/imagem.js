@@ -55,6 +55,7 @@ EW.imagem = (() => {
         progresso && progresso('Baixando o TensorFlow.js');
         if (!window.tf) await script(URLS.tf);
         if (!window.cocoSsd) await script(URLS.coco);
+        if (!window.tf || !window.cocoSsd) throw new Error('não foi possível baixar as bibliotecas de visão');
         progresso && progresso('Baixando os modelos de visão (só na primeira vez)');
         const [coco, mobilenet] = await Promise.all([cocoSsd.load({base: 'lite_mobilenet_v2'}), tf.loadLayersModel(URLS.mobilenet)]);
         return {coco, mobilenet};

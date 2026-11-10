@@ -1,5 +1,5 @@
 // EatWise · service worker: guarda o app no aparelho para abrir mesmo sem internet.
-const CACHE = 'eatwise-v4';
+const CACHE = 'eatwise-v6';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-180.png'];
 
 self.addEventListener('install', e => {
@@ -18,6 +18,6 @@ self.addEventListener('fetch', e => {
       const cacheable = res.ok && (url.origin === location.origin || url.host.endsWith('fonts.googleapis.com') || url.host.endsWith('fonts.gstatic.com'));
       if (cacheable) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); }
       return res;
-    }).catch(() => caches.match('./index.html')))
+    }).catch(() => e.request.mode === 'navigate' ? caches.match('./index.html') : Response.error()))   // página reserva só ao abrir o app
   );
 });
